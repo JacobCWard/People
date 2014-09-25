@@ -29,7 +29,25 @@ partial class Master : Page {
 
             return (Json)X.GET("/supercrm/partials/contacts/" + objectId, 0, h1);
         }, h0);
-        
+
+        // App name required for Launchpad
+
+        Handle.GET("/app-name", () =>
+        {
+            var json = new AppName();
+            //json
+            return json;
+        });
+
+        // App name required for Launchpad
+        Handle.GET("/app-icon", () =>
+        {
+            var iconpage = new Page() { Html = "/SuperCRM/app-icon.html" };
+            //json
+            return iconpage;
+        });
+
+
         Handle.GET("/supercrm/companies/add", () =>
         {
             var page = (CompanyPage)X.GET("/supercrm/partials/companies/add");

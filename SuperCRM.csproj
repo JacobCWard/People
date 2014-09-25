@@ -121,6 +121,7 @@
   <ItemGroup>
     <Content Include="Client\company.html" />
     <Content Include="Client\contact.html" />
+    <Content Include="Client\SuperCRM\app-icon.html" />
     <Content Include="Client\css\animation.css" />
     <Content Include="Client\css\supercrmfont-codes.css" />
     <Content Include="Client\css\supercrmfont-embedded.css" />
@@ -159,6 +160,9 @@
     <None Include="Client\font\supercrmfont.eot" />
     <None Include="Client\font\supercrmfont.ttf" />
     <None Include="Client\font\supercrmfont.woff" />
+    <TypedJSON Include="Server\AppName.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(StarcounterBin)\Starcounter.MsBuild.targets" />
