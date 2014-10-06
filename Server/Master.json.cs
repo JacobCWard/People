@@ -34,6 +34,7 @@ partial class Master : Page {
 
         Handle.GET("/app-name", () =>
         {
+            //return "SuperCRM";
             var json = new AppName();
             //json
             return json;
@@ -199,7 +200,7 @@ partial class Master : Page {
                 i++;
             }
             return page;
-        });
+        }, h1);
     
         Handle.GET("/supercrm", ()=>{
             var m = new Master() {
