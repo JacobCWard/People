@@ -38,11 +38,22 @@ partial class Master : Page {
             return (Json)X.GET("/societyobjects/ring2/organisation/" + objectId);
         }, h0);
 
-       Handle.GET("/societyobjects/ring2/organisation/{?}", (String objectId) =>
+        Handle.GET("/societyobjects/ring2/organisation/{?}", (String objectId) =>
         {
             // var c = Db.SQL("SELECT e FROM Employee e WHERE e.ObjectId = ?", objectId);
 
             return (Json)X.GET("/supercrm/partials/companies/" + objectId, 0, h1);
+        }, h0);
+
+        Handle.GET("/supercrm/partials/companies", () =>
+        {
+            var page = (Json)X.GET("/societyobjects/ring2/organisation");
+            return page;
+        }, h0);
+
+        Handle.GET("/societyobjects/ring2/organisation", () =>
+        {
+            return (Json)X.GET("/supercrm/partials/companies", 0, h1);
         }, h0);
         
         // App name required for Launchpad
@@ -63,6 +74,13 @@ partial class Master : Page {
             return iconpage;
         });
 
+        Handle.GET("/supercrm/companies", () =>
+        {
+            var page = (Json)X.GET("/supercrm/partials/companies");
+            Master m = (Master)X.GET("/supercrm");
+            m.FavoriteCustomer = page;
+            return m;
+        });
 
         Handle.GET("/supercrm/companies/add", () =>
         {
@@ -117,6 +135,18 @@ partial class Master : Page {
 
             return c;
         });
+
+        Handle.GET("/supercrm/partials/companies", () =>
+        {
+            CompaniesPage c = new CompaniesPage()
+            {
+                Html = "/companies.html"
+            };
+            var companies = SQL<SuperCRM.Company>("SELECT c FROM SuperCRM.Company c");
+            c.Companies.Data = companies;
+
+            return c;
+        }, h1);
 
         Handle.GET("/supercrm/contacts/add", () =>
         {

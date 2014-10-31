@@ -1,0 +1,24 @@
+﻿<link rel="stylesheet" href="/css/SuperCRM.css">
+
+<template bind="{{SuperCRM}}">
+
+    <!-- Companies -->
+    <div class="SuperCRM">
+
+        <!-- Icon plus header -->
+        <h1><i class="icon-industrial-building"></i><span class="i-name">Companies</span></h1>
+
+        <!-- List of Companies -->
+        <ul id="companies">
+            <template repeat="{{Companies}}">
+                    <li><a href="{{Uri}}">{{Name}}
+
+                        <!-- TODO fix PuppetJS span in a
+                            <span>{{Name$}}</span>
+                        <span>{{Contacts.length}} contacts</span>-->
+
+                        </a></li>
+            </template>
+        </ul>
+    </div>
+</template>
