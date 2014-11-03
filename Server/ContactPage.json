@@ -2,14 +2,16 @@
 	"Html" : "",
 	"Person" : {
 	    "FirstName$" : "Albert",
-		"LastName$" : "Einstein"
+		"Surname$" : "Einstein"
 	},
 	"Title$" : "Scientist",
 	"Email$" : "albert@example.com",
 	"Uri" : "",
 	"SelectedCompanyIndex$" : 0,
 	"Companies": [{
-	  "Name" : ""
+	  "Organisation" : {
+        "Name" : ""
+	  }
 	}],
 	"Save$" : null,
 	"RedirectUrl$" : ""

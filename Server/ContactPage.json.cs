@@ -13,7 +13,7 @@ partial class ContactPage : Page
     {
         var index = (int)input.Value;
         var company = Companies[index];
-        ((SuperCRM.Contact)Data).Company = (SuperCRM.Company)company.Data;
+        ((SuperCRM.Contact_v2)Data).Company = (SuperCRM.Company_v2)company.Data;
     }
 
     protected override string UriFragment

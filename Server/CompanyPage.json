@@ -1,6 +1,8 @@
 {
 	"Html" : "",
-	"Name$" : "Id Software",
+	"Organisation": {
+	  "Name$" : "Id Software"
+	},
 	"Revenue$": 100000000,
 	"LogoUrl$": "",
 	"Uri" : "",

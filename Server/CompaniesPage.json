@@ -1,7 +1,9 @@
 {
     "Html": "",
 	"Companies" : [{
-	  "Name": "",
+	  "Organisation": {
+	    "Name": ""
+      },
 	  "Uri": ""
 	}]
 }

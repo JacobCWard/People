@@ -12,8 +12,8 @@
     </div>
 
     <div class="launcher-labeled-input">
-        <input id="PersonLastName$" type='text' value='{{ Person.LastName$ }}' placeholder='<Last Name>'>
-        <label for="PersonLastName$">Last Name</label>
+        <input id="PersonSurname$" type='text' value='{{ Person.Surname$ }}' placeholder='<Last Name>'>
+        <label for="PersonSurname$">Last Name</label>
     </div>
 
     <div class="launcher-labeled-input">
@@ -29,7 +29,7 @@
     <template if="{{ Companies.length > 0 }}">
         <select class="launcher-select" selectedIndex="{{ SelectedCompanyIndex$ }}">
             <template repeat="{{ Companies }}">
-                <option>{{ Name }}</option>
+                <option>{{ Organisation.Name }}</option>
             </template>
         </select>
     </template>

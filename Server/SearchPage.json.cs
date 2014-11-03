@@ -6,7 +6,7 @@ partial class SearchPage : Page
 }
 
 [SearchPage_json.Contacts]
-partial class SearchPageContacts : Page, IBound<SuperCRM.Contact>
+partial class SearchPageContacts : Page, IBound<SuperCRM.Contact_v2>
 {
     protected override string UriFragment
     {
@@ -18,7 +18,7 @@ partial class SearchPageContacts : Page, IBound<SuperCRM.Contact>
 }
 
 [SearchPage_json.Companies]
-partial class SearchPageCompanies : Page, IBound<SuperCRM.Company>
+partial class SearchPageCompanies : Page, IBound<SuperCRM.Company_v2>
 {
     protected override string UriFragment
     {

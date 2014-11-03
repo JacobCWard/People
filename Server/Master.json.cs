@@ -19,30 +19,27 @@ partial class Master : Page {
         // Map contact <-> SO.person
         Handle.GET("/supercrm/partials/contacts/{?}", (String objectId) =>
         {
-            // String objectId = (String) Db.SQL("SELECT p.ObjectId FROM Person p WHERE p.Name = ?", firstName).First;
-
-            return (Json)X.GET("/societyobjects/ring1/person/" + objectId);
+            SuperCRM.Contact_v2 contact = Db.SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE c.ObjectId = ?", objectId).First;
+            return (Json)X.GET("/societyobjects/ring1/person/" + contact.Person.GetObjectID());
         }, h0);
 
         Handle.GET("/societyobjects/ring1/person/{?}", (String objectId) =>
         {
-            // var c = Db.SQL("SELECT e FROM Employee e WHERE e.ObjectId = ?", objectId);
-
-            return (Json)X.GET("/supercrm/partials/contacts/" + objectId, 0, h1);
+            SuperCRM.Contact_v2 contact = Db.SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE c.Person.ObjectId = ?", objectId).First;
+            return (Json)X.GET("/supercrm/partials/contacts/" + contact.GetObjectID(), 0, h1);
         }, h0);
 
         // Map company <-> SO.Organisation
         Handle.GET("/supercrm/partials/companies/{?}", (String objectId) =>
         {
-            // String objectId = (String) Db.SQL("SELECT p.ObjectId FROM Person p WHERE p.Name = ?", firstName).First;
-            return (Json)X.GET("/societyobjects/ring2/organisation/" + objectId);
+            SuperCRM.Company_v2 company = Db.SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE c.ObjectId = ?", objectId).First;
+            return (Json)X.GET("/societyobjects/ring2/organisation/" + company.Organisation.GetObjectID());
         }, h0);
 
         Handle.GET("/societyobjects/ring2/organisation/{?}", (String objectId) =>
         {
-            // var c = Db.SQL("SELECT e FROM Employee e WHERE e.ObjectId = ?", objectId);
-
-            return (Json)X.GET("/supercrm/partials/companies/" + objectId, 0, h1);
+            SuperCRM.Company_v2 company = Db.SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE c.Organisation.ObjectId = ?", objectId).First;
+            return (Json)X.GET("/supercrm/partials/companies/" + company.GetObjectID(), 0, h1);
         }, h0);
 
         Handle.GET("/supercrm/partials/companies", () =>
@@ -100,7 +97,10 @@ partial class Master : Page {
             page.Transaction = new Transaction();
             page.Transaction.Add(() =>
             {
-                page.Data = new SuperCRM.Company();
+                SuperCRM.Company_v2 company = new SuperCRM.Company_v2() {
+                    Organisation = new Concepts.Ring2.Organisation()
+                };
+                page.Data = company;
             });
             return page;
         });
@@ -120,12 +120,12 @@ partial class Master : Page {
             {
                 Html = "/company.html"
             };
-            var company = SQL<SuperCRM.Company>("SELECT c FROM SuperCRM.Company c WHERE ObjectId = ?", objectId).First;
+            var company = SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE ObjectId = ?", objectId).First;
             c.Data = company;
             //c.Uri = "/launcher/workspace/supercrm/companies/" + objectId;
             c.Transaction = new Transaction();
 
-            var contacts = SQL<SuperCRM.Contact>("SELECT c FROM SuperCRM.Contact c WHERE Company = ?", company);
+            var contacts = SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE Company = ?", company);
             var enumerator = contacts.GetEnumerator();
             while (enumerator.MoveNext())
             {
@@ -142,7 +142,7 @@ partial class Master : Page {
             {
                 Html = "/companies.html"
             };
-            var companies = SQL<SuperCRM.Company>("SELECT c FROM SuperCRM.Company c");
+            var companies = SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c");
             c.Companies.Data = companies;
 
             return c;
@@ -168,14 +168,14 @@ partial class Master : Page {
                 Html = "/contact.html",
                 Uri = "/supercrm/partials/contacts-add"
             };
-            var companies = SQL<SuperCRM.Company>("SELECT c FROM SuperCRM.Company c");
+            var companies = SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c");
             page.Transaction = new Transaction();
             page.SelectedCompanyIndex = -1;
             page.Transaction.Add(() =>
             {
-                var contact = new SuperCRM.Contact()
+                var contact = new SuperCRM.Contact_v2()
                 {
-                    Person = new SuperCRM.Person()
+                    Person = new Concepts.Ring1.Person()
                 };
                 if (companies.First != null)
                 {
@@ -219,7 +219,7 @@ partial class Master : Page {
             {
                 Html = "/contact.html"
             };
-            var contact = SQL<SuperCRM.Contact>("SELECT c FROM SuperCRM.Contact c WHERE ObjectId = ?", objectId).First;
+            var contact = SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE ObjectId = ?", objectId).First;
             if (contact == null)
             {
                 //return empty response
@@ -232,7 +232,7 @@ partial class Master : Page {
             //page.Uri = "/launcher/workspace/supercrm/contacts/" + objectId;
             page.Transaction = new Transaction();
             page.SelectedCompanyIndex = -1;
-            var companies = SQL<SuperCRM.Company>("SELECT c FROM SuperCRM.Company c");
+            var companies = SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c");
             page.Companies.Data = companies;
             var enumertator = companies.GetEnumerator();
             var i = 0;
@@ -284,9 +284,20 @@ partial class Master : Page {
             {
                 Html = "/search.html"
             };
-            var wildcardQuery = "%" + query + "%";
-            var companies = SQL<SuperCRM.Company>("SELECT c FROM SuperCRM.Company c WHERE Name LIKE ? FETCH ?", wildcardQuery, 5);
-            var contacts = SQL<SuperCRM.Contact>("SELECT c FROM SuperCRM.Contact c WHERE Person.FirstName LIKE ? OR Person.LastName LIKE ? OR Title LIKE ? OR Company.Name LIKE ? FETCH ?", wildcardQuery, wildcardQuery, wildcardQuery, wildcardQuery, 5);
+            Rows<SuperCRM.Company_v2> companies;
+            Rows<SuperCRM.Contact_v2> contacts;
+            int count = 5;
+            if (query == "")
+            {
+                companies = SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c FETCH ?", count);
+                contacts = SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c FETCH ?", count);
+            }
+            else
+            {
+                var wildcardQuery = "%" + query + "%";
+                companies = SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE Organisation.Name LIKE ? FETCH ?", wildcardQuery, count);
+                contacts = SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE Person.FirstName LIKE ? OR Person.Surname LIKE ? OR Title LIKE ? OR Company.Organisation.Name LIKE ? FETCH ?", wildcardQuery, wildcardQuery, wildcardQuery, wildcardQuery, 5);
+            }
             page.Companies.Data = companies;
             page.Contacts.Data = contacts;
             return page;
@@ -298,10 +309,11 @@ partial class Master : Page {
             {
                 SlowSQL("DELETE FROM SuperCRM.Company");
                 SlowSQL("DELETE FROM SuperCRM.Contact");
-                SlowSQL("DELETE FROM SuperCRM.Person");
+                SlowSQL("DELETE FROM Concepts.Ring1.Person");
+                SlowSQL("DELETE FROM Concepts.Ring2.Organisation");
             });
             Master m = (Master)X.GET("/supercrm");
-            m.Message = "SugarCRM's company, contact and person data was removed";
+            m.Message = "SugarCRM's company and contact data was removed";
             return m;
         });
 
