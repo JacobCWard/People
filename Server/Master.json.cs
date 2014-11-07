@@ -315,8 +315,8 @@ partial class Master : Page {
             };
             Db.Transaction(() =>
             {
-                SlowSQL("DELETE FROM SuperCRM.Company");
-                SlowSQL("DELETE FROM SuperCRM.Contact");
+                SlowSQL("DELETE FROM SuperCRM.Company_v2");
+                SlowSQL("DELETE FROM SuperCRM.Contact_v2");
                 SlowSQL("DELETE FROM Concepts.Ring1.Person");
                 SlowSQL("DELETE FROM Concepts.Ring2.Organisation");
             });
