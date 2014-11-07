@@ -74,17 +74,19 @@ partial class Master : Page {
         Handle.GET("/supercrm/companies", () =>
         {
             var page = (Json)X.GET("/supercrm/partials/companies");
-            Master m = (Master)X.GET("/supercrm");
-            m.FavoriteCustomer = page;
-            return m;
+            // Master m = (Master)X.GET("/supercrm");
+            // m.FavoriteCustomer = page;
+            // return m;
+            return page;
         });
 
         Handle.GET("/supercrm/companies/add", () =>
         {
             var page = (Json)X.GET("/supercrm/partials/companies-add");
-            Master m = (Master)X.GET("/supercrm");
-            m.FavoriteCustomer = page;
-            return m;
+            // Master m = (Master)X.GET("/supercrm");
+            // m.FavoriteCustomer = page;
+            // return m;
+            return page;
         });
 
         Handle.GET("/supercrm/partials/companies-add", () =>
@@ -109,9 +111,10 @@ partial class Master : Page {
         {
             //var page = CompanyPage.GET("/supercrm/partials/companies/" + companyId);
             var page = (Json)X.GET("/supercrm/partials/companies/" + companyId);
-            Master m = (Master)X.GET("/supercrm");
-            m.FavoriteCustomer = page;
-            return m;
+            // Master m = (Master)X.GET("/supercrm");
+            // m.FavoriteCustomer = page;
+            // return m;
+            return page;
         });
 
         Handle.GET("/supercrm/partials/companies/{?}", (String objectId) =>
@@ -151,14 +154,15 @@ partial class Master : Page {
         Handle.GET("/supercrm/contacts/add", () =>
         {
             var page = (Json)X.GET("/supercrm/partials/contacts-add");
-            Master m = (Master)X.GET("/supercrm");
-            m.FavoriteCustomer = page;
-            /*if (m.AddContactToCompany.Data != null)
-            {
-                ((SuperCRM.Contact)page.Data).Company = (SuperCRM.Company)m.AddContactToCompany.Data;
-                m.AddContactToCompany.Data = null;
-            }*/
-            return m;
+            // Master m = (Master)X.GET("/supercrm");
+            // m.FavoriteCustomer = page;
+            // /*if (m.AddContactToCompany.Data != null)
+            // {
+            //     ((SuperCRM.Contact)page.Data).Company = (SuperCRM.Company)m.AddContactToCompany.Data;
+            //     m.AddContactToCompany.Data = null;
+            // }*/
+            // return m;
+            return page;
         });
 
         Handle.GET("/supercrm/partials/contacts-add", () =>
@@ -208,9 +212,10 @@ partial class Master : Page {
         Handle.GET("/supercrm/contacts/{?}", (String objectId) =>
         {
             var page = (Json)X.GET("/supercrm/partials/contacts/" + objectId);
-            Master m = (Master)X.GET("/supercrm");
-            m.FavoriteCustomer = page;
-            return m;
+            // Master m = (Master)X.GET("/supercrm");
+            // m.FavoriteCustomer = page;
+            // return m;
+            return page;
         });
 
         Handle.GET("/supercrm/partials/contacts/{?}", (String objectId) =>
@@ -247,12 +252,12 @@ partial class Master : Page {
             }
             return page;
         }, h1);
-    
-        Handle.GET("/supercrm", ()=>{
-            var m = new Master() {
-                Html = "/SuperCRM.html"
-            };
-            return m;
+        // Workspace home page (landing page from launchpad)
+        // dashboard alias
+        Handle.GET("/SuperCRM", ()=>{
+            Response resp;
+            X.GET("/dashboard", out resp);
+            return resp;
         });
 
         Handle.GET("/dashboard", () =>
@@ -305,6 +310,9 @@ partial class Master : Page {
 
         Handle.GET("/supercrm/delete-all-data", () =>
         {
+            var m = new Master() {
+                Html = "/SuperCRM/message.html"
+            };
             Db.Transaction(() =>
             {
                 SlowSQL("DELETE FROM SuperCRM.Company");
@@ -312,7 +320,6 @@ partial class Master : Page {
                 SlowSQL("DELETE FROM Concepts.Ring1.Person");
                 SlowSQL("DELETE FROM Concepts.Ring2.Organisation");
             });
-            Master m = (Master)X.GET("/supercrm");
             m.Message = "SugarCRM's company and contact data was removed";
             return m;
         });

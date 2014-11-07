@@ -133,7 +133,7 @@
     <Content Include="Client\css\supercrmfont-ie7.css" />
     <Content Include="Client\css\supercrmfont.css" />
     <Content Include="Client\font\supercrmfont.svg" />
-    <Content Include="Client\SuperCRM.html" />
+    <Content Include="Client\SuperCRM\message.html" />
     <Content Include="Client\menu.html" />
     <Content Include="Client\search.html" />
     <Content Include="Client\css\SuperCRM.css" />
