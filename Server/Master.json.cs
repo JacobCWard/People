@@ -6,52 +6,52 @@ using System.Web;
 
 [Master_json]                                       // This attribute tells Starcounter that the class corresponds to an object in the JSON-by-example file.
 partial class Master : Page {
-
     /// <summary>
     /// Every application in Starcounter works like a console application. They have an .EXE ending. They have a Main() function and
     /// they can do console output. However, they are run inside the scope of a database rather than connecting to it.
     /// </summary>
     static void Main()
     {
-        HandlerOptions h1 = new HandlerOptions() { HandlerLevel = 1 };
-        HandlerOptions h0 = new HandlerOptions() { HandlerLevel = 0 };
-
         // Map contact <-> SO.person
         Handle.GET("/supercrm/partials/contacts/{?}", (String objectId) =>
         {
             SuperCRM.Contact_v2 contact = Db.SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE c.ObjectId = ?", objectId).First;
             return (Json)X.GET("/societyobjects/ring1/person/" + contact.Person.GetObjectID());
-        }, h0);
+
+        }, HandlerOptions.DefaultLevel);
 
         Handle.GET("/societyobjects/ring1/person/{?}", (String objectId) =>
         {
             SuperCRM.Contact_v2 contact = Db.SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE c.Person.ObjectId = ?", objectId).First;
-            return (Json)X.GET("/supercrm/partials/contacts/" + contact.GetObjectID(), 0, h1);
-        }, h0);
+            return (Json)X.GET("/supercrm/partials/contacts/" + contact.GetObjectID(), 0, HandlerOptions.ApplicationLevel);
+
+        }, HandlerOptions.DefaultLevel);
 
         // Map company <-> SO.Organisation
         Handle.GET("/supercrm/partials/companies/{?}", (String objectId) =>
         {
             SuperCRM.Company_v2 company = Db.SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE c.ObjectId = ?", objectId).First;
             return (Json)X.GET("/societyobjects/ring2/organisation/" + company.Organisation.GetObjectID());
-        }, h0);
+
+        }, HandlerOptions.DefaultLevel);
 
         Handle.GET("/societyobjects/ring2/organisation/{?}", (String objectId) =>
         {
             SuperCRM.Company_v2 company = Db.SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE c.Organisation.ObjectId = ?", objectId).First;
-            return (Json)X.GET("/supercrm/partials/companies/" + company.GetObjectID(), 0, h1);
-        }, h0);
+            return (Json)X.GET("/supercrm/partials/companies/" + company.GetObjectID(), 0, HandlerOptions.ApplicationLevel);
+
+        }, HandlerOptions.DefaultLevel);
 
         Handle.GET("/supercrm/partials/companies", () =>
         {
             var page = (Json)X.GET("/societyobjects/ring2/organisation");
             return page;
-        }, h0);
+        }, HandlerOptions.DefaultLevel);
 
         Handle.GET("/societyobjects/ring2/organisation", () =>
         {
-            return (Json)X.GET("/supercrm/partials/companies", 0, h1);
-        }, h0);
+            return (Json)X.GET("/supercrm/partials/companies", 0, HandlerOptions.ApplicationLevel);
+        }, HandlerOptions.DefaultLevel);
         
         // App name required for Launchpad
 
@@ -149,7 +149,7 @@ partial class Master : Page {
             c.Companies.Data = companies;
 
             return c;
-        }, h1);
+        });
 
         Handle.GET("/supercrm/contacts/add", () =>
         {
@@ -251,7 +251,8 @@ partial class Master : Page {
                 i++;
             }
             return page;
-        }, h1);
+        });
+
         // Workspace home page (landing page from launchpad)
         // dashboard alias
         Handle.GET("/SuperCRM", ()=>{
