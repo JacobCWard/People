@@ -1,7 +1,7 @@
 <link rel="import" href="vendor/gravatar-img/gravatar-img.html">
 <script src="vendor/spark-md5/spark-md5.js"></script>
 <link rel="stylesheet" href="/css/SuperCRM.css">
-<link rel="import" href="/vendor/juicy-redirect/src/juicy-redirect.html">
+<link rel="import" href="/vendor/puppet-redirect/src/puppet-redirect.html">
 
 <template bind="{{SuperCRM}}">
 
@@ -40,5 +40,5 @@
 
     <button class="launcher-button" style="background-color:#11653B" onclick="getModel(this).Save$ = null">Save</button>
 
-    <link is="juicy-redirect" history url="{{ RedirectUrl$ }}">
+    <link is="puppet-redirect" history url="{{ RedirectUrl$ }}">
 </template>
