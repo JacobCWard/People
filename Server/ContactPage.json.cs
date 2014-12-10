@@ -20,7 +20,7 @@ partial class ContactPage : Page
     {
         get
         {
-            return "/launcher/workspace/supercrm/contacts/" + Data.GetObjectID();
+            return "/supercrm/contacts/" + Data.GetObjectID();
         }
     }
 }

@@ -16,14 +16,14 @@ partial class Master : Page {
         Handle.GET("/supercrm/partials/contacts/{?}", (String objectId) =>
         {
             SuperCRM.Contact_v2 contact = Db.SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE c.ObjectId = ?", objectId).First;
-            return (Json)X.GET("/societyobjects/ring1/person/" + contact.Person.GetObjectID());
+            return X.GET<Json>("/societyobjects/ring1/person/" + contact.Person.GetObjectID());
 
         }, HandlerOptions.DefaultLevel);
 
         Handle.GET("/societyobjects/ring1/person/{?}", (String objectId) =>
         {
             SuperCRM.Contact_v2 contact = Db.SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE c.Person.ObjectId = ?", objectId).First;
-            return (Json)X.GET("/supercrm/partials/contacts/" + contact.GetObjectID(), 0, HandlerOptions.ApplicationLevel);
+            return X.GET<Json>("/supercrm/partials/contacts/" + contact.GetObjectID(), 0, HandlerOptions.ApplicationLevel);
 
         }, HandlerOptions.DefaultLevel);
 
@@ -31,49 +31,49 @@ partial class Master : Page {
         Handle.GET("/supercrm/partials/companies/{?}", (String objectId) =>
         {
             SuperCRM.Company_v2 company = Db.SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE c.ObjectId = ?", objectId).First;
-            return (Json)X.GET("/societyobjects/ring2/organisation/" + company.Organisation.GetObjectID());
+            return X.GET<Json>("/societyobjects/ring2/organisation/" + company.Organisation.GetObjectID());
 
         }, HandlerOptions.DefaultLevel);
 
         Handle.GET("/societyobjects/ring2/organisation/{?}", (String objectId) =>
         {
             SuperCRM.Company_v2 company = Db.SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE c.Organisation.ObjectId = ?", objectId).First;
-            return (Json)X.GET("/supercrm/partials/companies/" + company.GetObjectID(), 0, HandlerOptions.ApplicationLevel);
+            return X.GET<Json>("/supercrm/partials/companies/" + company.GetObjectID(), 0, HandlerOptions.ApplicationLevel);
 
         }, HandlerOptions.DefaultLevel);
 
         Handle.GET("/supercrm/partials/companies", () =>
         {
-            var page = (Json)X.GET("/societyobjects/ring2/organisation");
+            var page = X.GET<Json>("/societyobjects/ring2/organisation");
             return page;
         }, HandlerOptions.DefaultLevel);
 
         Handle.GET("/societyobjects/ring2/organisation", () =>
         {
-            return (Json)X.GET("/supercrm/partials/companies", 0, HandlerOptions.ApplicationLevel);
+            return X.GET<Json>("/supercrm/partials/companies", 0, HandlerOptions.ApplicationLevel);
         }, HandlerOptions.DefaultLevel);
         
         // App name required for Launchpad
 
-        Handle.GET("/app-name", () =>
+        Handle.GET("/launcher/app-name", () =>
         {
             //return "SuperCRM";
             var json = new AppName();
             //json
             return json;
-        });
+        }, HandlerOptions.ApplicationLevel);
 
         // App name required for Launchpad
-        Handle.GET("/app-icon", () =>
+        Handle.GET("/launcher/app-icon", () =>
         {
             var iconpage = new Page() { Html = "/SuperCRM/app-icon.html" };
             //json
             return iconpage;
-        });
+        }, HandlerOptions.ApplicationLevel);
 
         Handle.GET("/supercrm/companies", () =>
         {
-            var page = (Json)X.GET("/supercrm/partials/companies");
+            var page = X.GET<Json>("/supercrm/partials/companies");
             // Master m = (Master)X.GET("/supercrm");
             // m.FavoriteCustomer = page;
             // return m;
@@ -82,7 +82,7 @@ partial class Master : Page {
 
         Handle.GET("/supercrm/companies/add", () =>
         {
-            var page = (Json)X.GET("/supercrm/partials/companies-add");
+            var page = X.GET<Json>("/supercrm/partials/companies-add");
             // Master m = (Master)X.GET("/supercrm");
             // m.FavoriteCustomer = page;
             // return m;
@@ -93,7 +93,7 @@ partial class Master : Page {
         {
             CompanyPage page = new CompanyPage()
             {
-                Uri = "/launcher/workspace/supercrm/companies-add",
+                Uri = "/supercrm/companies-add",
                 Html = "/company.html"
             };
             page.Transaction = new Transaction();
@@ -110,7 +110,7 @@ partial class Master : Page {
         Handle.GET("/supercrm/companies/{?}", (String companyId) =>
         {
             //var page = CompanyPage.GET("/supercrm/partials/companies/" + companyId);
-            var page = (Json)X.GET("/supercrm/partials/companies/" + companyId);
+            var page = X.GET<Json>("/supercrm/partials/companies/" + companyId);
             // Master m = (Master)X.GET("/supercrm");
             // m.FavoriteCustomer = page;
             // return m;
@@ -125,14 +125,13 @@ partial class Master : Page {
             };
             var company = SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE ObjectId = ?", objectId).First;
             c.Data = company;
-            //c.Uri = "/launcher/workspace/supercrm/companies/" + objectId;
             c.Transaction = new Transaction();
 
             var contacts = SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE Company = ?", company);
             var enumerator = contacts.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                var p = (Page)X.GET("/supercrm/partials/contacts/" + enumerator.Current.GetObjectID());
+                var p = X.GET<Page>("/supercrm/partials/contacts/" + enumerator.Current.GetObjectID());
                 c.Contacts.Add(p);
             }
 
@@ -153,7 +152,7 @@ partial class Master : Page {
 
         Handle.GET("/supercrm/contacts/add", () =>
         {
-            var page = (Json)X.GET("/supercrm/partials/contacts-add");
+            var page = X.GET<Json>("/supercrm/partials/contacts-add");
             // Master m = (Master)X.GET("/supercrm");
             // m.FavoriteCustomer = page;
             // /*if (m.AddContactToCompany.Data != null)
@@ -211,7 +210,7 @@ partial class Master : Page {
 
         Handle.GET("/supercrm/contacts/{?}", (String objectId) =>
         {
-            var page = (Json)X.GET("/supercrm/partials/contacts/" + objectId);
+            var page = X.GET<Json>("/supercrm/partials/contacts/" + objectId);
             // Master m = (Master)X.GET("/supercrm");
             // m.FavoriteCustomer = page;
             // return m;
@@ -234,7 +233,6 @@ partial class Master : Page {
                 };
             }
             page.Data = contact;
-            //page.Uri = "/launcher/workspace/supercrm/contacts/" + objectId;
             page.Transaction = new Transaction();
             page.SelectedCompanyIndex = -1;
             var companies = SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c");
@@ -255,34 +253,33 @@ partial class Master : Page {
 
         // Workspace home page (landing page from launchpad)
         // dashboard alias
-        Handle.GET("/SuperCRM", ()=>{
+        Handle.GET("/supercrm", ()=>{
             Response resp;
             X.GET("/dashboard", out resp);
             return resp;
         });
 
-        Handle.GET("/dashboard", () =>
+        Handle.GET("/launcher/dashboard", () =>
         {
             Response resp;
             X.GET("/supercrm/partials/search/", out resp);
             return resp;
-        });
+        }, HandlerOptions.ApplicationLevel);
 
-        Handle.GET("/menu", () =>
+        Handle.GET("/launcher/menu", () =>
         {
-            var p = new Page()
-            {
+            var p = new Page() {
                 Html = "/menu.html"
             };
             return p;
-        });
+        }, HandlerOptions.ApplicationLevel);
 
-        Handle.GET("/search?query={?}", (String query) =>
+        Handle.GET("/launcher/search?query={?}", (String query) =>
         {
             Response resp;
             X.GET("/supercrm/partials/search/" + HttpUtility.UrlEncode(query), out resp);
             return resp;
-        });
+        }, HandlerOptions.ApplicationLevel);
 
         Handle.GET("/supercrm/partials/search/{?}", (String query) =>
         {
