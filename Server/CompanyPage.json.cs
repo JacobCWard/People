@@ -12,14 +12,14 @@ partial class CompanyPage : Page
     void Handle(Input.AddContact input)
     {
         Transaction.Commit();
-        RedirectUrl = "/supercrm/contacts/add";
+        RedirectUrl = "/launcher/workspace/supercrm/contacts/add";
     }
 
     protected override string UriFragment
     {
         get
         {
-            return "/supercrm/companies/" + Data.GetObjectID();
+            return "/launcher/workspace/supercrm/companies/" + Data.GetObjectID();
         }
     }
 }

@@ -1,7 +1,7 @@
-<link rel="import" href="vendor/gravatar-img/gravatar-img.html">
-<script src="vendor/spark-md5/spark-md5.js"></script>
+<link rel="import" href="/sys/gravatar-img/gravatar-img.html">
+<script src="/sys/spark-md5/spark-md5.js"></script>
 <link rel="stylesheet" href="/css/SuperCRM.css">
-<link rel="import" href="/vendor/puppet-redirect/src/puppet-redirect.html">
+<link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html">
 
 <template bind="{{SuperCRM}}">
 
@@ -35,7 +35,7 @@
         </select>
     </template>
     <template if="{{ Companies.length == 0 }}">
-        <strong>Please <a href="/supercrm/companies/add">Add a Company</a> before adding a Contact</strong>
+        <strong>Please <a href="/launcher/workspace/supercrm/companies/add">Add a Company</a> before adding a Contact</strong>
     </template>
 
     <button class="launcher-button" style="background-color:#11653B" onclick="getModel(this).Save$ = null">Save</button>

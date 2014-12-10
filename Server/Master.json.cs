@@ -3,6 +3,7 @@ using Starcounter;                                  // Most stuff relating to th
 using Starcounter.Internal;
 using Starcounter.Templates;
 using System.Web;
+using PolyjuiceNamespace;
 
 [Master_json]                                       // This attribute tells Starcounter that the class corresponds to an object in the JSON-by-example file.
 partial class Master : Page {
@@ -12,47 +13,6 @@ partial class Master : Page {
     /// </summary>
     static void Main()
     {
-        // Map contact <-> SO.person
-        Handle.GET("/supercrm/partials/contacts/{?}", (String objectId) =>
-        {
-            SuperCRM.Contact_v2 contact = Db.SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE c.ObjectId = ?", objectId).First;
-            return X.GET<Json>("/societyobjects/ring1/person/" + contact.Person.GetObjectID());
-
-        }, HandlerOptions.DefaultLevel);
-
-        Handle.GET("/societyobjects/ring1/person/{?}", (String objectId) =>
-        {
-            SuperCRM.Contact_v2 contact = Db.SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE c.Person.ObjectId = ?", objectId).First;
-            return X.GET<Json>("/supercrm/partials/contacts/" + contact.GetObjectID(), 0, HandlerOptions.ApplicationLevel);
-
-        }, HandlerOptions.DefaultLevel);
-
-        // Map company <-> SO.Organisation
-        Handle.GET("/supercrm/partials/companies/{?}", (String objectId) =>
-        {
-            SuperCRM.Company_v2 company = Db.SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE c.ObjectId = ?", objectId).First;
-            return X.GET<Json>("/societyobjects/ring2/organisation/" + company.Organisation.GetObjectID());
-
-        }, HandlerOptions.DefaultLevel);
-
-        Handle.GET("/societyobjects/ring2/organisation/{?}", (String objectId) =>
-        {
-            SuperCRM.Company_v2 company = Db.SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE c.Organisation.ObjectId = ?", objectId).First;
-            return X.GET<Json>("/supercrm/partials/companies/" + company.GetObjectID(), 0, HandlerOptions.ApplicationLevel);
-
-        }, HandlerOptions.DefaultLevel);
-
-        Handle.GET("/supercrm/partials/companies", () =>
-        {
-            var page = X.GET<Json>("/societyobjects/ring2/organisation");
-            return page;
-        }, HandlerOptions.DefaultLevel);
-
-        Handle.GET("/societyobjects/ring2/organisation", () =>
-        {
-            return X.GET<Json>("/supercrm/partials/companies", 0, HandlerOptions.ApplicationLevel);
-        }, HandlerOptions.DefaultLevel);
-        
         // App name required for Launchpad
 
         Handle.GET("/launcher/app-name", () =>
@@ -93,7 +53,7 @@ partial class Master : Page {
         {
             CompanyPage page = new CompanyPage()
             {
-                Uri = "/supercrm/companies-add",
+                Uri = "/launcher/workspace/supercrm/companies-add",
                 Html = "/company.html"
             };
             page.Transaction = new Transaction();
@@ -116,7 +76,6 @@ partial class Master : Page {
             // return m;
             return page;
         });
-
         Handle.GET("/supercrm/partials/companies/{?}", (String objectId) =>
         {
             CompanyPage c = new CompanyPage()
@@ -216,7 +175,6 @@ partial class Master : Page {
             // return m;
             return page;
         });
-
         Handle.GET("/supercrm/partials/contacts/{?}", (String objectId) =>
         {
             ContactPage page = new ContactPage()
@@ -255,12 +213,11 @@ partial class Master : Page {
         // dashboard alias
         Handle.GET("/supercrm", ()=>{
             Response resp;
-            X.GET("/dashboard", out resp);
+            X.GET("/launcher/dashboard", out resp, null, 0, HandlerOptions.ApplicationLevel);
             return resp;
         });
 
-        Handle.GET("/launcher/dashboard", () =>
-        {
+        Handle.GET("/launcher/dashboard", () => {
             Response resp;
             X.GET("/supercrm/partials/search/", out resp);
             return resp;
@@ -321,6 +278,30 @@ partial class Master : Page {
             m.Message = "SugarCRM's company and contact data was removed";
             return m;
         });
+
+        Polyjuice.Map("/supercrm/partials/companies/@w", "/so/organization/@w",
+
+            (String appObjectId) => {
+                SuperCRM.Company_v2 company = Db.SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE c.ObjectId = ?", appObjectId).First;
+                return company.Organisation.GetObjectID();
+            },
+            (String soObjectId) => {
+                SuperCRM.Company_v2 company = Db.SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE c.Organisation.ObjectId = ?", soObjectId).First;
+                return company.GetObjectID();
+            }
+        );
+
+        Polyjuice.Map("/supercrm/partials/contacts/@w", "/so/person/@w",
+
+            (String appObjectId) => {
+                SuperCRM.Contact_v2 contact = Db.SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE c.ObjectId = ?", appObjectId).First;
+                return contact.Person.GetObjectID();
+            },
+            (String soObjectId) => {
+                SuperCRM.Contact_v2 contact = Db.SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE c.Person.ObjectId = ?", soObjectId).First;
+                return contact.GetObjectID();
+            }
+        );
 
     }
 }

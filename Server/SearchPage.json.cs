@@ -12,7 +12,7 @@ partial class SearchPageContacts : Page, IBound<SuperCRM.Contact_v2>
     {
         get
         {
-            return "/supercrm/contacts/" + Data.GetObjectID();
+            return "/launcher/workspace/supercrm/contacts/" + Data.GetObjectID();
         }
     }
 }
@@ -24,7 +24,7 @@ partial class SearchPageCompanies : Page, IBound<SuperCRM.Company_v2>
     {
         get
         {
-            return "/supercrm/companies/" + Data.GetObjectID();
+            return "/launcher/workspace/supercrm/companies/" + Data.GetObjectID();
         }
     }
 }

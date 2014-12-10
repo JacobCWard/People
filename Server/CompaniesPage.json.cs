@@ -12,7 +12,7 @@ partial class CompaniesPageCompanies : Page, IBound<SuperCRM.Company_v2>
     {
         get
         {
-            return "/supercrm/companies/" + Data.GetObjectID();
+            return "/launcher/workspace/supercrm/companies/" + Data.GetObjectID();
         }
     }
 }
