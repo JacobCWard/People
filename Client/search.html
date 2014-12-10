@@ -41,24 +41,5 @@
                         </a></li>
             </template>
         </ul>
-
-        <span id="more-companies" class="fake-link">+ New company...</span>
-
-        <style>
-          .fake-link:hover {
-            text-decoration: underline;
-            cursor: default;
-          }
-        </style>
-
-        <script>
-          document.getElementById('more-companies').addEventListener('click', function() {
-            for (var i = 0; i < 5; i++) {
-              var li = document.createElement('LI');
-              li.innerHTML = '<a href="#">Fake Company</a>';
-              document.getElementById('companies').appendChild(li);
-            }
-          });
-        </script>
     </div>
 </template>
