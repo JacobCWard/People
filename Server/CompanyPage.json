@@ -7,7 +7,7 @@
 	"LogoUrl$": "",
 	"Uri" : "",
 	"Contacts" : [{}],
-	"Save$" : null,
-	"AddContact$" : null,
+	"Save$" : false,
+	"AddContact$" : false,
 	"RedirectUrl$" : ""
 }

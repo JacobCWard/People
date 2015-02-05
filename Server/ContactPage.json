@@ -13,6 +13,6 @@
         "Name" : ""
 	  }
 	}],
-	"Save$" : null,
+	"Save$" : false,
 	"RedirectUrl$" : ""
 }

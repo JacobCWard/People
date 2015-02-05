@@ -1,15 +1,16 @@
 {
-  "name": "PolymerBolierplate",
+  "name": "SuperCRM",
   "version": "0.0.0",
-  "homepage": "https://github.com/Starcounter/PolymerBolierplate",
-  "description": "Minimum amount of code to create a SPA using Starcounter server and Polymer UI Elements.",
+  "homepage": "https://github.com/Starcounter/SuperCRM",
+  "description": "Super simple example of Polyjuice CRM app.",
   "main": "Client/master.html",
   "license": "MIT",
+  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "Client/vendor",
+    "Client/sys",
     "test",
     "tests"
   ],

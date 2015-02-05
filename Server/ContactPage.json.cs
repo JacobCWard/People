@@ -5,6 +5,7 @@ partial class ContactPage : Page
 {
     void Handle(Input.Save input)
     {
+        input.Value = false;
         Transaction.Commit();
         RedirectUrl = Uri;
     }

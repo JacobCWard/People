@@ -118,8 +118,6 @@
     <Content Include="Client\menu.html" />
     <Content Include="Client\search.html" />
     <Content Include="Client\css\SuperCRM.css" />
-    <Content Include="Client\vendor\x-html\x-html.html" />
-    <Content Include="Client\vendor\platform\platform.js" />
   </ItemGroup>
   <ItemGroup>
     <TypedJSON Include="Server\Page.json">

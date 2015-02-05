@@ -51,10 +51,10 @@
         <!-- <template is="launcher-partial" repeat="{{ Contacts }}"></template> -->
         <launcher-root-partial repeat="{{ Contacts }}" class="SuperCRM-ContactList"></launcher-root-partial>
         
-        <button class="launcher-button" style="background-color:#184259" onclick="getModel(this).AddContact$ = null">Add a contact in {{Organisation.Name$}}</button>
+        <button class="launcher-button" style="background-color:#184259" onclick="getModel(this).AddContact$ = true">Add a contact in {{Organisation.Name$}}</button>
     </div> 
 
-    <button class="launcher-button" style="background-color:#11653B" onclick="getModel(this).Save$ = null">Save</button>
+    <button class="launcher-button" style="background-color:#11653B" onclick="getModel(this).Save$ = true">Save</button>
     <link is="puppet-redirect" history url="{{ RedirectUrl$ }}">
 
 </template>
