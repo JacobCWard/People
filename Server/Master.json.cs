@@ -4,6 +4,7 @@ using Starcounter.Internal;
 using Starcounter.Templates;
 using System.Web;
 using PolyjuiceNamespace;
+using System.Diagnostics;
 
 [Master_json]                                       // This attribute tells Starcounter that the class corresponds to an object in the JSON-by-example file.
 partial class Master : Page {
@@ -14,22 +15,6 @@ partial class Master : Page {
     static void Main()
     {
         // App name required for Launchpad
-
-        Handle.GET("/launcher/app-name", () =>
-        {
-            //return "SuperCRM";
-            var json = new AppName();
-            //json
-            return json;
-        }, HandlerOptions.ApplicationLevel);
-
-        // App name required for Launchpad
-        Handle.GET("/launcher/app-icon", () =>
-        {
-            var iconpage = new Page() { Html = "/SuperCRM/app-icon.html" };
-            //json
-            return iconpage;
-        }, HandlerOptions.ApplicationLevel);
 
         Handle.GET("/supercrm/companies", () =>
         {
@@ -73,6 +58,7 @@ partial class Master : Page {
             // return m;
             return page;
         });
+
         Handle.GET("/supercrm/partials/companies/{?}", (String objectId) =>
         {
             return Db.Scope<CompanyPage>(() => {
@@ -166,6 +152,7 @@ partial class Master : Page {
             // return m;
             return page;
         });
+
         Handle.GET("/supercrm/partials/contacts/{?}", (String objectId) =>
         {
             return Db.Scope<Json>(() => {
@@ -199,31 +186,46 @@ partial class Master : Page {
         // Workspace home page (landing page from launchpad)
         // dashboard alias
         Handle.GET("/supercrm", ()=>{
-            Response resp;
-            X.GET("/launcher/dashboard", out resp, null, 0, HandlerOptions.ApplicationLevel);
+
+            Response resp = X.GET("/supercrm/dashboard");
             return resp;
         });
 
-        Handle.GET("/launcher/dashboard", () => {
-            Response resp;
-            X.GET("/supercrm/partials/search/", out resp);
-            return resp;
-        }, HandlerOptions.ApplicationLevel);
-
-        Handle.GET("/launcher/menu", () =>
-        {
+        Handle.GET("/supercrm/menu", () => {
             var p = new Page() {
                 Html = "/menu.html"
             };
             return p;
-        }, HandlerOptions.ApplicationLevel);
+        });
 
-        Handle.GET("/launcher/search?query={?}", (String query) =>
-        {
-            Response resp;
-            X.GET("/supercrm/partials/search/" + HttpUtility.UrlEncode(query), out resp);
+        Handle.GET("/supercrm/app-name", () => {
+
+            return new AppName();
+        });
+
+        // App name required for Launchpad
+        Handle.GET("/supercrm/app-icon", () => {
+
+            var iconpage = new Page() {
+                Html = "/SuperCRM/app-icon.html"
+            };
+
+            return iconpage;
+        });
+
+        Handle.GET("/supercrm/dashboard", () => {
+
+            Response resp = X.GET("/supercrm/partials/search/");
+
             return resp;
-        }, HandlerOptions.ApplicationLevel);
+        });
+
+        Handle.GET("/supercrm/search?query={?}", (String query) => {
+
+            Response resp = X.GET("/supercrm/partials/search/" + HttpUtility.UrlEncode(query));
+
+            return resp;
+        });
 
         Handle.GET("/supercrm/partials/search/{?}", (String query) =>
         {
@@ -266,7 +268,7 @@ partial class Master : Page {
             return m;
         });
 
-        Polyjuice.Map("/supercrm/partials/companies/@w", "/so/organization/@w",
+        Polyjuice.OntologyMap("/supercrm/partials/companies/@w", "/so/organization/@w",
 
             (String appObjectId) => {
                 SuperCRM.Company_v2 company = Db.SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE c.ObjectId = ?", appObjectId).First;
@@ -278,7 +280,7 @@ partial class Master : Page {
             }
         );
 
-        Polyjuice.Map("/supercrm/partials/contacts/@w", "/so/person/@w",
+        Polyjuice.OntologyMap("/supercrm/partials/contacts/@w", "/so/person/@w",
 
             (String appObjectId) => {
                 SuperCRM.Contact_v2 contact = Db.SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE c.ObjectId = ?", appObjectId).First;
@@ -290,6 +292,11 @@ partial class Master : Page {
             }
         );
 
+        Polyjuice.Map("/supercrm/menu", "/polyjuice/menu");
+        Polyjuice.Map("/supercrm/app-name", "/polyjuice/app-name");
+        Polyjuice.Map("/supercrm/app-icon", "/polyjuice/app-icon");
+        Polyjuice.Map("/supercrm/dashboard", "/polyjuice/dashboard");
+        Polyjuice.Map("/supercrm/search?query=@w", "/polyjuice/search?query=@w");
     }
 }
 
