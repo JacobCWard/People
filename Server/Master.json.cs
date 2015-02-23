@@ -230,7 +230,7 @@ partial class Master : Page {
             var m = new Master() {
                 Html = "/SuperCRM/message.html"
             };
-            Db.Transaction(() =>
+            Db.Transact(() =>
             {
                 SlowSQL("DELETE FROM SuperCRM.Company_v2");
                 SlowSQL("DELETE FROM SuperCRM.Contact_v2");
