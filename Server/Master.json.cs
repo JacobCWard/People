@@ -199,6 +199,12 @@ partial class Master : Page {
 
             Response resp = X.GET("/supercrm/partials/search/" + HttpUtility.UrlEncode(query));
 
+            var page = (SearchPage)resp.Resource;
+            if (page.Companies.Count == 0 && page.Contacts.Count == 0) {
+              //no results
+              return new Page() { };
+            }
+
             return resp;
         });
 
