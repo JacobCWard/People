@@ -34,17 +34,18 @@ partial class Master : Page {
             return page;
         });
 
-        Handle.GET("/supercrm/partials/companies-add", () =>
-        {
+        Handle.GET("/supercrm/partials/companies-add", () => {
+          return Db.Scope<CompanyPage>(() => {
             CompanyPage page = new CompanyPage() {
-                Uri = "/launcher/workspace/supercrm/companies-add",
-                Html = "/company.html"
+              Uri = "/launcher/workspace/supercrm/companies-add",
+              Html = "/company.html"
             };
             SuperCRM.Company_v2 company = new SuperCRM.Company_v2() {
-                Organisation = new Concepts.Ring2.Organisation()
+              Organisation = new Concepts.Ring2.Organisation()
             };
             page.Data = company;
             return page;
+          });
         });
 
         Handle.GET("/supercrm/companies/{?}", (String companyId) =>
@@ -57,21 +58,22 @@ partial class Master : Page {
             return page;
         });
 
-        Handle.GET("/supercrm/partials/companies/{?}", (String objectId) =>
-        {
+        Handle.GET("/supercrm/partials/companies/{?}", (String objectId) => {
+          return Db.Scope<CompanyPage>(() => {
             CompanyPage c = new CompanyPage() {
-                Html = "/company.html"
+              Html = "/company.html"
             };
             var company = SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c WHERE ObjectId = ?", objectId).First;
             c.Data = company;
-                
+
             var contacts = SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE Company = ?", company);
             var enumerator = contacts.GetEnumerator();
             while (enumerator.MoveNext()) {
-                var p = X.GET<Page>("/supercrm/partials/contacts/" + enumerator.Current.GetObjectID());
-                c.Contacts.Add(p);
+              var p = X.GET<Page>("/supercrm/partials/contacts/" + enumerator.Current.GetObjectID());
+              c.Contacts.Add(p);
             }
             return c;
+          });
         });
 
         Handle.GET("/supercrm/partials/companies", () =>
@@ -101,24 +103,26 @@ partial class Master : Page {
         });
 
         Handle.GET("/supercrm/partials/contacts-add", () => {
+          return Db.Scope<ContactPage>(() => {
             ContactPage page = new ContactPage() {
-                Html = "/contact.html",
-                Uri = "/supercrm/partials/contacts-add"
+              Html = "/contact.html",
+              Uri = "/supercrm/partials/contacts-add"
             };
             var companies = SQL<SuperCRM.Company_v2>("SELECT c FROM SuperCRM.Company_v2 c");
             page.SelectedCompanyIndex = -1;
 
             var contact = new SuperCRM.Contact_v2() {
-                Person = new Concepts.Ring1.Person()
+              Person = new Concepts.Ring1.Person()
             };
             if (companies.First != null) {
-                contact.Company = companies.First;
-                page.SelectedCompanyIndex = 0;
+              contact.Company = companies.First;
+              page.SelectedCompanyIndex = 0;
             }
             page.Data = contact;
             page.Companies.Data = companies;
 
             return page;
+          });
         });
 
         Handle.GET("/supercrm/contacts/{?}", (String objectId) =>
@@ -130,17 +134,17 @@ partial class Master : Page {
             return page;
         });
 
-        Handle.GET("/supercrm/partials/contacts/{?}", (String objectId) =>
-        {
+        Handle.GET("/supercrm/partials/contacts/{?}", (String objectId) => {
+          return Db.Scope<Page>(() => {
             ContactPage page = new ContactPage() {
-                Html = "/contact.html"
+              Html = "/contact.html"
             };
             var contact = SQL<SuperCRM.Contact_v2>("SELECT c FROM SuperCRM.Contact_v2 c WHERE ObjectId = ?", objectId).First;
             if (contact == null) {
-                //return empty response
-                return new Page() {
-                    Html = ""
-                };
+              //return empty response
+              return new Page() {
+                Html = ""
+              };
             }
             page.Data = contact;
             page.SelectedCompanyIndex = -1;
@@ -149,13 +153,14 @@ partial class Master : Page {
             var enumertator = companies.GetEnumerator();
             var i = 0;
             while (enumertator.MoveNext()) {
-                if (enumertator.Current.Equals(contact.Company)) {
-                    page.SelectedCompanyIndex = i;
-                    break;
-                }
-                i++;
+              if (enumertator.Current.Equals(contact.Company)) {
+                page.SelectedCompanyIndex = i;
+                break;
+              }
+              i++;
             }
             return page;
+          });
         });
 
         // Workspace home page (landing page from launchpad)
