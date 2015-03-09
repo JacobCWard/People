@@ -1,13 +1,23 @@
 {
-	"Html" : "",
-	"Organisation": {
-	    "Name$" : "Id Software"
-	},
-	"Revenue$": 100000000,
-	"LogoUrl$": "",
-	"Uri" : "",
-	"Contacts" : [{}],
-	"Save$" : false,
-	"AddContact$" : false,
+    "Html": "",
+    "Organisation": {
+        "Name$": ""
+    },
+    "Revenue$": 0,
+    "LogoUrl$": "",
+    "Uri": "",
+    "Contacts": [
+        {
+            "Person": {
+                "FirstName": "",
+                "Surname": ""
+            },
+            "Email": "",
+            "Title": ""
+        }
+    ],
+    "Save$": 0,
+    "Cancel$": 0,
+	"AddContact$" : 0,
 	"RedirectUrl$" : ""
 }

@@ -53,12 +53,12 @@ namespace People {
                     var company = SQL<Company>("SELECT c FROM People.Company c WHERE ObjectId = ?", objectId).First;
                     c.Data = company;
 
-                    var contacts = SQL<Contact>("SELECT c FROM People.Contact c WHERE Company = ?", company);
+                    /*var contacts = SQL<Contact>("SELECT c FROM People.Contact c WHERE Company = ?", company);
                     var enumerator = contacts.GetEnumerator();
                     while (enumerator.MoveNext()) {
                         var p = X.GET<Page>("/people/partials/contacts/" + enumerator.Current.GetObjectID());
                         c.Contacts.Add(p);
-                    }
+                    }*/
                     return c;
                 });
             });
@@ -138,7 +138,11 @@ namespace People {
             // Workspace home page (landing page from launchpad)
             // dashboard alias
             Handle.GET("/people", () => {
+                Response resp = X.GET("/people/dashboard");
+                return resp;
+            });
 
+            Handle.GET("/people/", () => {
                 Response resp = X.GET("/people/dashboard");
                 return resp;
             });
@@ -197,8 +201,10 @@ namespace People {
                     companies = SQL<Company>("SELECT c FROM People.Company c WHERE Organisation.Name LIKE ? FETCH ?", wildcardQuery, count);
                     contacts = SQL<Contact>("SELECT c FROM People.Contact c WHERE Person.FirstName LIKE ? OR Person.Surname LIKE ? OR Title LIKE ? OR Company.Organisation.Name LIKE ? FETCH ?", wildcardQuery, wildcardQuery, wildcardQuery, wildcardQuery, 5);
                 }
+
                 page.Companies.Data = companies;
                 page.Contacts.Data = contacts;
+                
                 return page;
             });
 

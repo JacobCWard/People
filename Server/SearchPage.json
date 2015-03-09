@@ -1,22 +1,35 @@
 {
-	"Html" : "",
-	"Companies" : [{
-	    "Organisation": {
-	        "Name": ""
-	    },
-	    "Uri": ""
-	}],
-	"Contacts" : [{
-	    "Person" : {
-	        "FirstName": "",
-	        "Surname": ""
-	    },
-	    "Title": "",
-	    "Company": {
+    "Html": "",
+    "Companies": [
+        {
             "Organisation": {
-  	            "Name": ""
-	        }
-	    },
-	    "Uri": ""
-	}]
+                "Name": ""
+            },
+            "Name": "",
+            "LogoUrl": "",
+            "Revenue": 0,
+            "Contacts": [
+                {
+                    "Title": ""
+                }
+            ],
+            "Uri": ""
+        }
+    ],
+    "Contacts": [
+        {
+            "Email": "",
+            "Person": {
+                "FirstName": "",
+                "Surname": ""
+            },
+            "Title": "",
+            "Company": {
+                "Organisation": {
+                    "Name": ""
+                }
+            },
+            "Uri": ""
+        }
+    ]
 }

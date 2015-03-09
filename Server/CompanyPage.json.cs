@@ -3,16 +3,19 @@ using Starcounter;
 namespace People {
     [CompanyPage_json]
     partial class CompanyPage : Page {
-        void Handle(Input.Save input) {
-            input.Value = false;
+        void Handle(Input.Save Action) {
             Transaction.Commit();
-            RedirectUrl = Uri;
+            RedirectUrl = UrlHelper.GetUrl();
         }
 
-        void Handle(Input.AddContact input) {
-            input.Value = false;
+        void Handle(Input.AddContact Action) {
             Transaction.Commit();
             RedirectUrl = "/launcher/workspace/people/contacts/add";
+        }
+
+        void Handle(Input.Cancel Action) {
+            Transaction.Rollback();
+            RedirectUrl = UrlHelper.GetUrl();
         }
 
         protected override string UriFragment {

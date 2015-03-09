@@ -1,69 +1,67 @@
 ﻿
 .people {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .people h1 {
-  font-size: 150%;
-  margin:0px;
-  color: #333C4E;
-  border-bottom: 1px solid #ddd;
+    font-size: 150%;
+    margin: 0px;
+    color: #333C4E;
+    border-bottom: 1px solid #ddd;
 }
 
 .people ul {
-  display: table;
-  list-style: none;
-  padding: 0px;
-  margin: 8px 0px 0px 0px;
-  width: 100%;
+    display: table;
+    list-style: none;
+    padding: 0px;
+    margin: 8px 0px 0px 0px;
+    width: 100%;
 }
 
 .people li {
-  display: table-row;
+    display: table-row;
 }
 
 .people li a {
-  display: block;
-  color: black;
-  text-decoration: none;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 4px;
-  padding-bottom: 4px;
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .people li:hover a {
-  background-color:#333C4E;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  color:white;
+    background-color: #333C4E;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    color: white;
 }
 
 .people li span {
-  display: table-cell;
-  padding-right: 20px;
+    display: table-cell;
+    padding-right: 20px;
 }
 
 .people li span:last-child {
-  padding-right: 0;
+    padding-right: 0;
 }
 
 /* people Company */
 .people-Contacts h1 {
-  font-size: 150%;
-  margin:0px;
-  color: #333C4E;
-  border-bottom: 1px solid #ddd;
+    font-size: 150%;
+    margin: 0px;
+    color: #333C4E;
+    border-bottom: 1px solid #ddd;
 }
 
-.people-companyLogo
-{
+.people-companyLogo {
     position: relative;
 }
 
-.people-companyLogo > input
-{
+.people-companyLogo > input {
     display: none;
     position: absolute;
     bottom: 3px;
@@ -72,18 +70,109 @@
     width: calc( 100% - 1em);
 }
 
-.people-companyLogo:hover > input
-{
+.people-companyLogo:hover > input {
     display: block;
 }
 
-.people-Contacts .icon-adult:before
-{
+.people-Contacts .icon-adult:before {
     margin-top: .2em;
 }
 
-.people-ContactList > *
-{
+.people-ContactList > * {
     box-shadow: 0px 0px 2px 0px rgba(51,60,78,0.5);
     margin: 1em;
+}
+
+.people fieldset {
+    padding:0px;
+    border:none;
+    margin-bottom:25px;
+}
+
+.people fieldset legend {
+    border-bottom:1px solid #C0C0C0;
+    display:block;
+    font-size:22px;
+    width:100%;
+    padding-bottom:2px;
+    margin-bottom:5px;
+}
+
+.people .btn {
+    box-sizing:content-box;
+    min-width:80px;
+    padding:5px 15px;
+    background-color:#F0F0F0;
+    border:2px solid #D0D0D0;
+    text-align:center;
+    cursor:pointer;
+    color:#333333;
+    text-decoration:none;
+    display:inline-block;
+}
+
+.people .btn:hover {
+    background-color:#FFFFFF;
+}
+
+.people .btn.btn-primary {
+    background-color:#7b8aa6;
+    color:white;
+    border:2px solid #7b8aa6;
+}
+
+.people .btn.btn-primary:hover {
+    background-color:#FFFFFF;
+    color:#49566d;
+}
+
+.people .btn.btn-small {
+    padding:3px 10px;
+    border-width:1px;
+}
+
+.people table.table {
+    border-collapse:collapse;
+    border:none;
+    padding:0px;
+    margin:0px;
+    width:100%;
+}
+
+.people table.table th,
+.people table.table td {
+    padding:5px;
+    text-align:left;
+    border:1px solid #DDDDDD;
+}
+
+.people .form-horizontal {
+}
+
+.people .form-horizontal input[type=text],
+.people .form-horizontal select {
+    border:1px solid #C0C0C0;
+    padding:6px;
+    width:320px;
+    box-sizing:content-box;
+}
+
+.people .form-horizontal .control-group {
+    margin-bottom:15px;
+}
+
+.people .form-horizontal .control-group .control-label {
+    float:left;
+    width:300px;
+    text-align:right;
+    line-height:29px;
+}
+
+.people .form-horizontal .control-group .controls,
+.people .form-horizontal .control-group .hints {
+    margin-left:315px;
+}
+
+.people .form-horizontal .control-group .hints {
+    margin-top:6px;
 }

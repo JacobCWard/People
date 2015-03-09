@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\Database.cs" />
+    <Compile Include="Server\Code\UrlHelper.cs" />
     <Compile Include="Server\CompaniesPage.json.cs">
       <DependentUpon>CompaniesPage.json</DependentUpon>
     </Compile>

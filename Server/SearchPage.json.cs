@@ -9,7 +9,7 @@ namespace People {
     partial class SearchPageContacts : Page, IBound<Contact> {
         protected override string UriFragment {
             get {
-                return "/launcher/workspace/people/contacts/" + Data.GetObjectID();
+                return UrlHelper.GetUrl("/contacts/") + Data.GetObjectID();
             }
         }
     }
@@ -18,7 +18,7 @@ namespace People {
     partial class SearchPageCompanies : Page, IBound<Company> {
         protected override string UriFragment {
             get {
-                return "/launcher/workspace/people/companies/" + Data.GetObjectID();
+                return UrlHelper.GetUrl("/companies/") + Data.GetObjectID();
             }
         }
     }
