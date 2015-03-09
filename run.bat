@@ -1,1 +1,1 @@
-star --resourcedir="%~dp0Client" "%~dp0\bin\debug\SuperCRM.exe"
+star --resourcedir="%~dp0Client" "%~dp0\bin\debug\People.exe"

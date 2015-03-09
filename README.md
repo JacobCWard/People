@@ -1,4 +1,4 @@
-SuperCRM app
+People app
 ==================
 
 Simple example of Polyjuice app. 
@@ -8,7 +8,7 @@ Add functionality to create companies, and people. Uses dashoard, search results
 
 1. Make sure you Launcher is up and running.
 2. Build the solution
-3. Start `SuperCRM.exe` 
+3. Start `People.exe` 
 
    ```bash
    star --resourcedir=Client bin/Debug/SuperCRM.exe 
