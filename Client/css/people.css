@@ -1,16 +1,16 @@
 ﻿
-.SuperCRM {
+.people {
   box-sizing: border-box;
 }
 
-.SuperCRM h1 {
+.people h1 {
   font-size: 150%;
   margin:0px;
   color: #333C4E;
   border-bottom: 1px solid #ddd;
 }
 
-.SuperCRM ul {
+.people ul {
   display: table;
   list-style: none;
   padding: 0px;
@@ -18,11 +18,11 @@
   width: 100%;
 }
 
-.SuperCRM li {
+.people li {
   display: table-row;
 }
 
-.SuperCRM li a {
+.people li a {
   display: block;
   color: black;
   text-decoration: none;
@@ -32,7 +32,7 @@
   padding-bottom: 4px;
 }
 
-.SuperCRM li:hover a {
+.people li:hover a {
   background-color:#333C4E;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -40,20 +40,50 @@
   color:white;
 }
 
-.SuperCRM li span {
+.people li span {
   display: table-cell;
   padding-right: 20px;
-
 }
 
-.SuperCRM li span:last-child {
+.people li span:last-child {
   padding-right: 0;
 }
 
-/* SuperCRM Company */
-.SuperCRM-Contacts h1 {
+/* people Company */
+.people-Contacts h1 {
   font-size: 150%;
   margin:0px;
   color: #333C4E;
   border-bottom: 1px solid #ddd;
+}
+
+.people-companyLogo
+{
+    position: relative;
+}
+
+.people-companyLogo > input
+{
+    display: none;
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    margin: 0.5em;
+    width: calc( 100% - 1em);
+}
+
+.people-companyLogo:hover > input
+{
+    display: block;
+}
+
+.people-Contacts .icon-adult:before
+{
+    margin-top: .2em;
+}
+
+.people-ContactList > *
+{
+    box-shadow: 0px 0px 2px 0px rgba(51,60,78,0.5);
+    margin: 1em;
 }

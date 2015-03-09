@@ -1,21 +1,21 @@
 {
-  "name": "SuperCRM",
-  "version": "0.0.0",
-  "homepage": "https://github.com/Starcounter/SuperCRM",
-  "description": "Super simple example of Polyjuice CRM app.",
-  "main": "Client/master.html",
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "Client/sys",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "gravatar-img": "warpech/gravatar-img#~0.1.2",
-    "image-mask": "tomalec/image-mask#titleAttribute"
-  }
+    "name": "People",
+    "version": "0.0.1",
+    "homepage": "https://github.com/Starcounter/People",
+    "description": "People CRM - an example of Polyjuice app.",
+    "main": "Client/master.html",
+    "license": "MIT",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "Client/sys",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "gravatar-img": "warpech/gravatar-img#~0.1.2",
+        "image-mask": "tomalec/image-mask#titleAttribute"
+    }
 }

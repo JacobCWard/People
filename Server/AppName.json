@@ -1,4 +1,4 @@
 {
- name: "SuperCRM",
- description: "Extramely simple CRM example"
+    "name": "People",
+    "description": "Extramely simple People CRM"
 }

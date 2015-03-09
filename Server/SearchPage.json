@@ -1,22 +1,22 @@
 {
 	"Html" : "",
 	"Companies" : [{
-	  "Organisation": {
-	    "Name": ""
-	  },
-	  "Uri": ""
+	    "Organisation": {
+	        "Name": ""
+	    },
+	    "Uri": ""
 	}],
 	"Contacts" : [{
-	  "Person" : {
-	    "FirstName": "",
-	    "Surname": ""
-	  },
-	  "Title": "",
-	  "Company": {
-        "Organisation": {
-  	      "Name": ""
-	    }
-	  },
-	  "Uri": ""
+	    "Person" : {
+	        "FirstName": "",
+	        "Surname": ""
+	    },
+	    "Title": "",
+	    "Company": {
+            "Organisation": {
+  	            "Name": ""
+	        }
+	    },
+	    "Uri": ""
 	}]
 }

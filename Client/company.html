@@ -4,36 +4,11 @@
 <template>
 
     <div>
-        <style>
-            .SuperCRM-companyLogo{ 
-                position: relative;
-            }
-            .SuperCRM-companyLogo>input {
-                display: none;
-                position: absolute;
-                bottom: 3px;
-                left: 0;
-                margin: 0.5em;
-                width: calc( 100% - 1em);
-
-            }
-            .SuperCRM-companyLogo:hover>input {
-                display: block;
-            }
-            .SuperCRM-Contacts .icon-adult:before {
-                margin-top: .2em;
-            }
-            .SuperCRM-ContactList>*{
-                box-shadow: 0px 0px 2px 0px rgba(51,60,78,0.5);
-                margin: 1em;
-            }
-        </style>
-        <h1 class="SuperCRM-companyLogo">
+        <h1 class="people-companyLogo">
             <image-mask size="128" title="Company Logo" src="{{ LogoUrl$ }}">Logo here</image-mask>
             <input id="LogoUrl$" type='text' value='{{ LogoUrl$ }}' placeholder='<LogoURL>'>
         </h1>
     </div>
-
 
     <div class="launcher-labeled-input">
         <input id="Name$" type='text' value='{{ Organisation.Name$ }}' placeholder='<Name>'>
@@ -45,16 +20,12 @@
         <label for="Revenue$">Revenue</label>
     </div>
 
-    <div class="SuperCRM-Contacts">
+    <div class="people-Contacts">
         <h1><i class="icon-adult"></i><span class="i-name">Contacts</span></h1>
-
         <template is="launcher-partial" repeat="{{ Contacts }}"></template>
-        <!--<launcher-root-partial repeat="{{ Contacts }}" class="SuperCRM-ContactList"></launcher-root-partial>-->
-        
         <button class="launcher-button" style="background-color:#184259" onclick="getModel(this).AddContact$ = true">Add a contact in {{Organisation.Name$}}</button>
-    </div> 
+    </div>
 
     <button class="launcher-button" style="background-color:#11653B" onclick="getModel(this).Save$ = true">Save</button>
-    <link is="puppet-redirect" history url="{{ RedirectUrl$ }}">
-
+    <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />
 </template>

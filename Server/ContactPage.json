@@ -9,9 +9,9 @@
 	"Uri" : "",
 	"SelectedCompanyIndex$" : 0,
 	"Companies": [{
-	  "Organisation" : {
-        "Name" : ""
-	  }
+	    "Organisation" : {
+            "Name" : ""
+	    }
 	}],
 	"Save$" : false,
 	"RedirectUrl$" : ""
