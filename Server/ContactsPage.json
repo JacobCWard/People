@@ -1,0 +1,25 @@
+{
+    "Html": "",
+    "Contacts": [
+        {
+            "Email": "",
+            "Person": {
+                "FirstName": "",
+                "Surname": ""
+            },
+            "Title": "",
+            "Company": {
+                "Organisation": {
+                    "Name": ""
+                }
+            },
+            "Uri": "",
+            "Delete$": 0
+        }
+    ],
+    "Confirm": {
+        "Message": "",
+        "Ok$": "",
+        "Reject$": ""
+    } 
+}

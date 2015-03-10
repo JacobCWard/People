@@ -84,6 +84,9 @@
     <Compile Include="Server\ContactPage.json.cs">
       <DependentUpon>ContactPage.json</DependentUpon>
     </Compile>
+    <Compile Include="Server\ContactsPage.json.cs">
+      <DependentUpon>ContactsPage.json</DependentUpon>
+    </Compile>
     <Compile Include="Server\Master.json.cs">
       <DependentUpon>Master.json</DependentUpon>
     </Compile>
@@ -107,6 +110,7 @@
     <Content Include="Client\companies.html" />
     <Content Include="Client\company.html" />
     <Content Include="Client\contact.html" />
+    <Content Include="Client\contacts.html" />
     <Content Include="Client\People\app-icon.html" />
     <Content Include="Client\css\animation.css" />
     <Content Include="Client\css\people-font-codes.css" />
@@ -145,6 +149,9 @@
     <None Include="Client\font\people-font.eot" />
     <None Include="Client\font\people-font.ttf" />
     <None Include="Client\font\people-font.woff" />
+    <TypedJSON Include="Server\ContactsPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
     <TypedJSON Include="Server\CompaniesPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>

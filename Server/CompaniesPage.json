@@ -1,9 +1,25 @@
 {
     "Html": "",
-	"Companies" : [{
-	    "Organisation": {
-	        "Name": ""
-        },
-	    "Uri": ""
-	}]
+    "Companies": [
+        {
+            "Organisation": {
+                "Name": ""
+            },
+            "Name": "",
+            "LogoUrl": "",
+            "Revenue": 0,
+            "Contacts": [
+                {
+                    "Title": ""
+                }
+            ],
+            "Uri": "",
+            "Delete$": 0
+        }
+    ],
+    "Confirm": {
+        "Message": "",
+        "Ok$": "",
+        "Reject$": ""
+    }
 }

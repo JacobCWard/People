@@ -1,93 +1,92 @@
-<link rel="stylesheet" href="/css/people.css">
-<link rel="import" href="/People/sys/gravatar-img/gravatar-img.html">
-
+<link rel="stylesheet" href="/css/people.css" />
+<link rel="import" href="/People/sys/gravatar-img/gravatar-img.html" />
 <template>
-
-     <!-- Contacts -->
     <div class="people">
-        <fieldset>
-            <legend>
-                <i class="icon-industrial-building"></i><span class="i-name">Companies</span>
-            </legend>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Logo</th>
-                        <th>Name</th>
-                        <th>Revenue</th>
-                        <th>Contacts</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template repeat="{{Companies}}">
+        <template if="{{Companies.length > 0}}">
+            <fieldset>
+                <legend>
+                    <i class="icon-industrial-building"></i><span class="i-name">Companies</span>
+                </legend>
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>
-                                <img src="{{LogoUrl}}" alt="{{Organisation.Name$}}" height="32" />
-                            </td>
-                            <td>
-                                <span>{{Organisation.Name}}</span>
-                            </td>
-                            <td>
-                                <span>{{Revenue}}</span>
-                            </td>
-                            <td>
-                                <span>{{Contacts.length}}</span>
-                            </td>
-                            <td>
-                                <a class="btn btn-small" href="{{Uri}}">Edit company</a>
-                            </td>
+                            <th>Logo</th>
+                            <th>Name</th>
+                            <th>Revenue</th>
+                            <th>Contacts</th>
+                            <th></th>
                         </tr>
-                    </template>
-                </tbody>
-            </table>
-        </fieldset>
-        <fieldset>
-            <legend>
-                <i class="icon-adult"></i><span class="i-name">Contacts</span>
-            </legend>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Company</th>
-                        <th>Avatar</th>
-                        <th>Email</th>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Title</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template repeat="{{Contacts}}">
+                    </thead>
+                    <tbody>
+                        <template repeat="{{Companies}}">
+                            <tr>
+                                <td>
+                                    <img src="{{LogoUrl}}" alt="{{Organisation.Name$}}" height="32" />
+                                </td>
+                                <td>
+                                    <span>{{Organisation.Name}}</span>
+                                </td>
+                                <td>
+                                    <span>{{Revenue}}</span>
+                                </td>
+                                <td>
+                                    <span>{{Contacts.length}}</span>
+                                </td>
+                                <td>
+                                    <a class="btn btn-small" href="{{Uri}}">Edit company</a>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </fieldset>
+        </template>
+        <template if="{{Contacts.length > 0}}">
+            <fieldset>
+                <legend>
+                    <i class="icon-adult"></i><span class="i-name">Contacts</span>
+                </legend>
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>
-                                <span>{{Company.Organisation.Name}}</span>
-                            </td>
-                            <td>
-                                <gravatar-img email="{{Email$}}" style="min-height: 32px; max-width:32px; min-width:32px;"></gravatar-img>
-                            </td>
-                            <td>
-                                <a href="mailto:{{Email}}" target="_blank">{{Email}}</a>
-                            </td>
-                            <td>
-                                <span>{{Person.FirstName}}</span>
-                            </td>
-                            <td>
-                                <span>{{Person.Surname}}</span>
-                            </td>
-                            <td>
-                                <span>{{Title}}</span>
-                            </td>
-                            <td>
-                                <span>
+                            <th>Company</th>
+                            <th>Avatar</th>
+                            <th>Email</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Title</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template repeat="{{Contacts}}">
+                            <tr>
+                                <td>
+                                    <span>{{Company.Organisation.Name}}</span>
+                                </td>
+                                <td>
+                                    <gravatar-img email="{{Email$}}" style="min-height: 32px; max-width:32px; min-width:32px;"></gravatar-img>
+                                </td>
+                                <td>
+                                    <a href="mailto:{{Email}}" target="_blank">{{Email}}</a>
+                                </td>
+                                <td>
+                                    <span>{{Person.FirstName}}</span>
+                                </td>
+                                <td>
+                                    <span>{{Person.Surname}}</span>
+                                </td>
+                                <td>
+                                    <span>{{Title}}</span>
+                                </td>
+                                <td>
                                     <a href="{{Uri}}" class="btn btn-small">Edit contact</a>
-                                </span>
-                            </td>
-                        </tr>
-                    </template>
-                </tbody>
-            </table>
-        </fieldset>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </fieldset>
+        </template>
     </div>
 </template>

@@ -5,7 +5,7 @@ namespace People {
     partial class CompanyPage : Page {
         void Handle(Input.Save Action) {
             Transaction.Commit();
-            RedirectUrl = UrlHelper.GetUrl();
+            RedirectUrl = UrlHelper.GetUrl("/companies");
         }
 
         void Handle(Input.AddContact Action) {
@@ -15,7 +15,7 @@ namespace People {
 
         void Handle(Input.Cancel Action) {
             Transaction.Rollback();
-            RedirectUrl = UrlHelper.GetUrl();
+            RedirectUrl = UrlHelper.GetUrl("/companies");
         }
 
         protected override string UriFragment {

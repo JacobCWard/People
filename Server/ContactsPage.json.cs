@@ -3,44 +3,42 @@ using System.Linq;
 using Starcounter;
 
 namespace People {
-    [CompaniesPage_json]
-    partial class CompaniesPage : Page {
+    partial class ContactsPage : Page {
         public Action ConfirmAction;
 
-        public void RefreshCompanies() {
-            this.Companies = SQL<Company>("SELECT c FROM People.Company c");
+        public void RefreshContacts() {
+            this.Contacts = SQL<Contact>("SELECT c FROM People.Contact c");
         }
     }
 
-    [CompaniesPage_json.Companies]
-    partial class CompaniesPageCompanies : Page, IBound<Company> {
+    [ContactsPage_json.Contacts]
+    partial class ContactsPageContacts : Page, IBound<Contact> {
         protected override string UriFragment {
             get {
-                return "/launcher/workspace/people/companies/" + Data.GetObjectID();
+                return "/launcher/workspace/people/contacts/" + Data.GetObjectID();
             }
         }
 
         void Handle(Input.Delete Action) {
-            this.ParentView.Confirm.Message = "Are you sure want to delete [" + this.Data.Organisation.Name + "]?";
-            this.ParentView.ConfirmAction = () => 
-            {
+            this.ParentView.Confirm.Message = "Are you sure want to delete [" + this.Data.Title + "]?";
+            this.ParentView.ConfirmAction = () => {
                 Db.Transact(() => {
                     this.Data.Delete();
                 });
 
-                this.ParentView.RefreshCompanies();
+                this.ParentView.RefreshContacts();
             };
         }
 
-        CompaniesPage ParentView {
+        ContactsPage ParentView {
             get {
-                return this.Parent.Parent as CompaniesPage;
+                return this.Parent.Parent as ContactsPage;
             }
         }
     }
 
-    [CompaniesPage_json.Confirm]
-    partial class CompaniesPageConfirm : Page {
+    [ContactsPage_json.Confirm]
+    partial class ContactsPageConfirm : Page {
         void Cancel() {
             this.ParentView.Confirm.Message = string.Empty;
             this.ParentView.ConfirmAction = null;
@@ -58,9 +56,9 @@ namespace People {
             this.Cancel();
         }
 
-        CompaniesPage ParentView {
+        ContactsPage ParentView {
             get {
-                return this.Parent as CompaniesPage;
+                return this.Parent as ContactsPage;
             }
         }
     }
