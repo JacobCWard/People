@@ -1,65 +1,111 @@
-<link rel="import" href="/People/sys/gravatar-img/gravatar-img.html" />
 <script src="/People/sys/spark-md5/spark-md5.js"></script>
 <link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
 <link rel="stylesheet" href="/css/people.css" />
 <template>
-    <form class="form-horizontal">
-        <div class="control-group">
-            <div class="controls">
-                <gravatar-img email="{{ Email$ }}" style="min-height: 80px; max-width:80px; min-width:80px;"></gravatar-img>
+    <div class="people">
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label">Company:</label>
+                <div class="controls">
+                    <template if="{{ Companies.length > 0 }}">
+                        <select selectedindex="{{ SelectedCompanyIndex$ }}">
+                            <template repeat="{{ Companies }}">
+                                <option>{{ Organisation.Name }}</option>
+                            </template>
+                        </select>
+                    </template>
+                    <template if="{{ Companies.length == 0 }}">
+                        <strong>Please <a href="/launcher/workspace/people/companies/add">Add a Company</a> before adding a Contact</strong>
+                    </template>
+                </div>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Company:</label>
-            <div class="controls">
-                <template if="{{ Companies.length > 0 }}">
-                    <select selectedindex="{{ SelectedCompanyIndex$ }}">
-                        <template repeat="{{ Companies }}">
-                            <option>{{ Organisation.Name }}</option>
-                        </template>
-                    </select>
-                </template>
-                <template if="{{ Companies.length == 0 }}">
-                    <strong>Please <a href="/launcher/workspace/people/companies/add">Add a Company</a> before adding a Contact</strong>
-                </template>
+            <div class="control-group">
+                <label class="control-label">First Name:</label>
+                <div class="controls">
+                    <input type='text' value='{{ Person.FirstName$ }}' placeholder='First Name' />
+                </div>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Email:</label>
-            <div class="controls">
-                <input type='text' value='{{ Email$ }}' placeholder='Email' />
+            <div class="control-group">
+                <label class="control-label">Last Name:</label>
+                <div class="controls">
+                    <input type='text' value='{{ Person.Surname$ }}' placeholder='Last Name' />
+                </div>
             </div>
-            <div class="hints">
-                <div>The contact icon will be automatically loaded from <a href="https://en.gravatar.com/" target="_blank">gravatar.com</a></div>
+            <div class="control-group">
+                <label class="control-label">Title:</label>
+                <div class="controls">
+                    <input type='text' value='{{ Title$ }}' placeholder='Title' />
+                </div>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">First Name:</label>
-            <div class="controls">
-                <input type='text' value='{{ Person.FirstName$ }}' placeholder='First Name' />
+            <div class="control-group">
+                <label class="control-label">Details:</label>
+                <div class="controls">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Role</th>
+                                <th>Value</th>
+                                <th>Comment</th>
+                                <th>Default</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template repeat="{{info in Infos}}">
+                                <tr>
+                                    <td>
+                                        <select selectedindex="{{ info.SelectedContactInfoTypeIndex$ }}">
+                                            <template repeat="{{ ContactInfoTypes }}">
+                                                <option>{{ Name }}</option>
+                                            </template>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select selectedindex="{{ info.SelectedContactInfoRoleIndex$ }}">
+                                            <template repeat="{{ ContactInfoRoles }}">
+                                                <option>{{ Name }}</option>
+                                            </template>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" value="{{info.Value$}}" />
+                                    </td>
+                                    <td>
+                                        <input type="text" value="{{info.Comment$}}" />
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" checked="{{info.Default$}}" />
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-small" onclick="getModel(this).info.Delete$++">Delete</button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Last Name:</label>
-            <div class="controls">
-                <input type='text' value='{{ Person.Surname$ }}' placeholder='Last Name' />
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    <button type="button" class="btn btn-primary" onclick="getModel(this).Save$++">Save</button>
+                    <button type="button" class="btn" onclick="getModel(this).Cancel$++">Cancel</button>
+                    <button type="button" class="btn" onclick="getModel(this).AddInfo$++">Add details</button>
+                </div>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Title:</label>
-            <div class="controls">
-                <input type='text' value='{{ Title$ }}' placeholder='Title' />
+        </form>
+        <template if="{{Confirm.Message != null && Confirm.Message != ''}}">
+            <div class="dialog-overlay"></div>
+            <div class="dialog">
+                <div class="dialog-header">Confirmation</div>
+                <div class="dialog-content">{{Confirm.Message}}</div>
+                <div class="dialog-actions">
+                    <button type="button" class="btn btn-primary btn-small" onclick="getModel(this).Confirm.Ok$++">OK</button>
+                    <button type="button" class="btn btn-small" onclick="getModel(this).Confirm.Reject$++">Cancel</button>
+                </div>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label"></label>
-            <div class="controls">
-                <button type="button" class="btn btn-primary" onclick="getModel(this).Save$++">Save</button>
-                <button type="button" class="btn" onclick="getModel(this).Cancel$++">Cancel</button>
-            </div>
-        </div>
-    </form>
-
+        </template>
+    </div>
     <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />
-    <div>{{ RedirectUrl$ }}</div>
 </template>

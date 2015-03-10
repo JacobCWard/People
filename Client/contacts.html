@@ -1,5 +1,4 @@
 ﻿<link rel="stylesheet" href="/css/people.css" />
-<link rel="import" href="/People/sys/gravatar-img/gravatar-img.html" />
 <template>
     <div class="people">
         <fieldset>
@@ -10,8 +9,8 @@
                 <thead>
                     <tr>
                         <th>Company</th>
-                        <th>Avatar</th>
-                        <th>Email</th>
+                        <th>Default email</th>
+                        <th>Default phone</th>
                         <th>First name</th>
                         <th>Last name</th>
                         <th>Title</th>
@@ -25,10 +24,10 @@
                                 <span>{{Company.Organisation.Name}}</span>
                             </td>
                             <td>
-                                <gravatar-img email="{{Email$}}" style="min-height: 32px; max-width:32px; min-width:32px;"></gravatar-img>
+                                <a href="mailto:{{DefaultEmail}}" target="_blank">{{DefaultEmail}}</a>
                             </td>
                             <td>
-                                <a href="mailto:{{Email}}" target="_blank">{{Email}}</a>
+                                <a href="tel:{{DefaultPhone}}" target="_blank">{{DefaultPhone}}</a>
                             </td>
                             <td>
                                 <span>{{Person.FirstName}}</span>

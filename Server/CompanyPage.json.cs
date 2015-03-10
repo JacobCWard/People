@@ -14,7 +14,7 @@ namespace People {
         }
 
         void Handle(Input.Cancel Action) {
-            Transaction.Rollback();
+            //Transaction.Rollback();
             RedirectUrl = UrlHelper.GetUrl("/companies");
         }
 

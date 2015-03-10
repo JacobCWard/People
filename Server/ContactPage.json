@@ -1,19 +1,46 @@
 {
-	"Html" : "",
-	"Person" : {
-	    "FirstName$" : "Albert",
-		"Surname$" : "Einstein"
-	},
-	"Title$" : "Scientist",
-	"Email$" : "albert@example.com",
-	"Uri" : "",
-	"SelectedCompanyIndex$" : 0,
-	"Companies": [{
-	    "Organisation" : {
-            "Name" : ""
-	    }
-	}],
+    "Html": "",
+    "Person": {
+        "FirstName$": "",
+        "Surname$": ""
+    },
+    "Title$": "",
+    "Uri": "",
+    "SelectedCompanyIndex$": 0,
+    "Companies": [
+        {
+            "Organisation": {
+                "Name": ""
+            }
+        }
+    ],
+    "Infos": [
+        {
+            "SelectedContactInfoTypeIndex$": 0,
+            "SelectedContactInfoRoleIndex$": 0,
+            "Value$": "",
+            "Comment$": "",
+            "Default$": false,
+            "Delete$": 0
+        }
+    ],
+    "ContactInfoTypes": [
+        {
+            "Name": ""
+        }
+    ],
+    "ContactInfoRoles": [
+        { 
+            "Name": ""
+        }
+    ],
     "Save$": 0,
     "Cancel$": 0,
-	"RedirectUrl$" : ""
+    "AddInfo$": 0,
+    "RedirectUrl$": "",
+    "Confirm": {
+        "Message": "",
+        "Ok$": "",
+        "Reject$": ""
+    }
 }

@@ -1,9 +1,10 @@
 using System;
+using System.Web;
+using System.Diagnostics;
+using System.Linq;
 using Starcounter;                                  // Most stuff relating to the database, JSON and communication is in this namespace
 using Starcounter.Internal;
 using Starcounter.Templates;
-using System.Web;
-using System.Diagnostics;
 using PolyjuiceNamespace;
 
 namespace People {
@@ -14,7 +15,45 @@ namespace People {
         /// they can do console output. However, they are run inside the scope of a database rather than connecting to it.
         /// </summary>
         static void Main() {
+            RegisterPartials();
+
+            // Workspace home page (landing page from launchpad)
+            // dashboard alias
+            Handle.GET("/people", () => {
+                Response resp = X.GET("/people/dashboard");
+                return resp;
+            });
+
+            Handle.GET("/people/", () => {
+                Response resp = X.GET("/people/dashboard");
+                return resp;
+            });
+
             // App name required for Launchpad
+            Handle.GET("/people/app-name", () => {
+                return new AppName();
+            });
+
+            Handle.GET("/people/app-icon", () => {
+                Page iconpage = new Page() {
+                    Html = "/People/app-icon.html"
+                };
+
+                return iconpage;
+            });
+
+            Handle.GET("/people/menu", () => {
+                var p = new Page() {
+                    Html = "/menu.html"
+                };
+                return p;
+            });
+
+            Handle.GET("/people/dashboard", () => {
+                Response resp = X.GET("/People/partials/search/");
+
+                return resp;
+            });
 
             Handle.GET("/people/companies", () => {
                 var page = X.GET<Json>("/people/partials/companies");
@@ -46,6 +85,69 @@ namespace People {
                 return page;
             });
 
+            Handle.GET("/people/search?query={?}", (String query) => {
+                Response resp = X.GET("/People/partials/search/" + HttpUtility.UrlEncode(query));
+
+                var page = (SearchPage)resp.Resource;
+                if (page.Companies.Count == 0 && page.Contacts.Count == 0) {
+                    //no results
+                    return new Page() { };
+                }
+
+                return resp;
+            });
+
+            Handle.GET("/people/delete-all-data", () => {
+                Master m = new Master() {
+                    Html = "/People/message.html"
+                };
+                Db.Transact(() => {
+                    SlowSQL("DELETE FROM People.Company");
+                    SlowSQL("DELETE FROM People.Contact");
+                    SlowSQL("DELETE FROM Concepts.Ring1.Person");
+                    SlowSQL("DELETE FROM Concepts.Ring2.Organisation");
+                });
+                m.Message = "SugarCRM's company and contact data was removed";
+                return m;
+            });
+
+            OntologyMap();
+            InitializeData();
+        }
+
+        static void OntologyMap() {
+            Polyjuice.OntologyMap("/people/partials/companies/@w", "/so/organization/@w",
+
+                (String appObjectId) => {
+                    Company company = Db.SQL<Company>("SELECT c FROM People.Company c WHERE c.ObjectId = ?", appObjectId).First;
+                    return company.Organisation.GetObjectID();
+                },
+                (String soObjectId) => {
+                    Company company = Db.SQL<Company>("SELECT c FROM People.Company c WHERE c.Organisation.ObjectId = ?", soObjectId).First;
+                    return company.GetObjectID();
+                }
+            );
+
+            Polyjuice.OntologyMap("/people/partials/contacts/@w", "/so/person/@w",
+
+                (String appObjectId) => {
+                    Contact contact = Db.SQL<Contact>("SELECT c FROM People.Contact c WHERE c.ObjectId = ?", appObjectId).First;
+                    return contact.Person.GetObjectID();
+                },
+                (String soObjectId) => {
+                    Contact contact = Db.SQL<Contact>("SELECT c FROM People.Contact c WHERE c.Person.ObjectId = ?", soObjectId).First;
+                    return contact.GetObjectID();
+                }
+            );
+
+            Polyjuice.Map("/people/menu", "/polyjuice/menu");
+            Polyjuice.Map("/people/app-name", "/polyjuice/app-name");
+            Polyjuice.Map("/people/app-icon", "/polyjuice/app-icon");
+            Polyjuice.Map("/people/dashboard", "/polyjuice/dashboard");
+            Polyjuice.Map("/people/search?query=@w", "/polyjuice/search?query=@w");
+        }
+
+        static void RegisterPartials() {
             Handle.GET("/people/partials/companies", () => {
                 CompaniesPage c = new CompaniesPage() {
                     Html = "/companies.html"
@@ -76,7 +178,7 @@ namespace People {
                         Html = "/company.html"
                     };
 
-                    var company = SQL<Company>("SELECT c FROM People.Company c WHERE ObjectId = ?", objectId).First;
+                    var company = Db.SQL<Company>("SELECT c FROM People.Company c WHERE ObjectId = ?", objectId).First;
                     c.Data = company;
 
                     return c;
@@ -100,20 +202,12 @@ namespace People {
                         Html = "/contact.html"
                     };
 
-                    Rows<Company> companies = SQL<Company>("SELECT c FROM People.Company c");
-                    page.SelectedCompanyIndex = -1;
-
                     Contact contact = new Contact() {
-                        Person = new Concepts.Ring1.Person()
+                        Person = new Concepts.Ring1.Person(),
+                        Company = Db.SQL<Company>("SELECT c FROM People.Company c").First
                     };
-
-                    if (companies.First != null) {
-                        contact.Company = companies.First;
-                        page.SelectedCompanyIndex = 0;
-                    }
-
-                    page.Data = contact;
-                    page.Companies.Data = companies;
+                
+                    page.RefreshContact(contact);
 
                     return page;
                 });
@@ -124,146 +218,67 @@ namespace People {
                     ContactPage page = new ContactPage() {
                         Html = "/contact.html"
                     };
-                    var contact = SQL<Contact>("SELECT c FROM People.Contact c WHERE ObjectId = ?", objectId).First;
+                    
+                    Contact contact = Db.SQL<Contact>("SELECT c FROM People.Contact c WHERE ObjectId = ?", objectId).First;
+                    
                     if (contact == null) {
                         //return empty response
                         return new Page() {
                             Html = ""
                         };
                     }
-                    page.Data = contact;
-                    page.SelectedCompanyIndex = -1;
-                    var companies = SQL<Company>("SELECT c FROM People.Company c");
-                    page.Companies.Data = companies;
-                    var enumertator = companies.GetEnumerator();
-                    var i = 0;
-                    while (enumertator.MoveNext()) {
-                        if (enumertator.Current.Equals(contact.Company)) {
-                            page.SelectedCompanyIndex = i;
-                            break;
-                        }
-                        i++;
-                    }
+
+                    page.RefreshContact(contact);
+
                     return page;
                 });
-            });
-
-            // Workspace home page (landing page from launchpad)
-            // dashboard alias
-            Handle.GET("/people", () => {
-                Response resp = X.GET("/people/dashboard");
-                return resp;
-            });
-
-            Handle.GET("/people/", () => {
-                Response resp = X.GET("/people/dashboard");
-                return resp;
-            });
-
-            Handle.GET("/people/menu", () => {
-                var p = new Page() {
-                    Html = "/menu.html"
-                };
-                return p;
-            });
-
-            Handle.GET("/people/app-name", () => {
-                return new AppName();
-            });
-
-            // App name required for Launchpad
-            Handle.GET("/people/app-icon", () => {
-                Page iconpage = new Page() {
-                    Html = "/People/app-icon.html"
-                };
-
-                return iconpage;
-            });
-
-            Handle.GET("/people/dashboard", () => {
-                Response resp = X.GET("/People/partials/search/");
-
-                return resp;
-            });
-
-            Handle.GET("/people/search?query={?}", (String query) => {
-                Response resp = X.GET("/People/partials/search/" + HttpUtility.UrlEncode(query));
-
-                var page = (SearchPage)resp.Resource;
-                if (page.Companies.Count == 0 && page.Contacts.Count == 0) {
-                    //no results
-                    return new Page() { };
-                }
-
-                return resp;
             });
 
             Handle.GET("/people/partials/search/{?}", (String query) => {
                 SearchPage page = new SearchPage() {
                     Html = "/search.html"
                 };
-                Rows<Company> companies;
-                Rows<Contact> contacts;
-                int count = 5;
+                SearchProvider provider = new SearchProvider();
+                int fetch = 5;
 
-                if (string.IsNullOrEmpty(query)) {
-                    companies = SQL<Company>("SELECT c FROM People.Company c FETCH ?", count);
-                    contacts = SQL<Contact>("SELECT c FROM People.Contact c FETCH ?", count);
-                } else {
-                    var wildcardQuery = "%" + query + "%";
-                    companies = SQL<Company>("SELECT c FROM People.Company c WHERE Organisation.Name LIKE ? FETCH ?", wildcardQuery, count);
-                    contacts = SQL<Contact>("SELECT c FROM People.Contact c WHERE Person.FirstName LIKE ? OR Person.Surname LIKE ? OR Title LIKE ? OR Company.Organisation.Name LIKE ? FETCH ?", wildcardQuery, wildcardQuery, wildcardQuery, wildcardQuery, 5);
-                }
+                page.Companies.Data = provider.SelectCompanies(query, fetch);
+                page.Contacts.Data = provider.SelectContacts(query, fetch);
 
-                page.Companies.Data = companies;
-                page.Contacts.Data = contacts;
-                
                 return page;
             });
+        }
 
-            Handle.GET("/people/delete-all-data", () => {
-                Master m = new Master() {
-                    Html = "/People/message.html"
-                };
-                Db.Transact(() => {
-                    SlowSQL("DELETE FROM People.Company");
-                    SlowSQL("DELETE FROM People.Contact");
-                    SlowSQL("DELETE FROM Concepts.Ring1.Person");
-                    SlowSQL("DELETE FROM Concepts.Ring2.Organisation");
-                });
-                m.Message = "SugarCRM's company and contact data was removed";
-                return m;
-            });
+        static void InitializeData() {
+            string[] defaultContactInfoTypes = new string[] { "Email", "Phone", "Address" };
+            string[] defaultContactInfoRoles = new string[] { "Personal", "Home", "Work" };
 
-            Polyjuice.OntologyMap("/people/partials/companies/@w", "/so/organization/@w",
+            for (int i = 0; i < defaultContactInfoTypes.Length; i++) {
+                string t = defaultContactInfoTypes[i];
+                ContactInfoType cit = Db.SQL<ContactInfoType>("SELECT cit FROM ContactInfoType cit WHERE cit.SysName = ?", t).First;
 
-                (String appObjectId) => {
-                    Company company = Db.SQL<Company>("SELECT c FROM People.Company c WHERE c.ObjectId = ?", appObjectId).First;
-                    return company.Organisation.GetObjectID();
-                },
-                (String soObjectId) => {
-                    Company company = Db.SQL<Company>("SELECT c FROM People.Company c WHERE c.Organisation.ObjectId = ?", soObjectId).First;
-                    return company.GetObjectID();
+                if (cit == null) {
+                    Db.Transact(() => {
+                        cit = new ContactInfoType();
+                        cit.Name = cit.SysName = t;
+                        cit.Deletable = false;
+                        cit.SortNumber = i;
+                    });
                 }
-            );
+            }
 
-            Polyjuice.OntologyMap("/people/partials/contacts/@w", "/so/person/@w",
+            for (int i = 0; i < defaultContactInfoRoles.Length; i++) {
+                string r = defaultContactInfoRoles[i];
+                ContactInfoRole cir = Db.SQL<ContactInfoRole>("SELECT cir FROM ContactInfoRole cir WHERE cir.SysName = ?", r).First;
 
-                (String appObjectId) => {
-                    Contact contact = Db.SQL<Contact>("SELECT c FROM People.Contact c WHERE c.ObjectId = ?", appObjectId).First;
-                    return contact.Person.GetObjectID();
-                },
-                (String soObjectId) => {
-                    Contact contact = Db.SQL<Contact>("SELECT c FROM People.Contact c WHERE c.Person.ObjectId = ?", soObjectId).First;
-                    return contact.GetObjectID();
+                if (cir == null) {
+                    Db.Transact(() => {
+                        cir = new ContactInfoRole();
+                        cir.Name = cir.SysName = r;
+                        cir.Deletable = false;
+                        cir.SortNumber = i;
+                    });
                 }
-            );
-
-            Polyjuice.Map("/people/menu", "/polyjuice/menu");
-            Polyjuice.Map("/people/app-name", "/polyjuice/app-name");
-            Polyjuice.Map("/people/app-icon", "/polyjuice/app-icon");
-            Polyjuice.Map("/people/dashboard", "/polyjuice/dashboard");
-            Polyjuice.Map("/people/search?query=@w", "/polyjuice/search?query=@w");
+            }
         }
     }
 }

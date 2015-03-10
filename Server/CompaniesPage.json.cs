@@ -22,8 +22,7 @@ namespace People {
 
         void Handle(Input.Delete Action) {
             this.ParentView.Confirm.Message = "Are you sure want to delete [" + this.Data.Organisation.Name + "]?";
-            this.ParentView.ConfirmAction = () => 
-            {
+            this.ParentView.ConfirmAction = () => {
                 Db.Transact(() => {
                     this.Data.Delete();
                 });

@@ -7,7 +7,7 @@ namespace People {
         public Action ConfirmAction;
 
         public void RefreshContacts() {
-            this.Contacts = SQL<Contact>("SELECT c FROM People.Contact c");
+            this.Contacts = Db.SQL<Contact>("SELECT c FROM People.Contact c");
         }
     }
 
@@ -23,6 +23,7 @@ namespace People {
             this.ParentView.Confirm.Message = "Are you sure want to delete [" + this.Data.Title + "]?";
             this.ParentView.ConfirmAction = () => {
                 Db.Transact(() => {
+                    this.Data.DeleteRelations();
                     this.Data.Delete();
                 });
 

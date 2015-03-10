@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Starcounter;
 
 namespace People {
@@ -5,7 +7,6 @@ namespace People {
     public class Company {
         public Concepts.Ring2.Organisation Organisation;
         public decimal Revenue;
-        public string LogoUrl;
 
         public QueryResultRows<Contact> Contacts {
             get {
@@ -15,11 +16,28 @@ namespace People {
     }
 
     [Database]
-    public class Contact {
-        public Company Company;
-        public Concepts.Ring1.Person Person;
-        public string Email;
-        public string Title;
+    public class ContactInfo {
+        public Contact Contact;
+        public ContactInfoType Type;
+        public ContactInfoRole Role;
+        public string Value;
+        public string Comment;
+        public bool Default;
     }
 
+    [Database]
+    public class ContactInfoType {
+        public string Name;
+        public string SysName;
+        public int SortNumber;
+        public bool Deletable;
+    }
+
+    [Database]
+    public class ContactInfoRole {
+        public string Name;
+        public string SysName;
+        public int SortNumber;
+        public bool Deletable;
+    }
 }

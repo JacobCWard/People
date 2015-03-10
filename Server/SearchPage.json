@@ -6,7 +6,6 @@
                 "Name": ""
             },
             "Name": "",
-            "LogoUrl": "",
             "Revenue": 0,
             "Contacts": [
                 {
@@ -19,7 +18,6 @@
     ],
     "Contacts": [
         {
-            "Email": "",
             "Person": {
                 "FirstName": "",
                 "Surname": ""
@@ -30,6 +28,8 @@
                     "Name": ""
                 }
             },
+            "DefaultEmail": "",
+            "DefaultPhone": "",
             "Uri": ""
         }
     ]

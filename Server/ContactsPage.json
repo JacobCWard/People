@@ -2,7 +2,6 @@
     "Html": "",
     "Contacts": [
         {
-            "Email": "",
             "Person": {
                 "FirstName": "",
                 "Surname": ""
@@ -13,6 +12,8 @@
                     "Name": ""
                 }
             },
+            "DefaultEmail": "",
+            "DefaultPhone": "",
             "Uri": "",
             "Delete$": 0
         }

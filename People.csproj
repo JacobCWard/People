@@ -76,7 +76,9 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\Contact.cs" />
     <Compile Include="Database\Database.cs" />
+    <Compile Include="Database\SearchProvider.cs" />
     <Compile Include="Server\Code\UrlHelper.cs" />
     <Compile Include="Server\CompaniesPage.json.cs">
       <DependentUpon>CompaniesPage.json</DependentUpon>

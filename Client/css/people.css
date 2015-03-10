@@ -151,6 +151,14 @@
     border:1px solid #DDDDDD;
 }
 
+.people table.table td input[type=text],
+.people table.table td select {
+    width:100%;
+    padding:2px 3px;
+    border:none;
+    box-sizing:border-box;
+}
+
 .people .form-horizontal {
 }
 
