@@ -56,33 +56,46 @@ namespace People {
             });
 
             Handle.GET("/people/companies", () => {
-                var page = X.GET<Json>("/people/partials/companies");
-                return page;
+                return Db.Scope<Json>(() => {
+                    return X.GET<Json>("/people/partials/companies");
+                });
             });
 
             Handle.GET("/people/companies/add", () => {
-                var page = X.GET<Json>("/people/partials/companies-add");
-                return page;
+                return Db.Scope<Json>(() => {
+                    Company company = new Company() {
+                        Organisation = new Concepts.Ring2.Organisation()
+                    };
+                    return X.GET<Json>("/people/partial/companies/" + company.GetObjectID());
+                });
             });
 
             Handle.GET("/people/companies/{?}", (String companyId) => {
-                var page = X.GET<Json>("/People/partials/companies/" + companyId);
-                return page;
+                return Db.Scope<Json>(() => {
+                    return X.GET<Json>("/people/partials/companies/" + companyId);
+                });
             });
 
             Handle.GET("/people/contacts", () => {
-                var page = X.GET<Json>("/people/partials/contacts");
-                return page;
+                return Db.Scope<Json>(() => {
+                    return X.GET<Json>("/people/partials/contacts");
+                });
             });
 
             Handle.GET("/people/contacts/add", () => {
-                var page = X.GET<Json>("/people/partials/contacts-add");
-                return page;
+                return Db.Scope<Json>(() => {
+                    Contact contact = new Contact() {
+                        Person = new Concepts.Ring1.Person(),
+                        Company = Db.SQL<Company>("SELECT c FROM People.Company c").First
+                    };
+                    return X.GET<Json>("/people/partials/contacts/" + contact.GetObjectID());
+                });
             });
 
             Handle.GET("/people/contacts/{?}", (String objectId) => {
-                var page = X.GET<Json>("/People/partials/contacts/" + objectId);
-                return page;
+                return Db.Scope<Json>(() => {
+                    return X.GET<Json>("/People/partials/contacts/" + objectId);
+                });
             });
 
             Handle.GET("/people/search?query={?}", (String query) => {
@@ -158,19 +171,18 @@ namespace People {
                 return c;
             });
 
-            Handle.GET("/people/partials/companies-add", () => {
-                return Db.Scope<CompanyPage>(() => {
-                    CompanyPage page = new CompanyPage() {
-                        Uri = "/launcher/workspace/people/companies-add",
-                        Html = "/company.html"
-                    };
-                    Company company = new Company() {
-                        Organisation = new Concepts.Ring2.Organisation()
-                    };
-                    page.Data = company;
-                    return page;
-                });
-            });
+            //Handle.GET("/people/partials/companies-add", () => {
+                
+            //        CompanyPage page = new CompanyPage() {
+            //            Uri = "/launcher/workspace/people/companies-add",
+            //            Html = "/company.html"
+            //        };
+            //        Company company = new Company() {
+            //            Organisation = new Concepts.Ring2.Organisation()
+            //        };
+            //        page.Data = company;
+            //        return page;
+            //});
 
             Handle.GET("/people/partials/companies/{?}", (String objectId) => {
                 return Db.Scope<CompanyPage>(() => {
@@ -195,23 +207,23 @@ namespace People {
                 return c;
             });
 
-            Handle.GET("/people/partials/contacts-add", () => {
-                return Db.Scope<ContactPage>(() => {
-                    ContactPage page = new ContactPage() {
-                        Uri = "/launcher/workspace/people/contacts-add",
-                        Html = "/contact.html"
-                    };
+            //Handle.GET("/people/partials/contacts-add", () => {
+            //    return Db.Scope<ContactPage>(() => {
+            //        ContactPage page = new ContactPage() {
+            //            Uri = "/launcher/workspace/people/contacts-add",
+            //            Html = "/contact.html"
+            //        };
 
-                    Contact contact = new Contact() {
-                        Person = new Concepts.Ring1.Person(),
-                        Company = Db.SQL<Company>("SELECT c FROM People.Company c").First
-                    };
+            //        Contact contact = new Contact() {
+            //            Person = new Concepts.Ring1.Person(),
+            //            Company = Db.SQL<Company>("SELECT c FROM People.Company c").First
+            //        };
                 
-                    page.RefreshContact(contact);
+            //        page.RefreshContact(contact);
 
-                    return page;
-                });
-            });
+            //        return page;
+            //    });
+            //});
 
             Handle.GET("/people/partials/contacts/{?}", (String objectId) => {
                 return Db.Scope<Page>(() => {
