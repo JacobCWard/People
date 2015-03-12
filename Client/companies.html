@@ -1,4 +1,6 @@
-﻿<link rel="stylesheet" href="/css/people.css" />
+﻿<link rel="import" href="/sys/paper-button/paper-button.html" />
+<link rel="import" href="/sys/paper-dialog/paper-action-dialog.html" />
+<link rel="stylesheet" href="/css/people.css" />
 <template>
     <div class="people">
         <fieldset>
@@ -18,7 +20,7 @@
                     <template repeat="{{Companies}}">
                         <tr>
                             <td>
-                                <span>{{Organisation.Name}}</span>
+                                <span>{{Organization.Name}}</span>
                             </td>
                             <td>
                                 <span>{{Revenue}}</span>
@@ -34,10 +36,14 @@
                     </template>
                 </tbody>
             </table>
-            <div class="buttons">
-                <a class="btn" href="/launcher/workspace/people/companies/add">Add new company</a>
-            </div>
         </fieldset>
+    </div>
+    <div class="people">
+        <div class="buttons">
+            <a class="btn" href="/launcher/workspace/people/companies/add">Add new company</a>
+        </div>
+    </div>
+    <div class="people">
         <template if="{{Confirm.Message != null && Confirm.Message != ''}}">
             <div class="dialog-overlay"></div>
             <div class="dialog">

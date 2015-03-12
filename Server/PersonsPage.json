@@ -1,0 +1,17 @@
+{
+    "Html": "",
+    "Persons": [
+        {
+            "Key": "",
+            "Name": "",
+            "Delete$": 0,
+            "Edit$": 0
+        }
+    ],
+    "RedirectUrl$": "",
+    "Confirm": {
+        "Message": "",
+        "Ok$": "",
+        "Reject$": ""
+    }
+}

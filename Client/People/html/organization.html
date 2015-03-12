@@ -1,0 +1,26 @@
+﻿<link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
+<link rel="stylesheet" href="/People/css/people.css" />
+
+<template>
+    <div class="people control-group">
+        <label class="control-label"></label>
+        <div class="controls">
+            <h2>Organization details</h2>
+        </div>
+    </div>
+    <div class="people control-group">
+        <label class="control-label">Name:</label>
+        <div class="controls">
+            <input type='text' value='{{ Name$ }}' placeholder='Red & Black co. ltd.' />
+        </div>
+    </div>
+    <div class="people control-group">
+        <label class="control-label"></label>
+        <div class="controls">
+            <button type="button" class="btn btn-primary" onclick="getModel(this).Save$++">Save</button>
+            <button type="button" class="btn" onclick="getModel(this).Cancel$++">Cancel</button>
+        </div>
+    </div>
+
+    <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />
+</template>

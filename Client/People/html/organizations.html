@@ -1,0 +1,46 @@
+﻿<link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
+<link rel="import" href="/sys/paper-button/paper-button.html" />
+<link rel="import" href="/sys/paper-dialog/paper-action-dialog.html" />
+<link rel="stylesheet" href="/People/css/people.css" />
+<template>
+    <fieldset class="people">
+        <legend>Organizations: {{Organizations.length}}</legend>
+        <table class="table" id="tblOrganizations">
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <template repeat="{{Organizations}}">
+                    <tr>
+                        <td>
+                            <span>{{Key}}</span>
+                        </td>
+                        <td>
+                            <span>{{Name}}</span>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-small" onclick="getModel(this).Delete$++">Delete</button>
+                            <button type="button" class="btn btn-small" onclick="getModel(this).Edit$++">Edit</button>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </fieldset>
+    <div class="people buttons">
+        <a href="/launcher/workspace/people/organizations/add" class="btn btn-small">Add organization</a>
+    </div>
+    <div class="people">
+        <paper-action-dialog heading="Confirmation" backdrop="true" layered="true" role="dialog" opened="{{Confirm.Message != null && Confirm.Message != ''}}">
+            <p>{{Confirm.Message}}</p>
+            <paper-button style="color:red;" affirmative role="button" tabindex="1" onclick="getModel(document.getElementById('tblOrganizations')).Confirm.Ok$++">Accept</paper-button>
+            <paper-button style="color:green;" affirmative role="button" tabindex="0" onclick="getModel(document.getElementById('tblOrganizations')).Confirm.Reject$++">Decline</paper-button>
+        </paper-action-dialog>
+    </div>
+
+    <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />
+</template>

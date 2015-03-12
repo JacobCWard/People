@@ -1,0 +1,23 @@
+{
+  "name": "gravatar-img",
+  "version": "0.1.3",
+  "main": [
+    "gravatar-img.html"
+  ],
+  "dependencies": {
+    "spark-md5": "~0.0.5"
+  },
+  "keywords": [
+    "web-components"
+  ],
+  "homepage": "https://github.com/warpech/gravatar-img",
+  "_release": "0.1.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.3",
+    "commit": "cab6cb4e34be3dc4cff57ba578812ddc5e852f21"
+  },
+  "_source": "git://github.com/warpech/gravatar-img.git",
+  "_target": "~0.1.2",
+  "_originalSource": "warpech/gravatar-img"
+}

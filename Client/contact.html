@@ -1,16 +1,18 @@
 <script src="/People/sys/spark-md5/spark-md5.js"></script>
 <link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
-<link rel="stylesheet" href="/css/people.css" />
+<link rel="import" href="/People/sys/paper-button/paper-button.html" />
+<link rel="import" href="/People/sys/paper-dialog/paper-action-dialog.html" />
+<link rel="stylesheet" href="/css/people.css" id="lnkPeopleCss" />
 <template>
     <div class="people">
-        <form class="form-horizontal">
+        <form class="form-horizontal" id="frmContact">
             <div class="control-group">
                 <label class="control-label">Company:</label>
                 <div class="controls">
                     <template if="{{ Companies.length > 0 }}">
                         <select selectedindex="{{ SelectedCompanyIndex$ }}">
                             <template repeat="{{ Companies }}">
-                                <option>{{ Organisation.Name }}</option>
+                                <option>{{ Organization.Name }}</option>
                             </template>
                         </select>
                     </template>
@@ -95,17 +97,11 @@
                 </div>
             </div>
         </form>
-        <template if="{{Confirm.Message != null && Confirm.Message != ''}}">
-            <div class="dialog-overlay"></div>
-            <div class="dialog">
-                <div class="dialog-header">Confirmation</div>
-                <div class="dialog-content">{{Confirm.Message}}</div>
-                <div class="dialog-actions">
-                    <button type="button" class="btn btn-primary btn-small" onclick="getModel(this).Confirm.Ok$++">OK</button>
-                    <button type="button" class="btn btn-small" onclick="getModel(this).Confirm.Reject$++">Cancel</button>
-                </div>
-            </div>
-        </template>
+        <paper-action-dialog heading="Confirmation" backdrop="true" layered="true" role="dialog" opened="{{Confirm.Message != null && Confirm.Message != ''}}">
+            <p>{{Confirm.Message}}</p>
+            <paper-button style="color:red;" affirmative role="button" tabindex="1" onclick="getModel(document.getElementById('frmContact')).Confirm.Ok$++">Accept</paper-button>
+            <paper-button style="color:green;" affirmative role="button" tabindex="0" onclick="getModel(document.getElementById('frmContact')).Confirm.Reject$++">Decline</paper-button>
+        </paper-action-dialog>
     </div>
     <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />
 </template>

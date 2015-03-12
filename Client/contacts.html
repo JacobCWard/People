@@ -21,7 +21,7 @@
                     <template repeat="{{Contacts}}">
                         <tr>
                             <td>
-                                <span>{{Company.Organisation.Name}}</span>
+                                <span>{{Company.Organization.Name}}</span>
                             </td>
                             <td>
                                 <a href="mailto:{{DefaultEmail}}" target="_blank">{{DefaultEmail}}</a>
@@ -46,10 +46,14 @@
                     </template>
                 </tbody>
             </table>
-            <div class="buttons">
-                <a class="btn" href="/launcher/workspace/people/contacts/add">Add new contact</a>
-            </div>
         </fieldset>
+    </div>
+    <div class="people">
+        <div class="buttons">
+            <a class="btn" href="/launcher/workspace/people/contacts/add">Add new contact</a>
+        </div>
+    </div>
+    <div class="people">
         <template if="{{Confirm.Message != null && Confirm.Message != ''}}">
             <div class="dialog-overlay"></div>
             <div class="dialog">

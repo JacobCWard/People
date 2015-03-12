@@ -19,7 +19,7 @@
                         <template repeat="{{Companies}}">
                             <tr>
                                 <td>
-                                    <span>{{Organisation.Name}}</span>
+                                    <span>{{Organization.Name}}</span>
                                 </td>
                                 <td>
                                     <span>{{Revenue}}</span>
@@ -36,6 +36,8 @@
                 </table>
             </fieldset>
         </template>
+    </div>
+    <div class="people">
         <template if="{{Contacts.length > 0}}">
             <fieldset>
                 <legend>
@@ -57,7 +59,7 @@
                         <template repeat="{{Contacts}}">
                             <tr>
                                 <td>
-                                    <span>{{Company.Organisation.Name}}</span>
+                                    <span>{{Company.Organization.Name}}</span>
                                 </td>
                                 <td>
                                     <a href="mailto:{{DefaultEmail}}" target="_blank">{{DefaultEmail}}</a>

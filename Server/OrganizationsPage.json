@@ -1,0 +1,17 @@
+{
+    "Html": "",
+    "Organizations": [
+        {
+            "Key": "",
+            "Name": "",
+            "Delete$": "",
+            "Edit$": ""
+        }
+    ],
+    "RedirectUrl$": "",
+    "Confirm": {
+        "Message": "",
+        "Ok$": "",
+        "Reject$": ""
+    }
+}

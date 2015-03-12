@@ -1,0 +1,172 @@
+﻿<link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
+<link rel="import" href="/sys/paper-button/paper-button.html" />
+<link rel="import" href="/sys/paper-dialog/paper-action-dialog.html" />
+<link rel="stylesheet" href="/People/css/people.css" />
+
+<template>
+    <div class="people control-group">
+        <label class="control-label"></label>
+        <div class="controls">
+            <h2>Person details</h2>
+        </div>
+    </div>
+    <div class="people control-group">
+        <label class="control-label">First Name:</label>
+        <div class="controls">
+            <input type='text' value='{{ FirstName$ }}' placeholder='John' />
+        </div>
+    </div>
+    <div class="people control-group">
+        <label class="control-label">First Name:</label>
+        <div class="controls">
+            <input type='text' value='{{ LastName$ }}' placeholder='Smith' />
+        </div>
+    </div>
+    <div class="people control-group">
+        <label class="control-label">Addresses:</label>
+        <div class="controls">
+            <table class="table table-addresses">
+                <thead>
+                    <tr>
+                        <th class="th-type">Type</th>
+                        <th class="th-country">Country</th>
+                        <th class="th-city">City</th>
+                        <th>Street</th>
+                        <th class="th-house">House</th>
+                        <th class="th-code">Postal code</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template repeat="{{item in Addresses}}">
+                        <tr>
+                            <td>
+                                <select selectedindex="{{item.TypeIndex$}}">
+                                    <template repeat="{{AddressRelationTypes}}">
+                                        <option>{{Name}}</option>
+                                    </template>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" value="{{item.Address.Country$}}" />
+                            </td>
+                            <td>
+                                <input type="text" value="{{item.Address.City$}}" />
+                            </td>
+                            <td>
+                                <input type="text" value="{{item.Address.Street$}}" />
+                            </td>
+                            <td>
+                                <input type="text" value="{{item.Address.House$}}" />
+                            </td>
+                            <td>
+                                <input type="text" value="{{item.Address.PostalCode$}}" />
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-small" onclick="getModel(this).item.Delete$++">Delete</button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+        <div class="controls">
+            <button type="button" class="btn btn-small" onclick="getModel(this).AddAddress$++">Add address</button>
+        </div>
+    </div>
+    <div class="people control-group">
+        <label class="control-label">Emails:</label>
+        <div class="controls">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template repeat="{{item, i in EmailAddresses}}">
+                        <tr>
+                            <td>
+                                <span>{{i + 1}}</span>
+                            </td>
+                            <td>
+                                <select selectedindex="{{item.TypeIndex$}}">
+                                    <template repeat="{{EmailAddressRelationTypes}}">
+                                        <option>{{Name}}</option>
+                                    </template>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" value="{{item.EmailAddress.Text$}}" />
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-small" onclick="getModel(this).item.Delete$++">Delete</button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+        <div class="controls">
+            <button type="button" class="btn btn-small" onclick="getModel(this).AddEmailAddress$++">Add email</button>
+        </div>
+    </div>
+    <div class="people control-group">
+        <label class="control-label">Phones:</label>
+        <div class="controls">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template repeat="{{item, i in PhoneNumbers}}">
+                        <tr>
+                            <td>
+                                <span>{{i + 1}}</span>
+                            </td>
+                            <td>
+                                <select selectedindex="{{item.TypeIndex$}}">
+                                    <template repeat="{{PhoneNumberRelationTypes}}">
+                                        <option>{{Name}}</option>
+                                    </template>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" value="{{item.PhoneNumber.Text$}}" />
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-small" onclick="getModel(this).item.Delete$++">Delete</button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+        <div class="controls">
+            <button type="button" class="btn btn-small" onclick="getModel(this).AddPhoneNumber$++">Add email</button>
+        </div>
+    </div>
+    <div class="people control-group">
+        <label class="control-label"></label>
+        <div class="controls">
+            <button type="button" class="btn btn-primary" onclick="getModel(this).Save$++">Save</button>
+            <button type="button" class="btn" onclick="getModel(this).Cancel$++">Cancel</button>
+        </div>
+    </div>
+    <div class="people" id="divDialog">
+        <paper-action-dialog heading="Confirmation" backdrop="true" layered="true" role="dialog" opened="{{Confirm.Message != null && Confirm.Message != ''}}">
+            <p>{{Confirm.Message}}</p>
+            <paper-button style="color:red;" affirmative role="button" tabindex="1" onclick="getModel(document.getElementById('divDialog')).Confirm.Ok$++">Accept</paper-button>
+            <paper-button style="color:green;" affirmative role="button" tabindex="0" onclick="getModel(document.getElementById('divDialog')).Confirm.Reject$++">Decline</paper-button>
+        </paper-action-dialog>
+    </div>
+    <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />
+</template>

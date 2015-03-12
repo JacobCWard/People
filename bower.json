@@ -11,11 +11,15 @@
         "node_modules",
         "bower_components",
         "Client/sys",
+        "Client/People/sys",
         "test",
         "tests"
     ],
     "dependencies": {
         "gravatar-img": "warpech/gravatar-img#~0.1.2",
-        "image-mask": "tomalec/image-mask#titleAttribute"
+        "image-mask": "tomalec/image-mask#titleAttribute",
+        "polymer": "Polymer/polymer#~0.5.5",
+        "core-elements": "Polymer/core-elements#~0.5.5",
+        "paper-dialog": "Polymer/paper-dialog#~0.5.5"
     }
 }
