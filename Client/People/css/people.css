@@ -77,7 +77,8 @@ fieldset.people legend {
 }
 
 .people .btn,
-.people a.btn {
+.people a.btn,
+html /deep/ paper-action-dialog .people .btn {
     box-sizing:content-box;
     min-width:80px;
     padding:5px 15px;
@@ -92,7 +93,8 @@ fieldset.people legend {
     font-family:Calibri, Helvetica, Arial, sans-serif;
 }
 
-.people .btn:hover {
+.people .btn:hover,
+html /deep/ paper-action-dialog .people .btn:hover {
     background-color:#FFFFFF;
 }
 
@@ -107,14 +109,16 @@ fieldset.people legend {
     color:#49566d;
 }
 
-.people .btn.btn-small {
+.people .btn.btn-small,
+html /deep/ paper-action-dialog .people .btn.btn-small {
     padding:3px 10px;
     border-width:1px;
     min-width:0px;
     line-height:15px;
 }
 
-.people table.table {
+.people table.table,
+html /deep/ paper-action-dialog .people table.table {
     border-collapse:collapse;
     border:none;
     padding:0px;
@@ -123,7 +127,9 @@ fieldset.people legend {
 }
 
 .people table.table th,
-.people table.table td {
+.people table.table td,
+html /deep/ paper-action-dialog .people table.table th,
+html /deep/ paper-action-dialog .people table.table td {
     padding:5px;
     text-align:left;
     border:1px solid #DDDDDD;
@@ -158,7 +164,8 @@ fieldset.people legend {
 }
 
 .people.control-group input[type=text],
-.people.control-group select {
+.people.control-group select,
+html /deep/ paper-action-dialog .people.control-group input[type=text] {
     border:1px solid #C0C0C0;
     padding:6px;
     width:320px;
@@ -169,20 +176,31 @@ fieldset.people legend {
     margin-bottom:0px;
 }
 
-.people.control-group {
+.people.control-group,
+html /deep/ paper-action-dialog .people.control-group {
     margin-bottom:15px;
 }
 
-.people.control-group .control-label {
+.people.control-group .control-label,
+html /deep/ paper-action-dialog .people.control-group .control-label {
     float:left;
     width:250px;
     text-align:right;
     line-height:29px;
 }
 
+html /deep/ paper-action-dialog .people.control-group .control-label {
+    width:auto;
+    display:block;
+    margin-bottom:5px;
+}
+
 .people.control-group .controls,
 .people.control-group .hints {
     margin-left:265px;
+}
+
+html /deep/ paper-action-dialog .people.control-group .controls {
 }
 
 .people.control-group .hints {

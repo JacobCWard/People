@@ -8,6 +8,7 @@ using Simplified.Ring3;
 namespace People {
     partial class OrganizationPage : Page, IBound<Organization> {
         protected ContactInfoProvider contactInfoProvider = new ContactInfoProvider();
+        protected OrganizationsProvider organizationsProvider = new OrganizationsProvider();
         public Action ConfirmAction = null;
 
         void Handle(Input.Save Action) {
@@ -69,6 +70,7 @@ namespace People {
                 this.RefreshAddresses();
                 this.RefreshEmailAddresses();
                 this.RefreshPhoneNumbers();
+                this.RefreshPersons();
             }
         }
 
@@ -121,6 +123,11 @@ namespace People {
 
                 row.TypeIndex = types.IndexOf(item.PhoneNumberRelationType);
             }
+        }
+
+        public void RefreshPersons() {
+            this.Persons.Clear();
+            this.Persons.Data = organizationsProvider.SelectOrganizationPersons(this.Data);
         }
 
         [OrganizationPage_json.Addresses]
@@ -217,6 +224,66 @@ namespace People {
             public OrganizationPage ParentPage {
                 get {
                     return this.Parent as OrganizationPage;
+                }
+            }
+        }
+
+        [OrganizationPage_json.Persons]
+        partial class OrganizationPersonPage : Page, IBound<OrganizationPerson> {
+            void Handle(Input.Delete Action) {
+                this.ParentPage.Confirm.Message = string.Format("Are you sure want to remove person [{0}] from this organization?", this.Data.Person.Name);
+                this.ParentPage.ConfirmAction = () => {
+                    this.Data.Delete();
+                    this.ParentPage.Persons.Remove(this);
+                };
+            }
+
+            public OrganizationPage ParentPage {
+                get {
+                    return this.Parent.Parent as OrganizationPage;
+                }
+            }
+        }
+
+        [OrganizationPage_json.Find]
+        partial class OrganizationFindPage : Page {
+            void Handle(Input.Query Action) {
+                string query = Action.Value as string;
+
+                this.Persons.Clear();
+
+                if (!string.IsNullOrEmpty(query)) {
+                    SearchProvider provider = new SearchProvider();
+
+                    this.Persons.Data = provider.SelectPersons(query, 5);
+                }
+            }
+
+            public OrganizationPage ParentPage {
+                get {
+                    return this.Parent as OrganizationPage;
+                }
+            }
+        }
+
+        [OrganizationPage_json.Find.Persons]
+        partial class OrganizationFindPersonPage : Page, IBound<Person> {
+            void Handle(Input.Add Action) {
+                this.ParentPage.Find.Visible = false;
+
+                if (this.ParentPage.Persons.Any(x => x.Data.Person.Equals(this.Data))) {
+                    return;
+                }
+
+                OrganizationPerson op = new OrganizationPerson();
+                op.Person = this.Data;
+                op.Organization = this.ParentPage.Data;
+                this.ParentPage.Persons.Add(new OrganizationPersonPage() { Data = op });
+            }
+
+            public OrganizationPage ParentPage {
+                get {
+                    return this.Parent.Parent.Parent as OrganizationPage;
                 }
             }
         }

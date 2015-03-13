@@ -4,6 +4,10 @@
         {
             "Key": "",
             "Name": "",
+            "EmailAddressName": "",
+            "PersonName": "",
+            "PhoneNumberName": "",
+            "AddressName": "",
             "Delete$": "",
             "Edit$": ""
         }

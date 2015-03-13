@@ -4,24 +4,24 @@
             Name: <a href="/launcher/workspace/people/persons/{{Key}}" title="Edit person">{{Name}}</a>
         </div>
     </div>
-    <template if="{{Address != null && Address != ''}}">
+    <template if="{{AddressName != null && AddressName != ''}}">
         <div class="people">
             <div class="search-person">
-                Address: <span>{{Address}}</span>
+                Address: <span>{{AddressName}}</span>
             </div>
         </div>
     </template>
-    <template if="{{EmailAddress != null && EmailAddress != ''}}">
+    <template if="{{EmailAddressName != null && EmailAddressName != ''}}">
         <div class="people">
             <div class="search-person">
-                Email address: <a href="mailto:{{EmailAddress}}" target="_blank">{{EmailAddress}}</a>
+                Email address: <a href="mailto:{{EmailAddressName}}" target="_blank">{{EmailAddressName}}</a>
             </div>
         </div>
     </template>
-    <template if="{{EmailAddress != null && EmailAddress != ''}}">
+    <template if="{{PhoneNumberName != null && PhoneNumberName != ''}}">
         <div class="people">
             <div class="search-person">
-                Phone number: <a href="tel:{{PhoneNumber}}" target="_blank">{{PhoneNumber}}</a>
+                Phone number: <a href="tel:{{PhoneNumberName}}" target="_blank">{{PhoneNumberName}}</a>
             </div>
         </div>
     </template>

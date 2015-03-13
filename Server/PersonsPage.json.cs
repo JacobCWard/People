@@ -2,10 +2,12 @@ using System;
 using System.Linq;
 using Starcounter;
 using Simplified.Ring2;
+using Simplified.Ring3;
 
 namespace People {
     partial class PersonsPage : Page {
         public PersonsProvider PersonsProvider = new PersonsProvider();
+        public ContactInfoProvider ContactInfoProvider = new ContactInfoProvider();
         public Action ConfirmAction = null;
 
         public void RefreshPersons() {
@@ -31,6 +33,29 @@ namespace People {
             public PersonsPage ParentPage {
                 get {
                     return this.Parent.Parent as PersonsPage;
+                }
+            }
+
+            protected override void OnData() {
+                base.OnData();
+
+                ContactInfoProvider cip = this.ParentPage.ContactInfoProvider;
+                Person p = this.Data;
+
+                AddressRelation a = cip.SelectAddressRelations(p).First;
+                EmailAddressRelation ea = cip.SelectEmailAddressRelations(p).First;
+                PhoneNumberRelation pn = cip.SelectPhoneNumberRelations(p).First;
+
+                if (a != null) {
+                    this.AddressName = a.Address.Name;
+                }
+
+                if (ea != null) {
+                    this.EmailAddressName = ea.EmailAddress.Name;
+                }
+
+                if (pn != null) {
+                    this.PhoneNumberName = pn.PhoneNumber.Name;
                 }
             }
         }

@@ -1,11 +1,11 @@
 ﻿<link rel="import" href="/sys/paper-button/paper-button.html" />
 <link rel="import" href="/sys/paper-dialog/paper-action-dialog.html" />
 <template>
-    <div class="people" id="divDialog">
+    <div class="people" id="divConfirmDialog">
         <paper-action-dialog heading="Confirmation" backdrop="true" layered="true" role="dialog" opened="{{Confirm.Message != null && Confirm.Message != ''}}">
             <p>{{Confirm.Message}}</p>
-            <paper-button style="color:red;" affirmative role="button" tabindex="1" onclick="getModel(document.getElementById('divDialog')).Confirm.Ok$++">Accept</paper-button>
-            <paper-button style="color:green;" affirmative role="button" tabindex="0" onclick="getModel(document.getElementById('divDialog')).Confirm.Reject$++">Decline</paper-button>
+            <paper-button style="color:red;" affirmative role="button" tabindex="1" onclick="getModel(document.getElementById('divConfirmDialog')).Confirm.Ok$++">Accept</paper-button>
+            <paper-button style="color:green;" affirmative role="button" tabindex="0" onclick="getModel(document.getElementById('divConfirmDialog')).Confirm.Reject$++">Decline</paper-button>
         </paper-action-dialog>
     </div>
 </template>

@@ -1,5 +1,6 @@
 {
     "Html": "",
+    "TabIndex$": 0,
     "Name$": "",
     "Save$": 0,
     "Cancel$": 0,
@@ -38,7 +39,7 @@
     "EmailAddresses": [
         {
             "TypeIndex$": 0,
-            "EmailAddress": { 
+            "EmailAddress": {
                 "Text$": ""
             },
             "Delete$": 0
@@ -47,8 +48,17 @@
     "PhoneNumbers": [
         {
             "TypeIndex$": 0,
-            "PhoneNumber": { 
+            "PhoneNumber": {
                 "Text$": ""
+            },
+            "Delete$": 0
+        }
+    ],
+    "Persons": [
+        {
+            "Person": {
+                "Key": "",
+                "Name": ""
             },
             "Delete$": 0
         }
@@ -57,5 +67,15 @@
         "Message": "",
         "Ok$": "",
         "Reject$": ""
+    },
+    "Find": {
+        "Visible$": false,
+        "Query$": "",
+        "Persons": [
+            {
+                "Name": "",
+                "Add$": 0
+            }
+        ]
     }
 }

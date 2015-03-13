@@ -28,5 +28,9 @@ namespace People {
 
             Organization.Delete();
         }
+
+        public QueryResultRows<OrganizationPerson> SelectOrganizationPersons(Organization Organization) {
+            return Db.SQL<OrganizationPerson>("SELECT op FROM Simplified.Ring2.OrganizationPerson op WHERE op.Organization = ?", Organization);
+        }
     }
 }

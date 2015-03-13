@@ -7,13 +7,14 @@ namespace People {
         protected override void OnData() {
             base.OnData();
 
-            AddressRelation ar = Db.SQL<AddressRelation>("SELECT ar FROM Simplified.Ring3.AddressRelation ar WHERE ar.Somebody = ?", this.Data).First;
-            EmailAddressRelation ear = Db.SQL<EmailAddressRelation>("SELECT ar FROM Simplified.Ring3.EmailAddressRelation ar WHERE ar.Somebody = ?", this.Data).First;
-            PhoneNumberRelation pnr = Db.SQL<PhoneNumberRelation>("SELECT ar FROM Simplified.Ring3.PhoneNumberRelation ar WHERE ar.Somebody = ?", this.Data).First;
+            ContactInfoProvider cip = new ContactInfoProvider();
+            AddressRelation ar = cip.SelectAddressRelations(this.Data).First;
+            EmailAddressRelation ear = cip.SelectEmailAddressRelations(this.Data).First;
+            PhoneNumberRelation pnr = cip.SelectPhoneNumberRelations(this.Data).First;
 
-            this.Address = ar != null ? ar.Address.Name : null;
-            this.EmailAddress = ear != null ? ear.EmailAddress.Name : null;
-            this.PhoneNumber = pnr != null ? pnr.PhoneNumber.Name : null;
+            this.AddressName = ar != null ? ar.Address.Name : null;
+            this.EmailAddressName = ear != null ? ear.EmailAddress.Name : null;
+            this.PhoneNumberName = pnr != null ? pnr.PhoneNumber.Name : null;
         }
     }
 }

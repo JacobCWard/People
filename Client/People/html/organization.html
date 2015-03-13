@@ -1,4 +1,6 @@
 ﻿<link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
+<link rel="import" href="/sys/paper-button/paper-button.html" />
+<link rel="import" href="/sys/paper-dialog/paper-action-dialog.html" />
 <link rel="stylesheet" href="/People/css/people.css" />
 
 <template>
@@ -27,6 +29,41 @@
         <template is="imported-template" content="/People/html/phone-numbers.html"></template>
     </div>
     <div class="people control-group">
+        <label class="control-label">Persons:</label>
+        <template if="{{Persons.length > 0}}">
+            <div class="controls">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template repeat="{{item, i in Persons}}">
+                            <tr>
+                                <td>
+                                    <span>{{i + 1}}</span>
+                                </td>
+                                <td>
+                                    <a href="/launcher/workspace/people/persons/{{item.Person.Key}}">{{item.Person.Name}}</a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-small" onclick="getModel(this).item.Delete$++">Delete</button>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+        <div class="controls">
+            <button type="button" class="btn btn-small" onclick="getModel(this).Find.Visible$ = true">Find person</button>
+            <a href="/launcher/workspace/people/persons/add" class="btn btn-small">Add person</a>
+        </div>
+    </div>
+    <div class="people control-group">
         <label class="control-label"></label>
         <div class="controls">
             <button type="button" class="btn btn-primary" onclick="getModel(this).Save$++">Save</button>
@@ -34,5 +71,44 @@
         </div>
     </div>
     <template is="imported-template" content="/People/html/confirm-dialog.html"></template>
+    <div class="people" id="divFindDialog">
+        <template if="{{Find.Visible$}}">
+            <paper-action-dialog heading="Find person" backdrop="true" layered="true" role="dialog" opened="{{Find.Visible$}}">
+                <div class="people control-group">
+                    <label class="control-label">Search:</label>
+                    <div class="controls">
+                        <input type="text" value="{{Find.Query$}}" />
+                    </div>
+                </div>
+                <div class="people control-group">
+                    <div class="controls">
+                        <template if="{{Find.Persons.length > 0}}">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template repeat="{{person, i in Find.Persons}}">
+                                        <tr>
+                                            <td>{{i + 1}}</td>
+                                            <td>{{person.Name}}</td>
+                                            <td>
+                                                <button affirmative type="button" class="btn btn-small" onclick="getModel(this).person.Add$++">Add</button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </template>
+                    </div>
+                </div>
+                <paper-button affirmative role="button" tabindex="0" onclick="getModel(document.getElementById('divFindDialog')).Find.Visible$ = false">Close</paper-button>
+            </paper-action-dialog>
+        </template>
+    </div>
     <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />
 </template>

@@ -8,6 +8,8 @@
                 <tr>
                     <th>Key</th>
                     <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
                     <th></th>
                 </tr>
             </thead>
@@ -19,6 +21,12 @@
                         </td>
                         <td>
                             <span>{{Name}}</span>
+                        </td>
+                        <td>
+                            <a href="mailto:{{EmailAddressName}}" target="_blank">{{EmailAddressName}}</a>
+                        </td>
+                        <td>
+                            <a href="tel:{{PhoneNumberName}}" target="_blank">{{PhoneNumberName}}</a>
                         </td>
                         <td>
                             <button type="button" class="btn btn-small" onclick="getModel(this).Delete$++">Delete</button>
