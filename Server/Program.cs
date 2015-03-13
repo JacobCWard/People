@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Starcounter;
 using PolyjuiceNamespace;
 using Simplified.Ring2;
@@ -98,6 +99,18 @@ namespace People {
                 });
             });
 
+            Handle.GET("/people/search?query={?}", (String query) => {
+                Response resp = X.GET("/People/partials/search/" + HttpUtility.UrlEncode(query));
+
+                SearchPage page = (SearchPage)resp.Resource;
+
+                if (page.Organizations.Count == 0 && page.Persons.Count == 0) {
+                    return new Page();
+                }
+
+                return resp;
+            });
+
             OntologyMap();
         }
 
@@ -106,7 +119,7 @@ namespace People {
             Polyjuice.Map("/people/app-name", "/polyjuice/app-name");
             Polyjuice.Map("/people/app-icon", "/polyjuice/app-icon");
             Polyjuice.Map("/people/dashboard", "/polyjuice/dashboard");
-            //Polyjuice.Map("/people/search?query=@w", "/polyjuice/search?query=@w");
+            Polyjuice.Map("/people/search?query=@w", "/polyjuice/search?query=@w");
         }
 
         static void RegisterPartials() {
@@ -155,6 +168,45 @@ namespace People {
 
                     return page;
                 });
+            });
+
+            Handle.GET("/people/partials/search/{?}", (String query) => {
+                SearchPage page = new SearchPage() {
+                    Html = "/People/html/search.html"
+                };
+
+                SearchProvider provider = new SearchProvider();
+                int fetch = 5;
+
+                foreach (Organization item in provider.SelectOrganizations(query, fetch)) {
+                    page.Organizations.Add(X.GET<Json>("/people/partials/search-organization/" + item.Key));
+                }
+
+                foreach (Person item in provider.SelectPersons(query, fetch)) {
+                    page.Persons.Add(X.GET<Json>("/people/partials/search-person/" + item.Key));
+                }
+
+                return page;
+            });
+
+            Handle.GET("/people/partials/search-organization/{?}", (String id) => {
+                SearchOrganizationPage page = new SearchOrganizationPage() {
+                    Html = "/People/html/search-organization.html"
+                };
+
+                page.Data = DbHelper.FromID(DbHelper.Base64DecodeObjectID(id)) as Organization;
+
+                return page;
+            });
+
+            Handle.GET("/people/partials/search-person/{?}", (String id) => {
+                SearchPersonPage page = new SearchPersonPage() {
+                    Html = "/People/html/search-person.html"
+                };
+
+                page.Data = DbHelper.FromID(DbHelper.Base64DecodeObjectID(id)) as Person;
+
+                return page;
             });
         }
 

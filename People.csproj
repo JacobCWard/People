@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\Database\SearchProvider.cs" />
     <Compile Include="Server\OrganizationPage.json.cs">
       <DependentUpon>OrganizationPage.json</DependentUpon>
     </Compile>
@@ -80,6 +81,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Server\Program.cs" />
+    <Compile Include="Server\SearchOrganizationPage.json.cs">
+      <DependentUpon>SearchOrganizationPage.json</DependentUpon>
+    </Compile>
+    <Compile Include="Server\SearchPage.json.cs">
+      <DependentUpon>SearchPage.json</DependentUpon>
+    </Compile>
+    <Compile Include="Server\SearchPersonPage.json.cs">
+      <DependentUpon>SearchPersonPage.json</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client\People\html\app-icon.html" />
@@ -96,6 +106,9 @@
     <Content Include="Client\People\html\menu.html" />
     <Content Include="Client\People\html\person.html" />
     <Content Include="Client\People\html\persons.html" />
+    <Content Include="Client\People\html\search-organization.html" />
+    <Content Include="Client\People\html\search-person.html" />
+    <Content Include="Client\People\html\search.html" />
     <Content Include="Client\People\message.html" />
     <Content Include="Client\People\img\people.png" />
     <Content Include="Client\People\css\people.css" />
@@ -104,6 +117,15 @@
     <None Include="Client\People\font\people-font.eot" />
     <None Include="Client\People\font\people-font.ttf" />
     <None Include="Client\People\font\people-font.woff" />
+    <TypedJSON Include="Server\SearchPersonPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="Server\SearchOrganizationPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="Server\SearchPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
     <TypedJSON Include="Server\OrganizationPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
