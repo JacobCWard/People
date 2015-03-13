@@ -1,6 +1,4 @@
 ﻿<link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
-<link rel="import" href="/sys/paper-button/paper-button.html" />
-<link rel="import" href="/sys/paper-dialog/paper-action-dialog.html" />
 <link rel="stylesheet" href="/People/css/people.css" />
 <template>
     <fieldset class="people">
@@ -34,13 +32,6 @@
     <div class="people buttons">
         <a href="/launcher/workspace/people/persons/add" class="btn btn-small">Add person</a>
     </div>
-    <div class="people" id="divDialog">
-        <paper-action-dialog heading="Confirmation" backdrop="true" layered="true" role="dialog" opened="{{Confirm.Message != null && Confirm.Message != ''}}">
-            <p>{{Confirm.Message}}</p>
-            <paper-button style="color:red;" affirmative role="button" tabindex="1" onclick="getModel(document.getElementById('divDialog')).Confirm.Ok$++">Accept</paper-button>
-            <paper-button style="color:green;" affirmative role="button" tabindex="0" onclick="getModel(document.getElementById('divDialog')).Confirm.Reject$++">Decline</paper-button>
-        </paper-action-dialog>
-    </div>
-
+    <template is="imported-template" content="/People/html/confirm-dialog.html"></template>
     <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />
 </template>

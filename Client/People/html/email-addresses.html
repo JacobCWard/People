@@ -1,0 +1,41 @@
+﻿<template>
+    <template if="{{EmailAddresses.length}}">
+        <div class="controls">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template repeat="{{item, i in EmailAddresses}}">
+                        <tr>
+                            <td>
+                                <span>{{i + 1}}</span>
+                            </td>
+                            <td>
+                                <select selectedindex="{{item.TypeIndex$}}">
+                                    <template repeat="{{EmailAddressRelationTypes}}">
+                                        <option>{{Name}}</option>
+                                    </template>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" value="{{item.EmailAddress.Text$}}" />
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-small" onclick="getModel(this).item.Delete$++">Delete</button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </template>
+    <div class="controls">
+        <button type="button" class="btn btn-small" onclick="getModel(this).AddEmailAddress$++">Add email</button>
+    </div>
+</template>

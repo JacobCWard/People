@@ -126,9 +126,10 @@ namespace People {
             Handle.GET("/people/partials/organizations-add", () => {
                 return Db.Scope<OrganizationPage>(() => {
                     OrganizationPage page = new OrganizationPage() {
-                        Html = "/People/html/organization.html",
-                        Data = new Organization()
+                        Html = "/People/html/organization.html"
                     };
+
+                    page.RefreshOrganization();
 
                     return page;
                 });

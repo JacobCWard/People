@@ -15,12 +15,24 @@
         </div>
     </div>
     <div class="people control-group">
+        <label class="control-label">Addresses:</label>
+        <template is="imported-template" content="/People/html/addresses.html"></template>
+    </div>
+    <div class="people control-group">
+        <label class="control-label">Emails:</label>
+        <template is="imported-template" content="/People/html/email-addresses.html"></template>
+    </div>
+    <div class="people control-group">
+        <label class="control-label">Phones:</label>
+        <template is="imported-template" content="/People/html/phone-numbers.html"></template>
+    </div>
+    <div class="people control-group">
         <label class="control-label"></label>
         <div class="controls">
             <button type="button" class="btn btn-primary" onclick="getModel(this).Save$++">Save</button>
             <button type="button" class="btn" onclick="getModel(this).Cancel$++">Cancel</button>
         </div>
     </div>
-
+    <template is="imported-template" content="/People/html/confirm-dialog.html"></template>
     <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />
 </template>

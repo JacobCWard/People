@@ -7,6 +7,7 @@ using Simplified.Ring3;
 
 namespace People {
     partial class PersonPage : Page, IBound<Person> {
+        protected ContactInfoProvider contactInfoProvider = new ContactInfoProvider();
         public Action ConfirmAction = null;
 
         void Handle(Input.Save Action) {
@@ -57,12 +58,9 @@ namespace People {
         }
 
         public void RefreshPerson(string ID = null) {
-            QueryResultRows<EmailAddressRelationType> emailAddressRelationTypes = Db.SQL<EmailAddressRelationType>("SELECT t FROM Simplified.Ring3.EmailAddressRelationType t");
-            QueryResultRows<PhoneNumberRelationType> phoneNumberRelationTypes = Db.SQL<PhoneNumberRelationType>("SELECT t FROM Simplified.Ring3.PhoneNumberRelationType t");
-
-            this.AddressRelationTypes = Db.SQL<AddressRelationType>("SELECT t FROM Simplified.Ring3.AddressRelationType t");
-            this.EmailAddressRelationTypes = emailAddressRelationTypes;
-            this.PhoneNumberRelationTypes = phoneNumberRelationTypes;
+            this.AddressRelationTypes = contactInfoProvider.SelectAddressRelationTypes();
+            this.EmailAddressRelationTypes = contactInfoProvider.SelectEmailAddressRelationTypes();
+            this.PhoneNumberRelationTypes = contactInfoProvider.SelectPhoneNumberRelationTypes();
 
             if (string.IsNullOrEmpty(ID)) {
                 this.Data = new Person();
@@ -89,7 +87,8 @@ namespace People {
         public void RefreshAddresses() {
             List<AddressRelationType> types = this.GetAddressRelationTypes();
 
-            this.Addresses.Data = Db.SQL<AddressRelation>("SELECT r FROM Simplified.Ring3.AddressRelation r WHERE r.Somebody = ?", this.Data);
+            this.Addresses.Clear();
+            this.Addresses.Data = contactInfoProvider.SelectAddressRelations(this.Data);
 
             foreach (var row in this.Addresses) {
                 AddressRelation item = row.Data as AddressRelation;
@@ -101,7 +100,8 @@ namespace People {
         public void RefreshEmailAddresses() {
             List<EmailAddressRelationType> types = this.GetEmailAddressRelationTypes();
 
-            this.EmailAddresses.Data = Db.SQL<EmailAddressRelation>("SELECT r FROM Simplified.Ring3.EmailAddressRelation r WHERE r.Somebody = ?", this.Data);
+            this.EmailAddresses.Clear();
+            this.EmailAddresses.Data = contactInfoProvider.SelectEmailAddressRelations(this.Data);
 
             foreach (var row in this.EmailAddresses) {
                 EmailAddressRelation item = row.Data as EmailAddressRelation;
@@ -113,7 +113,8 @@ namespace People {
         public void RefreshPhoneNumbers() {
             List<PhoneNumberRelationType> types = this.GetPhoneNumberRelationTypes();
 
-            this.PhoneNumbers.Data = Db.SQL<PhoneNumberRelation>("SELECT r FROM Simplified.Ring3.PhoneNumberRelation r WHERE r.Somebody = ?", this.Data);
+            this.PhoneNumbers.Clear();
+            this.PhoneNumbers.Data = contactInfoProvider.SelectPhoneNumberRelations(this.Data);
 
             foreach (var row in this.PhoneNumbers) {
                 PhoneNumberRelation item = row.Data as PhoneNumberRelation;

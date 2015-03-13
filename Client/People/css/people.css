@@ -189,6 +189,10 @@ fieldset.people legend {
     margin-top:6px;
 }
 
+.people.control-group .controls .btn.btn-small {
+    margin-top:5px;
+}
+
 .people .dialog-overlay {
     position:fixed;
     background-color:#C0C0C0;

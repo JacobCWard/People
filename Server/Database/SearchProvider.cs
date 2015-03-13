@@ -27,9 +27,8 @@ namespace People {
 
             return Db.SQL<Person>(@"SELECT p
                 FROM Simplified.Ring2.Person p
-	                LEFT JOIN Simplified.Ring3.AddressRelation ar ON ar.Somebody = p
-                WHERE p.Name LIKE ? OR ar.Address.Name LIKE ?
-                FETCH ?", Key, Key, Fetch);
+                WHERE p.Name LIKE ?
+                FETCH ?", Key, Fetch);
         }
 
         protected string PrepareLikeKey(string Key) {

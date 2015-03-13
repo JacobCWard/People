@@ -3,5 +3,59 @@
     "Name$": "",
     "Save$": 0,
     "Cancel$": 0,
-    "RedirectUrl$": ""
+    "RedirectUrl$": "",
+    "AddAddress$": 0,
+    "AddEmailAddress$": 0,
+    "AddPhoneNumber$": 0,
+    "AddressRelationTypes": [
+        {
+            "Name": ""
+        }
+    ],
+    "EmailAddressRelationTypes": [
+        {
+            "Name": ""
+        }
+    ],
+    "PhoneNumberRelationTypes": [
+        {
+            "Name": ""
+        }
+    ],
+    "Addresses": [
+        {
+            "TypeIndex$": 0,
+            "Address": {
+                "Country$": "",
+                "City$": "",
+                "Street$": "",
+                "House$": "",
+                "PostalCode$": ""
+            },
+            "Delete$": 0
+        }
+    ],
+    "EmailAddresses": [
+        {
+            "TypeIndex$": 0,
+            "EmailAddress": { 
+                "Text$": ""
+            },
+            "Delete$": 0
+        }
+    ],
+    "PhoneNumbers": [
+        {
+            "TypeIndex$": 0,
+            "PhoneNumber": { 
+                "Text$": ""
+            },
+            "Delete$": 0
+        }
+    ],
+    "Confirm": {
+        "Message": "",
+        "Ok$": "",
+        "Reject$": ""
+    }
 }

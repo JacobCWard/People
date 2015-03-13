@@ -5,13 +5,17 @@
     <template if="{{Organizations.length > 0}}">
         <fieldset class="people">
             <legend>Organizations</legend>
-            <launcher-root-partial repeat="{{Organizations}}"></launcher-root-partial>
+            <template repeat="{{Organizations}}">
+                <launcher-root-partial></launcher-root-partial>
+            </template>
         </fieldset>
     </template>
     <template if="{{Persons.length > 0}}">
         <fieldset class="people">
             <legend>Persons</legend>
-            <launcher-root-partial repeat="{{Persons}}"></launcher-root-partial>
+            <template repeat="{{Persons}}">
+                <launcher-root-partial></launcher-root-partial>
+            </template>
         </fieldset>
     </template>
 </template>

@@ -5,10 +5,11 @@ using Simplified.Ring2;
 
 namespace People {
     partial class PersonsPage : Page {
+        public PersonsProvider PersonsProvider = new PersonsProvider();
         public Action ConfirmAction = null;
 
         public void RefreshPersons() {
-            this.Persons = Db.SQL("SELECT p FROM Simplified.Ring2.Person p ORDER By p.Name");
+            this.Persons = PersonsProvider.SelectPersons();
         }
 
         [PersonsPage_json.Persons]
@@ -17,7 +18,7 @@ namespace People {
                 this.ParentPage.Confirm.Message = "Are you sure want to delete [" + this.Data.Name + "]?";
                 this.ParentPage.ConfirmAction = () => {
                     Db.Transact(() => {
-                        this.Data.Delete();
+                        this.ParentPage.PersonsProvider.Delete(this.Data);
                         this.ParentPage.RefreshPersons();
                     });
                 };
