@@ -8,11 +8,6 @@
     "AddAddress$": 0,
     "AddEmailAddress$": 0,
     "AddPhoneNumber$": 0,
-    "AddressRelationTypes": [
-        {
-            "Name": ""
-        }
-    ],
     "EmailAddressRelationTypes": [
         {
             "Name": ""
@@ -25,15 +20,6 @@
     ],
     "Addresses": [
         {
-            "TypeIndex$": 0,
-            "Address": {
-                "Country$": "",
-                "City$": "",
-                "Street$": "",
-                "House$": "",
-                "PostalCode$": ""
-            },
-            "Delete$": 0
         }
     ],
     "EmailAddresses": [

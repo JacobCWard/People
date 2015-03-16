@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -111,16 +111,8 @@ namespace People {
                 return resp;
             });
 
-            OntologyMap();
+            OntologyMap.Register();
         }
-
-        static void OntologyMap() {
-            Polyjuice.Map("/people/menu", "/polyjuice/menu");
-            Polyjuice.Map("/people/app-name", "/polyjuice/app-name");
-            Polyjuice.Map("/people/app-icon", "/polyjuice/app-icon");
-            Polyjuice.Map("/people/dashboard", "/polyjuice/dashboard");
-            Polyjuice.Map("/people/search?query=@w", "/polyjuice/search?query=@w");
-       }
 
         static void RegisterPartials() {
             Handle.GET("/people/partials/organizations-add", () => {
@@ -166,6 +158,30 @@ namespace People {
                     };
 
                     page.RefreshPerson(id);
+
+                    return page;
+                });
+            });
+
+            Handle.GET("/people/partials/address-relations/{?}", (string addrelId) => {
+                return Db.Scope<AddressRelationPage>(() => {
+                    AddressRelationPage page = new AddressRelationPage() {
+                        Html = "/People/html/address-relation.html"
+                    };
+
+                    page.RefreshAddressRelation(addrelId);
+
+                    return page;
+                });
+            });
+
+            Handle.GET("/people/partials/addresses/{?}", (string addressId) => {
+                return Db.Scope<AddressPage>(() => {
+                    AddressPage page = new AddressPage() {
+                        Html = "/People/html/address.html"
+                    };
+
+                    page.RefreshAddress(addressId);
 
                     return page;
                 });

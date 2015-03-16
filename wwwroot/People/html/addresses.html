@@ -1,56 +1,17 @@
 ﻿<template>
     <template if="{{Addresses.length > 0}}">
-        <div class="controls">
-            <table class="table table-addresses">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th class="th-type">Type</th>
-                        <th class="th-country">Country</th>
-                        <th class="th-city">City</th>
-                        <th>Street</th>
-                        <th class="th-house">House</th>
-                        <th class="th-code">Postal code</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template repeat="{{item, i in Addresses}}">
-                        <tr>
-                            <td>
-                                <span>{{i + 1}}</span>
-                            </td>
-                            <td>
-                                <select selectedindex="{{item.TypeIndex$}}">
-                                    <template repeat="{{AddressRelationTypes}}">
-                                        <option>{{Name}}</option>
-                                    </template>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" value="{{item.Address.Country$}}" />
-                            </td>
-                            <td>
-                                <input type="text" value="{{item.Address.City$}}" />
-                            </td>
-                            <td>
-                                <input type="text" value="{{item.Address.Street$}}" />
-                            </td>
-                            <td>
-                                <input type="text" value="{{item.Address.House$}}" />
-                            </td>
-                            <td>
-                                <input type="text" value="{{item.Address.PostalCode$}}" />
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-small" onclick="getModel(this).item.Delete$++">Delete</button>
-                            </td>
-                        </tr>
-                    </template>
-                </tbody>
-            </table>
-        </div>
+        <div class="contactinfo-head">Type</div>
+        <div class="contactinfo-head">Country</div>
+        <div class="contactinfo-head">City</div>
+        <div class="contactinfo-head">Street</div>
+        <div class="contactinfo-head">House</div>
+        <div class="contactinfo-head">Postal code</div>
+        
+        <template repeat="{{Addresses}}">
+            <template is="imported-template" content="{{Html}}"></template>
+        </template>
     </template>
+
     <div class="controls">
         <button type="button" class="btn btn-small" onclick="getModel(this).AddAddress$++">Add address</button>
     </div>

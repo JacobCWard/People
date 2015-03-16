@@ -66,10 +66,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\AddressPage.json.cs">
+      <DependentUpon>AddressPage.json</DependentUpon>
+    </Compile>
+    <Compile Include="Server\AddressRelationPage.json.cs">
+      <DependentUpon>AddressRelationPage.json</DependentUpon>
+    </Compile>
     <Compile Include="Server\Database\ContactInfoProvider.cs" />
     <Compile Include="Server\Database\OrganizationsProvider.cs" />
     <Compile Include="Server\Database\PersonsProvider.cs" />
     <Compile Include="Server\Database\SearchProvider.cs" />
+    <Compile Include="Server\OntologyMap.cs" />
     <Compile Include="Server\OrganizationPage.json.cs">
       <DependentUpon>OrganizationPage.json</DependentUpon>
     </Compile>
@@ -96,6 +103,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="wwwroot\People\html\address-relation.html" />
+    <Content Include="wwwroot\People\html\address.html" />
     <Content Include="wwwroot\People\html\addresses.html" />
     <Content Include="wwwroot\People\html\app-icon.html" />
     <Content Include="wwwroot\People\css\animation.css" />
@@ -122,6 +131,12 @@
     <Content Include="wwwroot\People\css\people.css" />
   </ItemGroup>
   <ItemGroup>
+    <TypedJSON Include="Server\AddressRelationPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="Server\AddressPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
     <None Include="wwwroot\People\font\people-font.eot" />
     <None Include="wwwroot\People\font\people-font.ttf" />
     <None Include="wwwroot\People\font\people-font.woff" />

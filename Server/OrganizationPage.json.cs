@@ -27,7 +27,7 @@ namespace People {
 
             ar.Somebody = this.Data;
             ar.Address = a;
-            ar.AddressRelationType = this.AddressRelationTypes.First().Data as AddressRelationType;
+            ar.AddressRelationType = contactInfoProvider.SelectAddressRelationTypes().First;
 
             this.RefreshAddresses();
         }
@@ -59,7 +59,6 @@ namespace People {
         }
 
         public void RefreshOrganization(string ID = null) {
-            this.AddressRelationTypes = contactInfoProvider.SelectAddressRelationTypes();
             this.EmailAddressRelationTypes = contactInfoProvider.SelectEmailAddressRelationTypes();
             this.PhoneNumberRelationTypes = contactInfoProvider.SelectPhoneNumberRelationTypes();
 
@@ -74,10 +73,6 @@ namespace People {
             }
         }
 
-        public List<AddressRelationType> GetAddressRelationTypes() {
-            return this.AddressRelationTypes.Select(val => val.Data).OfType<AddressRelationType>().ToList();
-        }
-
         public List<EmailAddressRelationType> GetEmailAddressRelationTypes() {
             return this.EmailAddressRelationTypes.Select(val => val.Data).OfType<EmailAddressRelationType>().ToList();
         }
@@ -87,15 +82,14 @@ namespace People {
         }
 
         public void RefreshAddresses() {
-            List<AddressRelationType> types = this.GetAddressRelationTypes();
-
             this.Addresses.Clear();
-            this.Addresses.Data = contactInfoProvider.SelectAddressRelations(this.Data); ;
 
-            foreach (var row in this.Addresses) {
-                AddressRelation item = row.Data as AddressRelation;
-
-                row.TypeIndex = types.IndexOf(item.AddressRelationType);
+            foreach (AddressRelation row in contactInfoProvider.SelectAddressRelations(this.Data)) {
+                var page = X.GET<AddressRelationPage>("/people/partials/address-relations/" + row.Key);
+                page.OnDelete = () => {
+                    this.RefreshAddresses();
+                };
+                this.Addresses.Add(page);
             }
         }
 
@@ -128,30 +122,6 @@ namespace People {
         public void RefreshPersons() {
             this.Persons.Clear();
             this.Persons.Data = organizationsProvider.SelectOrganizationPersons(this.Data);
-        }
-
-        [OrganizationPage_json.Addresses]
-        partial class OrganizatioAddressPage : Page, IBound<AddressRelation> {
-            void Handle(Input.TypeIndex Action) {
-                List<AddressRelationType> types = this.ParentPage.GetAddressRelationTypes();
-                int index = (int)Action.Value;
-
-                this.Data.AddressRelationType = types[index];
-            }
-
-            void Handle(Input.Delete Action) {
-                this.ParentPage.Confirm.Message = "Are you sure want to delete address [" + this.Data.Address.Name + "]?";
-                this.ParentPage.ConfirmAction = () => {
-                    this.Data.Delete();
-                    this.ParentPage.RefreshAddresses();
-                };
-            }
-
-            OrganizationPage ParentPage {
-                get {
-                    return this.Parent.Parent as OrganizationPage;
-                }
-            }
         }
 
         [OrganizationPage_json.EmailAddresses]

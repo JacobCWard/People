@@ -1,4 +1,4 @@
-﻿.people {
+.people {
     box-sizing: border-box;
 }
 
@@ -141,26 +141,6 @@ html /deep/ paper-action-dialog .people table.table td {
     padding:2px 3px;
     border:none;
     box-sizing:border-box;
-}
-
-.people .table.table-addresses .th-type {
-    width:80px;
-}
-
-.people .table.table-addresses .th-country {
-    width:100px;
-}
-
-.people .table.table-addresses .th-city {
-    width:100px;
-}
-
-.people .table.table-addresses .th-house {
-    width:50px;
-}
-
-.people .table.table-addresses .th-code {
-    width:70px;
 }
 
 .people.control-group input[type=text],
