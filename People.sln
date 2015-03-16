@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simplified", "..\Simplified\Simplified.csproj", "{26DF60EA-3A8C-455C-8A0C-2FD39703FC89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Launcher", "..\Launcher\Launcher.csproj", "{30D11832-7DCA-4B52-A52E-D3F4EB573E1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Images", "..\Images\Images.csproj", "{C9F21ACD-A247-4E76-85C9-1F102651C574}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -26,6 +30,14 @@ Global
 		{26DF60EA-3A8C-455C-8A0C-2FD39703FC89}.Debug|x64.Build.0 = Debug|x64
 		{26DF60EA-3A8C-455C-8A0C-2FD39703FC89}.Release|x64.ActiveCfg = Release|x64
 		{26DF60EA-3A8C-455C-8A0C-2FD39703FC89}.Release|x64.Build.0 = Release|x64
+		{30D11832-7DCA-4B52-A52E-D3F4EB573E1E}.Debug|x64.ActiveCfg = Debug|x64
+		{30D11832-7DCA-4B52-A52E-D3F4EB573E1E}.Debug|x64.Build.0 = Debug|x64
+		{30D11832-7DCA-4B52-A52E-D3F4EB573E1E}.Release|x64.ActiveCfg = Release|x64
+		{30D11832-7DCA-4B52-A52E-D3F4EB573E1E}.Release|x64.Build.0 = Release|x64
+		{C9F21ACD-A247-4E76-85C9-1F102651C574}.Debug|x64.ActiveCfg = Debug|x64
+		{C9F21ACD-A247-4E76-85C9-1F102651C574}.Debug|x64.Build.0 = Debug|x64
+		{C9F21ACD-A247-4E76-85C9-1F102651C574}.Release|x64.ActiveCfg = Release|x64
+		{C9F21ACD-A247-4E76-85C9-1F102651C574}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

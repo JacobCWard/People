@@ -17,12 +17,12 @@ namespace People {
 
             // Workspace home page (landing page from launchpad) dashboard alias
             Handle.GET("/people", () => {
-                Response resp = X.GET("/people/dashboard");
+                Response resp = X.GET("/people/persons");
                 return resp;
             });
 
             Handle.GET("/people/", () => {
-                Response resp = X.GET("/people/dashboard");
+                Response resp = X.GET("/people/persons");
                 return resp;
             });
 
