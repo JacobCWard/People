@@ -22,7 +22,26 @@
     </div>
     <div class="people control-group">
         <label class="control-label">Addresses:</label>
-        <template is="imported-template" content="/People/html/addresses.html"></template>
+
+        <div class="controls">
+            <template if="{{Addresses.length > 0}}">
+                <div class="contactinfo-headers">
+                    <div class="contactinfo-header">Type</div>
+                    <div class="contactinfo-header">Country</div>
+                    <div class="contactinfo-header">City</div>
+                    <div class="contactinfo-header">Street</div>
+                    <div class="contactinfo-header">House</div>
+                    <div class="contactinfo-header">Postal code</div>
+                </div>
+            </template>
+
+            <template repeat="{{Addresses}}">
+                <launcher-root-partial name="Addresses"></launcher-root-partial>
+            </template>
+
+            <button type="button" class="btn btn-small" onclick="getModel(this).AddAddress$++">Add address</button>
+        </div>
+
     </div>
     <div class="people control-group">
         <label class="control-label">Emails:</label>

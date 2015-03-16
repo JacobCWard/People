@@ -152,6 +152,17 @@ html /deep/ paper-action-dialog .people.control-group input[type=text] {
     box-sizing:content-box;
 }
 
+.people.control-group .contactinfo-headers {
+    display: flex;
+    border-bottom: 1px solid #C0C0C0;
+    margin-bottom: 9px;
+}
+
+.people.control-group .contactinfo-header {
+    width: 100px;
+    line-height: 29px;
+}
+
 .people.control-group h2 {
     margin-bottom:0px;
 }
@@ -164,8 +175,8 @@ html /deep/ paper-action-dialog .people.control-group {
 .people.control-group .control-label,
 html /deep/ paper-action-dialog .people.control-group .control-label {
     float:left;
-    width:250px;
-    text-align:right;
+    width:100px;
+    text-align:left;
     line-height:29px;
 }
 
@@ -177,7 +188,7 @@ html /deep/ paper-action-dialog .people.control-group .control-label {
 
 .people.control-group .controls,
 .people.control-group .hints {
-    margin-left:265px;
+    margin-left:115px;
 }
 
 html /deep/ paper-action-dialog .people.control-group .controls {
