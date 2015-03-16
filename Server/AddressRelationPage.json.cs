@@ -34,33 +34,22 @@ namespace People {
         }
 
         void Handle(Input.Delete Action) {
-            this.Confirm.Message = "Are you sure want to delete address [" + this.Data.Address.Name + "]?";
-            this.Confirm.ConfirmAction = () => {
-                this.Data.Delete();
-                this.OnDelete();
-            };
-        }
-    }
-
-    [AddressRelationPage_json.Confirm]
-    partial class AddressRelationConfirmPage : Json {
-        public Action ConfirmAction = null;
-
-        void Cancel() {
-            this.Message = null;
-            this.ConfirmAction = null;
-        }
-
-        void Handle(Input.Reject Action) {
-            Cancel();
-        }
-
-        void Handle(Input.Ok Action) {
-            if (this.ConfirmAction != null) {
-                this.ConfirmAction();
+            if (this.Parent.Parent is PersonPage) {
+                PersonPage MyParent = (PersonPage)this.Parent.Parent;
+                MyParent.Confirm.Message = "Are you sure want to delete address [" + this.Data.Address.Name + "]?";
+                MyParent.ConfirmAction = () => {
+                    this.Data.Delete();
+                    this.OnDelete();
+                };
             }
-
-            Cancel();
+            if (this.Parent.Parent is OrganizationPage) {
+                OrganizationPage MyParent = (OrganizationPage)this.Parent.Parent;
+                MyParent.Confirm.Message = "Are you sure want to delete address [" + this.Data.Address.Name + "]?";
+                MyParent.ConfirmAction = () => {
+                    this.Data.Delete();
+                    this.OnDelete();
+                };
+            }
         }
     }
 }

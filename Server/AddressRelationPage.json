@@ -8,10 +8,5 @@
     "TypeIndex$": 0,
     "Address": {
     },
-    "Delete$": 0,
-    "Confirm": {
-        "Message": "",
-        "Ok$": "",
-        "Reject$": ""
-    }
+    "Delete$": 0
 }
