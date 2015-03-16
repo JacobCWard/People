@@ -120,6 +120,12 @@ namespace People {
             Polyjuice.Map("/people/app-icon", "/polyjuice/app-icon");
             Polyjuice.Map("/people/dashboard", "/polyjuice/dashboard");
             Polyjuice.Map("/people/search?query=@w", "/polyjuice/search?query=@w");
+
+
+            //Polyjuice.OntologyMap("/people/persons/@w", "/so/somebody/@w", null, null);
+            Polyjuice.OntologyMap("/people/persons/@w", "/so/person/@w", null, null);
+            Polyjuice.OntologyMap("/people/organizations/@w", "/so/organization/@w", null, null);
+
         }
 
         static void RegisterPartials() {
