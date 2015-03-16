@@ -11,7 +11,7 @@ Add functionality to create companies, and people. Uses dashoard, search results
 3. Start `People.exe` 
 
    ```bash
-   star --resourcedir=Client bin/Debug/SuperCRM.exe 
+   star bin/Debug/People.exe 
    ```
    You can use `run.bat`, or Visual Studio as well.
 4. Go to [http://localhost:8080/](http://localhost:8080/)

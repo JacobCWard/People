@@ -3,15 +3,15 @@
     "version": "0.0.1",
     "homepage": "https://github.com/Starcounter/People",
     "description": "People CRM - an example of Polyjuice app.",
-    "main": "Client/master.html",
+    "main": "wwwroot/master.html",
     "license": "MIT",
     "private": true,
     "ignore": [
         "**/.*",
         "node_modules",
         "bower_components",
-        "Client/sys",
-        "Client/People/sys",
+        "wwwroot/sys",
+        "wwwroot/People/sys",
         "test",
         "tests"
     ],

@@ -95,35 +95,35 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Client\People\html\addresses.html" />
-    <Content Include="Client\People\html\app-icon.html" />
-    <Content Include="Client\People\css\animation.css" />
-    <Content Include="Client\People\css\people-font-codes.css" />
-    <Content Include="Client\People\css\people-font-embedded.css" />
-    <Content Include="Client\People\css\people-font-ie7-codes.css" />
-    <Content Include="Client\People\css\people-font-ie7.css" />
-    <Content Include="Client\People\css\people-font.css" />
-    <Content Include="Client\People\font\people-font.svg" />
-    <Content Include="Client\People\html\confirm-dialog.html" />
-    <Content Include="Client\People\html\email-addresses.html" />
-    <Content Include="Client\People\html\organization.html" />
-    <Content Include="Client\People\html\organizations.html" />
-    <Content Include="Client\People\html\dashboard.html" />
-    <Content Include="Client\People\html\menu.html" />
-    <Content Include="Client\People\html\person.html" />
-    <Content Include="Client\People\html\persons.html" />
-    <Content Include="Client\People\html\phone-numbers.html" />
-    <Content Include="Client\People\html\search-organization.html" />
-    <Content Include="Client\People\html\search-person.html" />
-    <Content Include="Client\People\html\search.html" />
-    <Content Include="Client\People\message.html" />
-    <Content Include="Client\People\img\people.png" />
-    <Content Include="Client\People\css\people.css" />
+    <Content Include="wwwroot\People\html\addresses.html" />
+    <Content Include="wwwroot\People\html\app-icon.html" />
+    <Content Include="wwwroot\People\css\animation.css" />
+    <Content Include="wwwroot\People\css\people-font-codes.css" />
+    <Content Include="wwwroot\People\css\people-font-embedded.css" />
+    <Content Include="wwwroot\People\css\people-font-ie7-codes.css" />
+    <Content Include="wwwroot\People\css\people-font-ie7.css" />
+    <Content Include="wwwroot\People\css\people-font.css" />
+    <Content Include="wwwroot\People\font\people-font.svg" />
+    <Content Include="wwwroot\People\html\confirm-dialog.html" />
+    <Content Include="wwwroot\People\html\email-addresses.html" />
+    <Content Include="wwwroot\People\html\organization.html" />
+    <Content Include="wwwroot\People\html\organizations.html" />
+    <Content Include="wwwroot\People\html\dashboard.html" />
+    <Content Include="wwwroot\People\html\menu.html" />
+    <Content Include="wwwroot\People\html\person.html" />
+    <Content Include="wwwroot\People\html\persons.html" />
+    <Content Include="wwwroot\People\html\phone-numbers.html" />
+    <Content Include="wwwroot\People\html\search-organization.html" />
+    <Content Include="wwwroot\People\html\search-person.html" />
+    <Content Include="wwwroot\People\html\search.html" />
+    <Content Include="wwwroot\People\message.html" />
+    <Content Include="wwwroot\People\img\people.png" />
+    <Content Include="wwwroot\People\css\people.css" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Client\People\font\people-font.eot" />
-    <None Include="Client\People\font\people-font.ttf" />
-    <None Include="Client\People\font\people-font.woff" />
+    <None Include="wwwroot\People\font\people-font.eot" />
+    <None Include="wwwroot\People\font\people-font.ttf" />
+    <None Include="wwwroot\People\font\people-font.woff" />
     <TypedJSON Include="Server\SearchPersonPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
