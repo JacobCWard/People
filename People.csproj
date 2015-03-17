@@ -111,6 +111,7 @@
     <Content Include="wwwroot\People\css\standalone.css" />
     <Content Include="wwwroot\People\html\address-relation.html" />
     <Content Include="wwwroot\People\html\address.html" />
+    <Content Include="wwwroot\People\html\addresses.html" />
     <Content Include="wwwroot\People\html\app-icon.html" />
     <Content Include="wwwroot\People\css\animation.css" />
     <Content Include="wwwroot\People\css\people-font-codes.css" />

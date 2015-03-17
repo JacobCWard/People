@@ -210,7 +210,7 @@ namespace People {
             }
 
             void Handle(Input.Edit Action) {
-                this.ParentPage.RedirectUrl = UrlHelper.GetUrl("/persons/" + this.Data.Key);
+                this.ParentPage.RedirectUrl = UrlHelper.GetUrl("/persons/" + this.Data.Person.Key);
             }
 
             public OrganizationPage ParentPage {
