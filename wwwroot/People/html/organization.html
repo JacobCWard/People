@@ -47,7 +47,7 @@
                                     <span>{{i + 1}}</span>
                                 </td>
                                 <td>
-                                    <a href="/launcher/workspace/people/persons/{{item.Person.Key}}">{{item.Person.Name}}</a>
+                                    <a href="javascript:" onclick="getModel(this).item.Edit$++">{{item.Person.Name}}</a>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-small" onclick="getModel(this).item.Delete$++">Delete</button>
@@ -60,7 +60,7 @@
         </template>
         <div class="controls">
             <button type="button" class="btn btn-small" onclick="getModel(this).Find.Visible$ = true">Find person</button>
-            <a href="/launcher/workspace/people/persons/add" class="btn btn-small">Add person</a>
+            <a href="{{AddPersonUrl}}" class="btn btn-small">Add person</a>
         </div>
     </div>
     <div class="people control-group">

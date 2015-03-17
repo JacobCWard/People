@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>People</title>
+    <script src="/sys/webcomponentsjs/webcomponents.js"></script>
+    <link rel="import" href="/sys/starcounter.html" />
+    <link rel="import" href="/sys/imported-template/imported-template.html" />
+    <link href="/People/css/standalone.css" rel="stylesheet" />
+</head>
+<body>
+    <template id="root" bind>
+        <nav id="top-menu">
+            <ul>
+                <li>
+                    <a href="/people/standalone">Home</a>
+                </li>
+                <li>
+                    <a href="/people/standalone/persons">Persons</a>
+                </li>
+                <li>
+                    <a href="/people/standalone/organizations">Organizations</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="body">
+            <template bind="{{CurrentPage}}">
+                <template is="imported-template" content="{{Html}}">
+                </template>
+            </template>
+        </div>
+    </template>
+    <puppet-client ref="root"></puppet-client>
+    <starcounter-debug-aid></starcounter-debug-aid>
+</body>
+</html>

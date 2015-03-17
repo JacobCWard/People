@@ -12,8 +12,12 @@ using Simplified.Ring3;
 namespace People {
     partial class Program : Page {
         static void Main() {
-            InitializeData();
+            InitialData data = new InitialData();
+            
+            data.Insert();
+            RegisterPolyjucie();
             RegisterPartials();
+            RegisterStandalone();
 
             // Workspace home page (landing page from launchpad) dashboard alias
             Handle.GET("/people", () => {
@@ -22,81 +26,31 @@ namespace People {
             });
 
             Handle.GET("/people/", () => {
-                Response resp = X.GET("/people/persons");
-                return resp;
-            });
-
-            // App name required for Launchpad
-            Handle.GET("/people/app-name", () => {
-                return new AppName();
-            });
-
-            Handle.GET("/people/app-icon", () => {
-                Page iconpage = new Page() {
-                    Html = "/People/html/app-icon.html"
-                };
-
-                return iconpage;
-            });
-
-            Handle.GET("/people/menu", () => {
-                Page p = new Page() {
-                    Html = "/People/html/menu.html"
-                };
-
-                return p;
-            });
-
-            Handle.GET("/people/dashboard", () => {
-                Page p = new Page() {
-                    Html = "/People/html/dashboard.html"
-                };
-
-                return p;
+                return X.GET("/people/persons");
             });
 
             Handle.GET("/people/organizations", () => {
-                OrganizationsPage p = new OrganizationsPage() {
-                    Html = "/People/html/organizations.html"
-                };
-
-                p.RefreshOrganizations();
-
-                return p;
+                return GetLauncherPage("/people/partials/organizations");
             });
 
             Handle.GET("/people/organizations/add", () => {
-                return Db.Scope(() => {
-                    return X.GET<Json>("/people/partials/organizations-add");
-                });
+                return GetLauncherPage("/people/partials/organizations-add", true);
             });
 
             Handle.GET("/people/organizations/{?}", (string id) => {
-                return Db.Scope(() => {
-                    return X.GET<Json>("/people/partials/organizations/" + id);
-                });
+                return GetLauncherPage("/people/partials/organizations/" + id, true);
             });
 
             Handle.GET("/people/persons", () => {
-                PersonsPage p = new PersonsPage() {
-                    Html = "/People/html/persons.html"
-                };
-
-                p.RefreshPersons();
-
-                return p;
+                return GetLauncherPage("/people/partials/persons");
             });
 
             Handle.GET("/people/persons/add", () => {
-                return Db.Scope(() => {
-                    return X.GET<Json>("/people/partials/persons-add");
-                });
+                return GetLauncherPage("/people/partials/persons-add", true);
             });
 
             Handle.GET<string>("/people/persons/{?}", (string id) => {
-                return Db.Scope(() => {
-                    return X.GET<Json>("/people/partials/persons/" + id);
-                });
+                return GetLauncherPage("/people/partials/persons/" + id, true);
             });
 
             Handle.GET("/people/search?query={?}", (String query) => {
@@ -114,7 +68,58 @@ namespace People {
             OntologyMap.Register();
         }
 
+        static void RegisterPolyjucie() {
+            // App name required for Launchpad
+            Handle.GET("/people/app-name", () => {
+                return new AppName();
+            });
+
+            Handle.GET("/people/app-icon", () => {
+                Page p = new Page() {
+                    Html = "/People/html/app-icon.html"
+                };
+
+                return p;
+            });
+
+            Handle.GET("/people/menu", () => {
+                Page p = new Page() {
+                    Html = "/People/html/menu.html"
+                };
+
+                return p;
+            });
+
+            Handle.GET("/people/dashboard", () => {
+                Page p = new Page() {
+                    Html = "/People/html/dashboard.html"
+                };
+
+                return p;
+            });
+        }
+
         static void RegisterPartials() {
+            Handle.GET("/people/partials/organizations", () => {
+                OrganizationsPage p = new OrganizationsPage() {
+                    Html = "/People/html/organizations.html"
+                };
+
+                p.RefreshOrganizations();
+
+                return p;
+            });
+
+            Handle.GET("/people/partials/persons", () => {
+                PersonsPage p = new PersonsPage() {
+                    Html = "/People/html/persons.html"
+                };
+
+                p.RefreshPersons();
+
+                return p;
+            });
+
             Handle.GET("/people/partials/organizations-add", () => {
                 return Db.Scope<OrganizationPage>(() => {
                     OrganizationPage page = new OrganizationPage() {
@@ -227,48 +232,81 @@ namespace People {
             });
         }
 
-        static void InitializeData() {
-            string[] defaultAddressTypes = new string[] { "Home", "Work" };
-            string[] defaultEmailTypes = new string[] { "Primary", "Secondary", "Work", "Spam" };
-            string[] defaultPhoneTypes = new string[] { "Mobile", "Home", "Work" };
+        static void RegisterStandalone() {
+            Handle.GET("/people/standalone/master", (Request r) => {
+                Session session = Session.Current;
+                UrlHelper.BaseUrl = "/people/standalone";
 
-            foreach (string t in defaultAddressTypes) {
-                AddressRelationType type = Db.SQL<AddressRelationType>("SELECT t FROM Simplified.Ring3.AddressRelationType t WHERE t.Name = ?", t).First;
-
-                if (type != null) {
-                    continue;
+                if (session == null) {
+                    session = new Session(SessionOptions.PatchVersioning);
                 }
 
-                Db.Transact(() => {
-                    type = new AddressRelationType();
-                    type.Name = t;
+                if (session.Data != null) {
+                    return session.Data;
+                }
+
+                StandalonePage page = new StandalonePage() {
+                    Html = "/People/html/standalone.html"
+                };
+                page.Session = session;
+
+                return page;
+            });
+
+            Handle.GET("/people/standalone", (Request r) => {
+                return GetStandalonePage("/people/partials/persons");
+            });
+
+            Handle.GET("/people/standalone/persons", (Request r) => {
+                return GetStandalonePage("/people/partials/persons");
+            });
+
+            Handle.GET("/people/standalone/persons/add", () => {
+                return GetStandalonePage("/people/partials/persons-add", true);
+            });
+
+            Handle.GET<string>("/people/standalone/persons/{?}", (string id) => {
+                return GetStandalonePage("/people/partials/persons/" + id, true);
+            });
+
+            Handle.GET("/people/standalone/organizations", (Request r) => {
+                return GetStandalonePage("/people/partials/organizations");
+            });
+
+            Handle.GET("/people/standalone/organizations/add", () => {
+                return GetStandalonePage("/people/partials/organizations-add", true);
+            });
+
+            Handle.GET<string>("/people/standalone/organizations/{?}", (string id) => {
+                return GetStandalonePage("/people/partials/organizations/" + id, true);
+            });
+        }
+
+        static StandalonePage GetStandalonePage(string CurrentPageUrl, bool DbScope = false) {
+            StandalonePage master = null;
+
+            if (DbScope) {
+                Db.Scope(() => {
+                    master = StandalonePage.GET("/people/standalone/master");
+                    master.CurrentPage = X.GET<Json>(CurrentPageUrl);
                 });
+            } else {
+                master = StandalonePage.GET("/people/standalone/master");
+                master.CurrentPage = X.GET<Json>(CurrentPageUrl);
             }
 
-            foreach (string t in defaultEmailTypes) {
-                EmailAddressRelationType type = Db.SQL<EmailAddressRelationType>("SELECT t FROM Simplified.Ring3.EmailAddressRelationType t WHERE t.Name = ?", t).First;
+            return master;
+        }
 
-                if (type != null) {
-                    continue;
-                }
+        static Json GetLauncherPage(string Url, bool DbScope = false) {
+            UrlHelper.BaseUrl = "/launcher/workspace/people";
 
-                Db.Transact(() => {
-                    type = new EmailAddressRelationType();
-                    type.Name = t;
+            if (DbScope) {
+                return Db.Scope<Json>(() => {
+                    return X.GET<Json>(Url);
                 });
-            }
-
-            foreach (string t in defaultPhoneTypes) {
-                PhoneNumberRelationType type = Db.SQL<PhoneNumberRelationType>("SELECT t FROM Simplified.Ring3.PhoneNumberRelationType t WHERE t.Name = ?", t).First;
-
-                if (type != null) {
-                    continue;
-                }
-
-                Db.Transact(() => {
-                    type = new PhoneNumberRelationType();
-                    type.Name = t;
-                });
+            } else {
+                return X.GET<Json>(Url);
             }
         }
     }

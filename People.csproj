@@ -73,6 +73,7 @@
       <DependentUpon>AddressRelationPage.json</DependentUpon>
     </Compile>
     <Compile Include="Server\Database\ContactInfoProvider.cs" />
+    <Compile Include="Server\Database\InitialData.cs" />
     <Compile Include="Server\Database\OrganizationsProvider.cs" />
     <Compile Include="Server\Database\PersonsProvider.cs" />
     <Compile Include="Server\Database\SearchProvider.cs" />
@@ -82,6 +83,9 @@
     </Compile>
     <Compile Include="Server\OrganizationsPage.json.cs">
       <DependentUpon>OrganizationsPage.json</DependentUpon>
+    </Compile>
+    <Compile Include="Server\StandalonePage.json.cs">
+      <DependentUpon>StandalonePage.json</DependentUpon>
     </Compile>
     <Compile Include="Server\PersonPage.json.cs">
       <DependentUpon>PersonPage.json</DependentUpon>
@@ -101,8 +105,10 @@
     <Compile Include="Server\SearchPersonPage.json.cs">
       <DependentUpon>SearchPersonPage.json</DependentUpon>
     </Compile>
+    <Compile Include="Server\UrlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="wwwroot\People\css\standalone.css" />
     <Content Include="wwwroot\People\html\address-relation.html" />
     <Content Include="wwwroot\People\html\address.html" />
     <Content Include="wwwroot\People\html\app-icon.html" />
@@ -125,6 +131,7 @@
     <Content Include="wwwroot\People\html\search-organization.html" />
     <Content Include="wwwroot\People\html\search-person.html" />
     <Content Include="wwwroot\People\html\search.html" />
+    <Content Include="wwwroot\People\html\standalone.html" />
     <Content Include="wwwroot\People\message.html" />
     <Content Include="wwwroot\People\img\people.png" />
     <Content Include="wwwroot\People\css\people.css" />
@@ -134,6 +141,9 @@
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <TypedJSON Include="Server\AddressPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="Server\StandalonePage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <None Include="wwwroot\People\font\people-font.eot" />

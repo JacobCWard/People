@@ -11,6 +11,7 @@
             "Edit$": 0
         }
     ],
+    "AddUrl": "",
     "RedirectUrl$": "",
     "Confirm": {
         "Message": "",

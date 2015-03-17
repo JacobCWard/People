@@ -54,7 +54,7 @@ namespace People {
         }
 
         public void GoBack() {
-            this.RedirectUrl = "/launcher/workspace/people/persons";
+            this.RedirectUrl = UrlHelper.GetUrl("/persons");
         }
 
         public void RefreshPerson(string ID = null) {

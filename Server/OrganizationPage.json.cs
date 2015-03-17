@@ -55,10 +55,11 @@ namespace People {
         }
 
         public void GoBack() {
-            this.RedirectUrl = "/launcher/workspace/people/organizations";
+            this.RedirectUrl = UrlHelper.GetUrl("/organizations");
         }
 
         public void RefreshOrganization(string ID = null) {
+            this.AddPersonUrl = UrlHelper.GetUrl("/persons/add");
             this.EmailAddressRelationTypes = contactInfoProvider.SelectEmailAddressRelationTypes();
             this.PhoneNumberRelationTypes = contactInfoProvider.SelectPhoneNumberRelationTypes();
 
@@ -206,6 +207,10 @@ namespace People {
                     this.Data.Delete();
                     this.ParentPage.Persons.Remove(this);
                 };
+            }
+
+            void Handle(Input.Edit Action) {
+                this.ParentPage.RedirectUrl = UrlHelper.GetUrl("/persons/" + this.Data.Key);
             }
 
             public OrganizationPage ParentPage {
