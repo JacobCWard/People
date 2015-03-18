@@ -1,13 +1,15 @@
 ﻿<template>
     <div>
-        <select selectedindex="{{TypeIndex$}}">
+        <select selectedindex="{{TypeIndex$}}" class="form-control">
             <template repeat="{{EmailAddressRelationTypes}}">
                 <option>{{Name}}</option>
             </template>
         </select>
     </div>
-    <template is="imported-template" bind="{{EmailAddress}}" content="{{EmailAddress.Html}}"></template>
+    <template bind="{{EmailAddress}}">
+        <launcher-root-partial></launcher-root-partial>
+    </template>
     <div>
-        <button type="button" class="btn btn-small" onclick="getModel(this).Delete$++">Delete</button>
+        <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).Delete$++">Delete</button>
     </div>
 </template>

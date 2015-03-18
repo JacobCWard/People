@@ -34,23 +34,13 @@ namespace People {
         }
 
         void Handle(Input.Delete Action) {
-            if (this.Parent.Parent is PersonPage) {
-                PersonPage MyParent = (PersonPage)this.Parent.Parent;
-                MyParent.Confirm.Message = "Are you sure want to delete address [" + this.Data.Address.Name + "]?";
-                MyParent.ConfirmAction = () => {
-                    this.Data.Delete();
-                    this.OnDelete();
-                };
-            }
-
-            if (this.Parent.Parent is OrganizationPage) {
-                OrganizationPage MyParent = (OrganizationPage)this.Parent.Parent;
-                MyParent.Confirm.Message = "Are you sure want to delete address [" + this.Data.Address.Name + "]?";
-                MyParent.ConfirmAction = () => {
-                    this.Data.Delete();
-                    this.OnDelete();
-                };
-            }
+            IConfirmPage page = this.Parent.Parent as IConfirmPage;
+            
+            page.SetConfirmMessage("Are you sure want to delete address [" + this.Data.Address.Name + "]?");
+            page.SetConfirmAction(() => {
+                this.Data.Delete();
+                this.OnDelete();
+            });
         }
 
         void OnDelete() {

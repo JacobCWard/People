@@ -6,7 +6,7 @@ using Simplified.Ring2;
 using Simplified.Ring3;
 
 namespace People {
-    partial class PersonPage : Page, IBound<Person> {
+    partial class PersonPage : Page, IBound<Person>, IConfirmPage {
         protected ContactInfoProvider contactInfoProvider = new ContactInfoProvider();
         public Action ConfirmAction = null;
 
@@ -108,6 +108,14 @@ namespace People {
 
                 this.PhoneNumbers.Add(page);
             }
+        }
+
+        public void SetConfirmMessage(string Message) {
+            this.Confirm.Message = Message;
+        }
+
+        public void SetConfirmAction(Action Action) {
+            this.ConfirmAction = Action;
         }
 
         [PersonPage_json.Confirm]

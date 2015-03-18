@@ -201,6 +201,16 @@ namespace People {
                 });
             });
 
+            Handle.GET("/people/partials/organization-persons/{?}", (string id) => {
+                return Db.Scope<OrganizationPersonPage>(() => {
+                    OrganizationPersonPage page = new OrganizationPersonPage();
+
+                    page.RefreshOrganizationPerson(id);
+
+                    return page;
+                });
+            });
+
             Handle.GET("/people/partials/address-relations/{?}", (string id) => {
                 return Db.Scope<AddressRelationPage>(() => {
                     AddressRelationPage page = new AddressRelationPage() {

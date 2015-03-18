@@ -29,8 +29,8 @@
                             <a href="tel:{{PhoneNumberName}}" target="_blank">{{PhoneNumberName}}</a>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-small" onclick="getModel(this).Delete$++">Delete</button>
-                            <button type="button" class="btn btn-small" onclick="getModel(this).Edit$++">Edit</button>
+                            <button type="button" class="btn btn-sm btn-default" onclick="getModel(this).Delete$++">Delete</button>
+                            <button type="button" class="btn btn-sm btn-default" onclick="getModel(this).Edit$++">Edit</button>
                         </td>
                     </tr>
                 </template>
@@ -38,7 +38,7 @@
         </table>
     </fieldset>
     <div class="people buttons">
-        <a href="{{AddUrl}}" class="btn btn-small">Add person</a>
+        <a href="{{AddUrl}}" class="btn btn-primary">Add person</a>
     </div>
     <template is="imported-template" content="/People/html/confirm-dialog.html"></template>
     <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />

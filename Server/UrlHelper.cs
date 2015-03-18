@@ -6,9 +6,18 @@ using System.Threading.Tasks;
 
 namespace People {
     public class UrlHelper {
-        public static string BaseUrl = "/launcher/workspace/people";
+        private static string baseUrl = "/launcher/workspace/people";
 
-        public static string GetUrl(string Value) { 
+        public static string BaseUrl {
+            get {
+                return baseUrl;
+            }
+            set {
+                baseUrl = value;
+            }
+        }
+
+        public static string GetUrl(string Value) {
             return BaseUrl + Value;
         }
     }

@@ -83,9 +83,13 @@
     <Compile Include="Server\EmailAddressRelationPage.json.cs">
       <DependentUpon>EmailAddressRelationPage.json</DependentUpon>
     </Compile>
+    <Compile Include="Server\Interfaces\IConfirmPage.cs" />
     <Compile Include="Server\OntologyMap.cs" />
     <Compile Include="Server\OrganizationPage.json.cs">
       <DependentUpon>OrganizationPage.json</DependentUpon>
+    </Compile>
+    <Compile Include="Server\OrganizationPersonPage.json.cs">
+      <DependentUpon>OrganizationPersonPage.json</DependentUpon>
     </Compile>
     <Compile Include="Server\OrganizationsPage.json.cs">
       <DependentUpon>OrganizationsPage.json</DependentUpon>
@@ -137,6 +141,7 @@
     <Content Include="wwwroot\People\html\email-address-relation.html" />
     <Content Include="wwwroot\People\html\email-address.html" />
     <Content Include="wwwroot\People\html\email-addresses.html" />
+    <Content Include="wwwroot\People\html\organization-person.html" />
     <Content Include="wwwroot\People\html\organization.html" />
     <Content Include="wwwroot\People\html\organizations.html" />
     <Content Include="wwwroot\People\html\dashboard.html" />
@@ -175,6 +180,9 @@
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <TypedJSON Include="Server\PhoneNumberRelationPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="Server\OrganizationPersonPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <None Include="wwwroot\People\font\people-font.eot" />

@@ -1,13 +1,15 @@
 ﻿<template>
     <div>
-        <select selectedindex="{{TypeIndex$}}">
+        <select selectedindex="{{TypeIndex$}}" class="form-control">
             <template repeat="{{PhoneNumberRelationTypes}}">
                 <option>{{Name}}</option>
             </template>
         </select>
     </div>
-    <template is="imported-template" bind="{{PhoneNumber}}" content="{{PhoneNumber.Html}}"></template>
+    <template bind="{{PhoneNumber}}">
+        <launcher-root-partial></launcher-root-partial>
+    </template>
     <div>
-        <button type="button" class="btn btn-small" onclick="getModel(this).Delete$++">Delete</button>
+        <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).Delete$++">Delete</button>
     </div>
 </template>

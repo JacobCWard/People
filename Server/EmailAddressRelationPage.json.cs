@@ -36,23 +36,13 @@ namespace People {
         }
 
         void Handle(Input.Delete Action) {
-            if (this.Parent.Parent is PersonPage) {
-                PersonPage MyParent = (PersonPage)this.Parent.Parent;
-                MyParent.Confirm.Message = "Are you sure want to delete email [" + this.Data.EmailAddress.Name + "]?";
-                MyParent.ConfirmAction = () => {
-                    this.Data.Delete();
-                    this.OnDelete();
-                };
-            }
+            IConfirmPage page = this.Parent.Parent as IConfirmPage;
 
-            if (this.Parent.Parent is OrganizationPage) {
-                OrganizationPage MyParent = (OrganizationPage)this.Parent.Parent;
-                MyParent.Confirm.Message = "Are you sure want to delete email [" + this.Data.EmailAddress.Name + "]?";
-                MyParent.ConfirmAction = () => {
-                    this.Data.Delete();
-                    this.OnDelete();
-                };
-            }
+            page.SetConfirmMessage("Are you sure want to delete email [" + this.Data.EmailAddress.Name + "]?");
+            page.SetConfirmAction(() => {
+                this.Data.Delete();
+                this.OnDelete();
+            });
         }
 
         void OnDelete() {

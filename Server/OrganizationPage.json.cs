@@ -6,7 +6,7 @@ using Simplified.Ring2;
 using Simplified.Ring3;
 
 namespace People {
-    partial class OrganizationPage : Page, IBound<Organization> {
+    partial class OrganizationPage : Page, IBound<Organization>, IConfirmPage {
         protected ContactInfoProvider contactInfoProvider = new ContactInfoProvider();
         protected OrganizationsProvider organizationsProvider = new OrganizationsProvider();
         public Action ConfirmAction = null;
@@ -38,7 +38,7 @@ namespace People {
 
             ear.Somebody = this.Data;
             ear.EmailAddress = ea;
-            ear.EmailAddressRelationType = this.EmailAddressRelationTypes.First().Data as EmailAddressRelationType;
+            ear.EmailAddressRelationType = contactInfoProvider.SelectEmailAddressRelationTypes().First;
 
             this.RefreshEmailAddresses();
         }
@@ -49,7 +49,7 @@ namespace People {
 
             pnr.Somebody = this.Data;
             pnr.PhoneNumber = pn;
-            pnr.PhoneNumberRelationType = this.PhoneNumberRelationTypes.First().Data as PhoneNumberRelationType;
+            pnr.PhoneNumberRelationType = contactInfoProvider.SelectPhoneNumberRelationTypes().First;
 
             this.RefreshPhoneNumbers();
         }
@@ -60,8 +60,6 @@ namespace People {
 
         public void RefreshOrganization(string ID = null) {
             this.AddPersonUrl = UrlHelper.GetUrl("/persons/add");
-            this.EmailAddressRelationTypes = contactInfoProvider.SelectEmailAddressRelationTypes();
-            this.PhoneNumberRelationTypes = contactInfoProvider.SelectPhoneNumberRelationTypes();
 
             if (string.IsNullOrEmpty(ID)) {
                 this.Data = new Organization();
@@ -72,14 +70,6 @@ namespace People {
                 this.RefreshPhoneNumbers();
                 this.RefreshPersons();
             }
-        }
-
-        public List<EmailAddressRelationType> GetEmailAddressRelationTypes() {
-            return this.EmailAddressRelationTypes.Select(val => val.Data).OfType<EmailAddressRelationType>().ToList();
-        }
-
-        public List<PhoneNumberRelationType> GetPhoneNumberRelationTypes() {
-            return this.PhoneNumberRelationTypes.Select(val => val.Data).OfType<PhoneNumberRelationType>().ToList();
         }
 
         public void RefreshAddresses() {
@@ -97,82 +87,53 @@ namespace People {
         }
 
         public void RefreshEmailAddresses() {
-            List<EmailAddressRelationType> types = this.GetEmailAddressRelationTypes();
-
             this.EmailAddresses.Clear();
-            this.EmailAddresses.Data = contactInfoProvider.SelectEmailAddressRelations(this.Data);
 
-            foreach (var row in this.EmailAddresses) {
-                EmailAddressRelation item = row.Data as EmailAddressRelation;
+            foreach (EmailAddressRelation row in contactInfoProvider.SelectEmailAddressRelations(this.Data)) {
+                EmailAddressRelationPage page = X.GET<EmailAddressRelationPage>("/people/partials/email-address-relations/" + row.Key);
 
-                row.TypeIndex = types.IndexOf(item.EmailAddressRelationType);
+                page.Deleted += (s, a) => {
+                    this.RefreshEmailAddresses();
+                };
+
+                this.EmailAddresses.Add(page);
             }
         }
 
         public void RefreshPhoneNumbers() {
-            List<PhoneNumberRelationType> types = this.GetPhoneNumberRelationTypes();
-
             this.PhoneNumbers.Clear();
-            this.PhoneNumbers.Data = contactInfoProvider.SelectPhoneNumberRelations(this.Data);
 
-            foreach (var row in this.PhoneNumbers) {
-                PhoneNumberRelation item = row.Data as PhoneNumberRelation;
+            foreach (PhoneNumberRelation row in contactInfoProvider.SelectPhoneNumberRelations(this.Data)) {
+                PhoneNumberRelationPage page = X.GET<PhoneNumberRelationPage>("/people/partials/phone-number-relations/" + row.Key);
 
-                row.TypeIndex = types.IndexOf(item.PhoneNumberRelationType);
+                page.Deleted += (s, a) => {
+                    this.RefreshEmailAddresses();
+                };
+
+                this.PhoneNumbers.Add(page);
             }
         }
 
         public void RefreshPersons() {
             this.Persons.Clear();
-            this.Persons.Data = organizationsProvider.SelectOrganizationPersons(this.Data);
-        }
 
-        [OrganizationPage_json.EmailAddresses]
-        partial class OrganizatioEmailAddressPage : Page, IBound<EmailAddressRelation> {
-            void Handle(Input.TypeIndex Action) {
-                List<EmailAddressRelationType> types = this.ParentPage.GetEmailAddressRelationTypes();
-                int index = (int)Action.Value;
+            foreach (OrganizationPerson row in organizationsProvider.SelectOrganizationPersons(this.Data)) {
+                OrganizationPersonPage page = X.GET<OrganizationPersonPage>("/people/partials/organization-persons/" + row.Key);
 
-                this.Data.EmailAddressRelationType = types[index];
-            }
-
-            void Handle(Input.Delete Action) {
-                this.ParentPage.Confirm.Message = "Are you sure want to delete email address [" + this.Data.EmailAddress.Name + "]?";
-                this.ParentPage.ConfirmAction = () => {
-                    this.Data.Delete();
-                    this.ParentPage.RefreshEmailAddresses();
+                page.Deleted += (s, e) => {
+                    this.RefreshPersons();
                 };
-            }
 
-            OrganizationPage ParentPage {
-                get {
-                    return this.Parent.Parent as OrganizationPage;
-                }
+                this.Persons.Add(page);
             }
         }
 
-        [OrganizationPage_json.PhoneNumbers]
-        partial class OrganizatioPhoneNumberPage : Page, IBound<PhoneNumberRelation> {
-            void Handle(Input.TypeIndex Action) {
-                List<PhoneNumberRelationType> types = this.ParentPage.GetPhoneNumberRelationTypes();
-                int index = (int)Action.Value;
+        public void SetConfirmMessage(string Message) {
+            this.Confirm.Message = Message;
+        }
 
-                this.Data.PhoneNumberRelationType = types[index];
-            }
-
-            void Handle(Input.Delete Action) {
-                this.ParentPage.Confirm.Message = "Are you sure want to delete phone number [" + this.Data.PhoneNumber.Name + "]?";
-                this.ParentPage.ConfirmAction = () => {
-                    this.Data.Delete();
-                    this.ParentPage.RefreshPhoneNumbers();
-                };
-            }
-
-            OrganizationPage ParentPage {
-                get {
-                    return this.Parent.Parent as OrganizationPage;
-                }
-            }
+        public void SetConfirmAction(Action Action) {
+            this.ConfirmAction = Action;
         }
 
         [OrganizationPage_json.Confirm]
@@ -197,27 +158,6 @@ namespace People {
             public OrganizationPage ParentPage {
                 get {
                     return this.Parent as OrganizationPage;
-                }
-            }
-        }
-
-        [OrganizationPage_json.Persons]
-        partial class OrganizationPersonPage : Page, IBound<OrganizationPerson> {
-            void Handle(Input.Delete Action) {
-                this.ParentPage.Confirm.Message = string.Format("Are you sure want to remove person [{0}] from this organization?", this.Data.Person.Name);
-                this.ParentPage.ConfirmAction = () => {
-                    this.Data.Delete();
-                    this.ParentPage.Persons.Remove(this);
-                };
-            }
-
-            void Handle(Input.Edit Action) {
-                this.ParentPage.RedirectUrl = UrlHelper.GetUrl("/persons/" + this.Data.Person.Key);
-            }
-
-            public OrganizationPage ParentPage {
-                get {
-                    return this.Parent.Parent as OrganizationPage;
                 }
             }
         }
@@ -248,7 +188,7 @@ namespace People {
             void Handle(Input.Add Action) {
                 this.ParentPage.Find.Visible = false;
 
-                if (this.ParentPage.Persons.Any(x => x.Data.Person.Equals(this.Data))) {
+                if (this.ParentPage.Persons.Any(x => (x as OrganizationPersonPage).Data.Person.Equals(this.Data))) {
                     return;
                 }
 
