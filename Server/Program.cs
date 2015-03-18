@@ -17,52 +17,85 @@ namespace People {
             data.Insert();
             RegisterPolyjucie();
             RegisterPartials();
-            RegisterStandalone();
+
+            Handle.GET("/people/standalone", () => {
+                Session session = Session.Current;
+
+                if (session != null && session.Data != null)
+                    return session.Data;
+
+                var standalone = new StandalonePage();
+
+                if (session == null) {
+                    session = new Session(SessionOptions.PatchVersioning);
+                    UrlHelper.BaseUrl = "/people";
+                    standalone.Html = "/People/html/standalone.html";
+                }
+
+                standalone.Session = session;
+                return standalone;
+            });
 
             // Workspace home page (landing page from launchpad) dashboard alias
             Handle.GET("/people", () => {
-                Response resp = X.GET("/people/persons");
-                return resp;
-            });
-
-            Handle.GET("/people/", () => {
                 return X.GET("/people/persons");
             });
 
             Handle.GET("/people/organizations", () => {
-                return GetLauncherPage("/people/partials/organizations");
+                var master = (StandalonePage)X.GET("/people/standalone");
+                if (!(master.CurrentPage is OrganizationsPage)) {
+                    master.CurrentPage = GetLauncherPage("/people/partials/organizations");
+                }
+                return master;
             });
 
             Handle.GET("/people/organizations/add", () => {
-                return GetLauncherPage("/people/partials/organizations-add", true);
+                var master = (StandalonePage)X.GET("/people/standalone");
+                master.CurrentPage = GetLauncherPage("/people/partials/organizations-add", true);
+                return master;
             });
 
             Handle.GET("/people/organizations/{?}", (string id) => {
-                return GetLauncherPage("/people/partials/organizations/" + id, true);
+                var master = (StandalonePage)X.GET("/people/standalone");
+                master.CurrentPage = GetLauncherPage("/people/partials/organizations/" + id, true);
+                return master;
             });
 
             Handle.GET("/people/persons", () => {
-                return GetLauncherPage("/people/partials/persons");
+                var master = (StandalonePage)X.GET("/people/standalone");
+                if (!(master.CurrentPage is PersonsPage)) {
+                    master.CurrentPage = GetLauncherPage("/people/partials/persons");
+                }
+                return master;
             });
 
             Handle.GET("/people/persons/add", () => {
-                return GetLauncherPage("/people/partials/persons-add", true);
+                var master = (StandalonePage)X.GET("/people/standalone");
+                master.CurrentPage = GetLauncherPage("/people/partials/persons-add", true);
+                return master;
             });
 
             Handle.GET<string>("/people/persons/{?}", (string id) => {
-                return GetLauncherPage("/people/partials/persons/" + id, true);
+                var master = (StandalonePage)X.GET("/people/standalone");
+                master.CurrentPage = GetLauncherPage("/people/partials/persons/" + id, true);
+                return master;
             });
 
             Handle.GET("/people/search?query={?}", (String query) => {
+                var master = (StandalonePage)X.GET("/people/standalone");
+                
                 Response resp = X.GET("/People/partials/search/" + HttpUtility.UrlEncode(query));
 
                 SearchPage page = (SearchPage)resp.Resource;
 
                 if (page.Organizations.Count == 0 && page.Persons.Count == 0) {
-                    return new Page();
+                    master.CurrentPage = new Page();
+                }
+                else {
+                    master.CurrentPage = resp;
                 }
 
-                return resp;
+                return master;
             });
 
             OntologyMap.Register();
@@ -280,93 +313,14 @@ namespace People {
             });
         }
 
-        static void RegisterStandalone() {
-            Handle.GET("/people/standalone/master", (Request r) => {
-                Session session = Session.Current;
-                UrlHelper.BaseUrl = "/people/standalone";
-
-                if (session == null) {
-                    session = new Session(SessionOptions.PatchVersioning);
-                }
-
-                if (session.Data != null) {
-                    return session.Data;
-                }
-
-                StandalonePage page = new StandalonePage() {
-                    Html = "/People/html/standalone.html"
-                };
-                page.Session = session;
-
-                return page;
-            });
-
-            Handle.GET("/people/standalone", (Request r) => {
-                return GetStandalonePage("/people/partials/persons");
-            });
-
-            Handle.GET("/people/standalone/persons", (Request r) => {
-                return GetStandalonePage("/people/partials/persons");
-            });
-
-            Handle.GET("/people/standalone/persons/add", () => {
-                return GetStandalonePage("/people/partials/persons-add", true);
-            });
-
-            Handle.GET<string>("/people/standalone/persons/{?}", (string id) => {
-                return GetStandalonePage("/people/partials/persons/" + id, true);
-            });
-
-            Handle.GET("/people/standalone/organizations", (Request r) => {
-                return GetStandalonePage("/people/partials/organizations");
-            });
-
-            Handle.GET("/people/standalone/organizations/add", () => {
-                return GetStandalonePage("/people/partials/organizations-add", true);
-            });
-
-            Handle.GET<string>("/people/standalone/organizations/{?}", (string id) => {
-                return GetStandalonePage("/people/partials/organizations/" + id, true);
-            });
-        }
-
-        static StandalonePage GetStandalonePage(string CurrentPageUrl, bool DbScope = false) {
-            StandalonePage master = null;
-
-            if (DbScope) {
-                Db.Scope(() => {
-                    master = X.GET<StandalonePage>("/people/standalone/master");
-                    master.CurrentPage = X.GET<Json>(CurrentPageUrl);
-                });
-            } else {
-                master = X.GET<StandalonePage>("/people/standalone/master");
-                master.CurrentPage = X.GET<Json>(CurrentPageUrl);
-            }
-
-            return master;
-        }
-
         static Json GetLauncherPage(string Url, bool DbScope = false) {
-            UrlHelper.BaseUrl = "/launcher/workspace/people";
-            WrapperPage page = null;
-
             if (DbScope) {
-                Db.Scope(() => {
-                    page = new WrapperPage() { 
-                        Html = "/People/html/wrapper.html"
-                    };
-
-                    page.Page = X.GET<Json>(Url);
+                return Db.Scope(() => {
+                    return X.GET<Json>(Url);
                 });
             } else {
-                page = new WrapperPage() {
-                    Html = "/People/html/wrapper.html"
-                };
-
-                page.Page = X.GET<Json>(Url);
+                return X.GET<Json>(Url);
             }
-
-            return page;
         }
     }
 }

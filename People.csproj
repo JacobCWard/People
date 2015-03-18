@@ -118,9 +118,6 @@
       <DependentUpon>SearchPersonPage.json</DependentUpon>
     </Compile>
     <Compile Include="Server\UrlHelper.cs" />
-    <Compile Include="Server\WrapperPage.json.cs">
-      <DependentUpon>WrapperPage.json</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="wwwroot\People\css\people.css" />
@@ -166,9 +163,6 @@
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <TypedJSON Include="Server\StandalonePage.json">
-      <Generator>MsBuild:Compile</Generator>
-    </TypedJSON>
-    <TypedJSON Include="Server\WrapperPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <TypedJSON Include="Server\EmailAddressRelationPage.json">
