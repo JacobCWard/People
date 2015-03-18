@@ -168,25 +168,73 @@ namespace People {
                 });
             });
 
-            Handle.GET("/people/partials/address-relations/{?}", (string addrelId) => {
+            Handle.GET("/people/partials/address-relations/{?}", (string id) => {
                 return Db.Scope<AddressRelationPage>(() => {
                     AddressRelationPage page = new AddressRelationPage() {
                         Html = "/People/html/address-relation.html"
                     };
 
-                    page.RefreshAddressRelation(addrelId);
+                    page.RefreshAddressRelation(id);
 
                     return page;
                 });
             });
 
-            Handle.GET("/people/partials/addresses/{?}", (string addressId) => {
+            Handle.GET("/people/partials/addresses/{?}", (string id) => {
                 return Db.Scope<AddressPage>(() => {
                     AddressPage page = new AddressPage() {
                         Html = "/People/html/address.html"
                     };
 
-                    page.RefreshAddress(addressId);
+                    page.RefreshAddress(id);
+
+                    return page;
+                });
+            });
+
+            Handle.GET("/people/partials/email-address-relations/{?}", (string id) => {
+                return Db.Scope<EmailAddressRelationPage>(() => {
+                    EmailAddressRelationPage page = new EmailAddressRelationPage() {
+                        Html = "/People/html/email-address-relation.html"
+                    };
+
+                    page.RefreshEmailAddressRelation(id);
+
+                    return page;
+                });
+            });
+
+            Handle.GET("/people/partials/email-addresses/{?}", (string id) => {
+                return Db.Scope<EmailAddressPage>(() => {
+                    EmailAddressPage page = new EmailAddressPage() {
+                        Html = "/People/html/email-address.html"
+                    };
+
+                    page.RefreshAddress(id);
+
+                    return page;
+                });
+            });
+
+            Handle.GET("/people/partials/phone-number-relations/{?}", (string id) => {
+                return Db.Scope<PhoneNumberRelationPage>(() => {
+                    PhoneNumberRelationPage page = new PhoneNumberRelationPage() {
+                        Html = "/People/html/phone-number-relation.html"
+                    };
+
+                    page.RefreshPhoneNumberRelation(id);
+
+                    return page;
+                });
+            });
+
+            Handle.GET("/people/partials/phone-number/{?}", (string id) => {
+                return Db.Scope<PhoneNumberPage>(() => {
+                    PhoneNumberPage page = new PhoneNumberPage() {
+                        Html = "/People/html/phone-number.html"
+                    };
+
+                    page.RefreshPhoneNumber(id);
 
                     return page;
                 });
@@ -300,14 +348,25 @@ namespace People {
 
         static Json GetLauncherPage(string Url, bool DbScope = false) {
             UrlHelper.BaseUrl = "/launcher/workspace/people";
+            WrapperPage page = null;
 
             if (DbScope) {
-                return Db.Scope<Json>(() => {
-                    return X.GET<Json>(Url);
+                Db.Scope(() => {
+                    page = new WrapperPage() { 
+                        Html = "/People/html/wrapper.html"
+                    };
+
+                    page.Page = X.GET<Json>(Url);
                 });
             } else {
-                return X.GET<Json>(Url);
+                page = new WrapperPage() {
+                    Html = "/People/html/wrapper.html"
+                };
+
+                page.Page = X.GET<Json>(Url);
             }
+
+            return page;
         }
     }
 }

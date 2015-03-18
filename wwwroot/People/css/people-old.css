@@ -1,0 +1,241 @@
+.people {
+    box-sizing: border-box;
+}
+
+.people a {
+    color:#0445a0;
+}
+
+.people a:hover {
+    color:#297ef5;
+}
+
+.people h1 {
+    font-size: 150%;
+    margin: 0px;
+    color: #333C4E;
+    border-bottom: 1px solid #ddd;
+}
+
+.people ul {
+    display: table;
+    list-style: none;
+    padding: 0px;
+    margin: 8px 0px 0px 0px;
+    width: 100%;
+}
+
+.people li {
+    display: table-row;
+}
+
+.people li a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.people li:hover a {
+    background-color: #333C4E;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    color: white;
+}
+
+.people li span {
+    display: table-cell;
+    padding-right: 20px;
+}
+
+.people li span:last-child {
+    padding-right: 0;
+}
+
+.people .search-organization,
+.people .search-person {
+    padding:5px;
+}
+
+fieldset.people {
+    padding:0px;
+    border:none;
+    margin-bottom:5px;
+}
+
+fieldset.people legend {
+    border-bottom:1px solid #C0C0C0;
+    display:block;
+    font-size:22px;
+    width:100%;
+    padding-bottom:2px;
+    margin-bottom:5px;
+}
+
+.people .btn,
+.people a.btn,
+html /deep/ paper-action-dialog .people .btn {
+    box-sizing:content-box;
+    min-width:80px;
+    padding:5px 15px;
+    background-color:#F0F0F0;
+    border:2px solid #D0D0D0;
+    text-align:center;
+    cursor:pointer;
+    color:#333333;
+    text-decoration:none;
+    display:inline-block;
+    font-size:14px;
+    font-family:Calibri, Helvetica, Arial, sans-serif;
+}
+
+.people .btn:hover,
+html /deep/ paper-action-dialog .people .btn:hover {
+    background-color:#FFFFFF;
+}
+
+.people .btn.btn-primary {
+    background-color:#7b8aa6;
+    color:white;
+    border:2px solid #7b8aa6;
+}
+
+.people .btn.btn-primary:hover {
+    background-color:#FFFFFF;
+    color:#49566d;
+}
+
+.people .btn.btn-small,
+html /deep/ paper-action-dialog .people .btn.btn-small {
+    padding:3px 10px;
+    border-width:1px;
+    min-width:0px;
+    line-height:15px;
+}
+
+.people table.table,
+html /deep/ paper-action-dialog .people table.table {
+    border-collapse:collapse;
+    border:none;
+    padding:0px;
+    margin:0px 0px 10px 0px;
+    width:100%;
+}
+
+.people table.table th,
+.people table.table td,
+html /deep/ paper-action-dialog .people table.table th,
+html /deep/ paper-action-dialog .people table.table td {
+    padding:5px;
+    text-align:left;
+    border:1px solid #DDDDDD;
+}
+
+.people table.table td input[type=text],
+.people table.table td select {
+    width:100%;
+    padding:2px 3px;
+    border:none;
+    box-sizing:border-box;
+}
+
+.people.control-group input[type=text],
+.people.control-group select,
+html /deep/ paper-action-dialog .people.control-group input[type=text] {
+    border:1px solid #C0C0C0;
+    padding:6px;
+    width:320px;
+    box-sizing:content-box;
+}
+
+.people.control-group .contactinfo-headers {
+    display: flex;
+    border-bottom: 1px solid #C0C0C0;
+    margin-bottom: 9px;
+}
+
+.people.control-group .contactinfo-header {
+    width: 100px;
+    line-height: 29px;
+}
+
+.people.control-group h2 {
+    margin-bottom:0px;
+}
+
+.people.control-group,
+html /deep/ paper-action-dialog .people.control-group {
+    margin-bottom:15px;
+}
+
+.people.control-group .control-label,
+html /deep/ paper-action-dialog .people.control-group .control-label {
+    float:left;
+    width:100px;
+    text-align:left;
+    line-height:29px;
+}
+
+html /deep/ paper-action-dialog .people.control-group .control-label {
+    width:auto;
+    display:block;
+    margin-bottom:5px;
+}
+
+.people.control-group .controls,
+.people.control-group .hints {
+    margin-left:115px;
+}
+
+html /deep/ paper-action-dialog .people.control-group .controls {
+}
+
+.people.control-group .hints {
+    margin-top:6px;
+}
+
+.people.control-group .controls .btn.btn-small {
+    margin-top:5px;
+}
+
+.people .dialog-overlay {
+    position:fixed;
+    background-color:#C0C0C0;
+    opacity:0.5;
+    width:100%;
+    height:100%;
+    left:0px;
+    top:0px;
+}
+
+.people .dialog {
+    position:fixed;
+    background-color:white;
+    width:300px;
+    height:150px;
+    left:50%;
+    top:50%;
+    margin-left:-150px;
+    margin-top:-100px;
+    padding:5px;
+}
+
+.people .dialog .dialog-header {
+    font-size:18px;
+    padding:0px 10px 0px 0px;
+    border-bottom:1px solid #C0C0C0;
+    margin-bottom:10px;
+}
+
+.people .dialog .dialog-content {
+    height:80px;
+}
+
+.people .dialog .dialog-actions {
+    margin-top:5px;
+    text-align:center;
+}

@@ -2,16 +2,16 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Starcounter;
+using Simplified.Ring3;
 
 namespace People {
     [AddressRelationPage_json]
-    partial class AddressRelationPage : Page, IBound<Simplified.Ring3.AddressRelation> {
+    partial class AddressRelationPage : Page, IBound<AddressRelation> {
         protected ContactInfoProvider contactInfoProvider = new ContactInfoProvider();
-        
-        public Action OnDelete = () => { };
+        public event EventHandler Deleted;
 
         public void RefreshAddressRelation(string addrelId) {
-            var addrel = Db.SQL<Simplified.Ring3.AddressRelation>("SELECT a FROM Simplified.Ring3.AddressRelation a WHERE ObjectId = ?", addrelId).First;
+            var addrel = Db.SQL<AddressRelation>("SELECT a FROM Simplified.Ring3.AddressRelation a WHERE ObjectId = ?", addrelId).First;
             this.Data = addrel;
 
             var types = contactInfoProvider.SelectAddressRelationTypes();
@@ -30,7 +30,7 @@ namespace People {
 
         void Handle(Input.TypeIndex Action) {
             int index = (int)Action.Value;
-            this.Data.AddressRelationType = (Simplified.Ring3.AddressRelationType)AddressRelationTypes[index].Data;
+            this.Data.AddressRelationType = (AddressRelationType)AddressRelationTypes[index].Data;
         }
 
         void Handle(Input.Delete Action) {
@@ -42,6 +42,7 @@ namespace People {
                     this.OnDelete();
                 };
             }
+
             if (this.Parent.Parent is OrganizationPage) {
                 OrganizationPage MyParent = (OrganizationPage)this.Parent.Parent;
                 MyParent.Confirm.Message = "Are you sure want to delete address [" + this.Data.Address.Name + "]?";
@@ -49,6 +50,12 @@ namespace People {
                     this.Data.Delete();
                     this.OnDelete();
                 };
+            }
+        }
+
+        void OnDelete() {
+            if (this.Deleted != null) {
+                this.Deleted(this, EventArgs.Empty);
             }
         }
     }

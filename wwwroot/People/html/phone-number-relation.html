@@ -1,0 +1,13 @@
+﻿<template>
+    <div>
+        <select selectedindex="{{TypeIndex$}}">
+            <template repeat="{{PhoneNumberRelationTypes}}">
+                <option>{{Name}}</option>
+            </template>
+        </select>
+    </div>
+    <template is="imported-template" bind="{{PhoneNumber}}" content="{{PhoneNumber.Html}}"></template>
+    <div>
+        <button type="button" class="btn btn-small" onclick="getModel(this).Delete$++">Delete</button>
+    </div>
+</template>

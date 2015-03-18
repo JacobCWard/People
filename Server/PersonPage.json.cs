@@ -37,7 +37,7 @@ namespace People {
 
             ear.Somebody = this.Data;
             ear.EmailAddress = ea;
-            ear.EmailAddressRelationType = this.EmailAddressRelationTypes.First().Data as EmailAddressRelationType;
+            ear.EmailAddressRelationType = contactInfoProvider.SelectEmailAddressRelationTypes().First;
 
             this.RefreshEmailAddresses();
         }
@@ -48,7 +48,7 @@ namespace People {
 
             pnr.Somebody = this.Data;
             pnr.PhoneNumber = pn;
-            pnr.PhoneNumberRelationType = this.PhoneNumberRelationTypes.First().Data as PhoneNumberRelationType;
+            pnr.PhoneNumberRelationType = contactInfoProvider.SelectPhoneNumberRelationTypes().First;
 
             this.RefreshPhoneNumbers();
         }
@@ -58,9 +58,6 @@ namespace People {
         }
 
         public void RefreshPerson(string ID = null) {
-            this.EmailAddressRelationTypes = contactInfoProvider.SelectEmailAddressRelationTypes();
-            this.PhoneNumberRelationTypes = contactInfoProvider.SelectPhoneNumberRelationTypes();
-
             if (string.IsNullOrEmpty(ID)) {
                 this.Data = new Person();
             } else {
@@ -71,97 +68,45 @@ namespace People {
             }
         }
 
-        public List<EmailAddressRelationType> GetEmailAddressRelationTypes() {
-            return this.EmailAddressRelationTypes.Select(val => val.Data).OfType<EmailAddressRelationType>().ToList();
-        }
-
-        public List<PhoneNumberRelationType> GetPhoneNumberRelationTypes() {
-            return this.PhoneNumberRelationTypes.Select(val => val.Data).OfType<PhoneNumberRelationType>().ToList();
-        }
-
         public void RefreshAddresses() {
             this.Addresses.Clear();
 
             foreach (AddressRelation row in contactInfoProvider.SelectAddressRelations(this.Data)) {
-                var page = X.GET<AddressRelationPage>("/people/partials/address-relations/" + row.Key);
-                page.OnDelete = () => {
+                AddressRelationPage page = X.GET<AddressRelationPage>("/people/partials/address-relations/" + row.Key);
+
+                page.Deleted += (s, e) => {
                     this.RefreshAddresses();
                 };
+
                 this.Addresses.Add(page);
             }
         }
 
         public void RefreshEmailAddresses() {
-            List<EmailAddressRelationType> types = this.GetEmailAddressRelationTypes();
-
             this.EmailAddresses.Clear();
-            this.EmailAddresses.Data = contactInfoProvider.SelectEmailAddressRelations(this.Data);
 
-            foreach (var row in this.EmailAddresses) {
-                EmailAddressRelation item = row.Data as EmailAddressRelation;
+            foreach (EmailAddressRelation row in contactInfoProvider.SelectEmailAddressRelations(this.Data)) {
+                EmailAddressRelationPage page = X.GET<EmailAddressRelationPage>("/people/partials/email-address-relations/" + row.Key);
 
-                row.TypeIndex = types.IndexOf(item.EmailAddressRelationType);
+                page.Deleted += (s, a) => {
+                    this.RefreshEmailAddresses();
+                };
+
+                this.EmailAddresses.Add(page);
             }
         }
 
         public void RefreshPhoneNumbers() {
-            List<PhoneNumberRelationType> types = this.GetPhoneNumberRelationTypes();
-
             this.PhoneNumbers.Clear();
-            this.PhoneNumbers.Data = contactInfoProvider.SelectPhoneNumberRelations(this.Data);
 
-            foreach (var row in this.PhoneNumbers) {
-                PhoneNumberRelation item = row.Data as PhoneNumberRelation;
+            foreach (PhoneNumberRelation row in contactInfoProvider.SelectPhoneNumberRelations(this.Data)) {
+                PhoneNumberRelationPage page = X.GET<PhoneNumberRelationPage>("/people/partials/phone-number-relations/" + row.Key);
 
-                row.TypeIndex = types.IndexOf(item.PhoneNumberRelationType);
-            }
-        }
-
-        [PersonPage_json.EmailAddresses]
-        partial class PersonEmailAddressPage : Page, IBound<EmailAddressRelation> {
-            void Handle(Input.TypeIndex Action) {
-                List<EmailAddressRelationType> types = this.ParentPage.GetEmailAddressRelationTypes();
-                int index = (int)Action.Value;
-
-                this.Data.EmailAddressRelationType = types[index];
-            }
-
-            void Handle(Input.Delete Action) {
-                this.ParentPage.Confirm.Message = "Are you sure want to delete email address [" + this.Data.EmailAddress.Name + "]?";
-                this.ParentPage.ConfirmAction = () => {
-                    this.Data.Delete();
-                    this.ParentPage.RefreshEmailAddresses();
+                page.Deleted += (s, a) => {
+                    this.RefreshEmailAddresses();
                 };
-            }
 
-            PersonPage ParentPage {
-                get {
-                    return this.Parent.Parent as PersonPage;
-                }
-            }
-        }
-
-        [PersonPage_json.PhoneNumbers]
-        partial class PersonPhoneNumberPage : Page, IBound<PhoneNumberRelation> {
-            void Handle(Input.TypeIndex Action) {
-                List<PhoneNumberRelationType> types = this.ParentPage.GetPhoneNumberRelationTypes();
-                int index = (int)Action.Value;
-
-                this.Data.PhoneNumberRelationType = types[index];
-            }
-
-            void Handle(Input.Delete Action) {
-                this.ParentPage.Confirm.Message = "Are you sure want to delete phone number [" + this.Data.PhoneNumber.Name + "]?";
-                this.ParentPage.ConfirmAction = () => {
-                    this.Data.Delete();
-                    this.ParentPage.RefreshPhoneNumbers();
-                };
-            }
-
-            PersonPage ParentPage {
-                get {
-                    return this.Parent.Parent as PersonPage;
-                }
+                this.PhoneNumbers.Add(page);
             }
         }
 

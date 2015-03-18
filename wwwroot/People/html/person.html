@@ -1,44 +1,60 @@
 ﻿<link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
-<link rel="stylesheet" href="/People/css/people.css" />
 
 <template>
-    <div class="people control-group">
-        <label class="control-label"></label>
-        <div class="controls">
-            <h2>Person details</h2>
-        </div>
+    <div>
+        <h2>Person details</h2>
     </div>
-    <div class="people control-group">
+    <div>
         <label class="control-label">First name:</label>
-        <div class="controls">
-            <input type="text" value='{{ FirstName$ }}' placeholder="First name" />
-        </div>
     </div>
-    <div class="people control-group">
+    <div>
+        <input type="text" value='{{FirstName$}}' placeholder="First name" class="form-control" />
+    </div>
+    <div>
         <label class="control-label">Last name:</label>
-        <div class="controls">
-            <input type="text" value="{{ LastName$ }}" placeholder="Last name" />
-        </div>
     </div>
-    <div class="people control-group">
+    <div>
+        <input type="text" value="{{LastName$}}" placeholder="Last name" class="form-control" />
+    </div>
+    <div>
         <label class="control-label">Addresses:</label>
-        <template is="imported-template" content="/People/html/addresses.html"></template>
     </div>
-    <div class="people control-group">
+    <div>
+        <template repeat="{{Addresses}}">
+            <launcher-root-partial name="Addresses"></launcher-root-partial>
+        </template>
+    </div>
+    <div>
+        <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddAddress$++">Add address</button>
+    </div>
+    <div>
         <label class="control-label">Emails:</label>
-        <template is="imported-template" content="/People/html/email-addresses.html"></template>
     </div>
-    <div class="people control-group">
+    <div>
+        <template repeat="{{EmailAddresses}}">
+            <launcher-root-partial name="EmailAddresses"></launcher-root-partial>
+        </template>
+    </div>
+    <div>
+        <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddEmailAddress$++">Add email address</button>
+    </div>
+    <div>
         <label class="control-label">Phones:</label>
-        <template is="imported-template" content="/People/html/phone-numbers.html"></template>
     </div>
-    <div class="people control-group">
-        <label class="control-label"></label>
-        <div class="controls">
-            <button type="button" class="btn btn-primary" onclick="getModel(this).Save$++">Save</button>
-            <button type="button" class="btn" onclick="getModel(this).Cancel$++">Cancel</button>
-        </div>
+    <div>
+        <template repeat="{{PhoneNumbers}}">
+            <launcher-root-partial name="PhoneNumbers"></launcher-root-partial>
+        </template>
+    </div>
+    <div>
+        <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddPhoneNumber$++">Add phone number</button>
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary" onclick="getModel(this).Save$++">Save</button>
+    </div>
+    <div>
+        <button type="button" class="btn btn-default" onclick="getModel(this).Cancel$++">Cancel</button>
     </div>
     <template is="imported-template" content="/People/html/confirm-dialog.html"></template>
-    <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />
+    <link is="puppet-redirect" history url="{{RedirectUrl$}}" />
 </template>

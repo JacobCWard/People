@@ -77,12 +77,24 @@
     <Compile Include="Server\Database\OrganizationsProvider.cs" />
     <Compile Include="Server\Database\PersonsProvider.cs" />
     <Compile Include="Server\Database\SearchProvider.cs" />
+    <Compile Include="Server\EmailAddressPage.json.cs">
+      <DependentUpon>EmailAddressPage.json</DependentUpon>
+    </Compile>
+    <Compile Include="Server\EmailAddressRelationPage.json.cs">
+      <DependentUpon>EmailAddressRelationPage.json</DependentUpon>
+    </Compile>
     <Compile Include="Server\OntologyMap.cs" />
     <Compile Include="Server\OrganizationPage.json.cs">
       <DependentUpon>OrganizationPage.json</DependentUpon>
     </Compile>
     <Compile Include="Server\OrganizationsPage.json.cs">
       <DependentUpon>OrganizationsPage.json</DependentUpon>
+    </Compile>
+    <Compile Include="Server\PhoneNumberPage.json.cs">
+      <DependentUpon>PhoneNumberPage.json</DependentUpon>
+    </Compile>
+    <Compile Include="Server\PhoneNumberRelationPage.json.cs">
+      <DependentUpon>PhoneNumberRelationPage.json</DependentUpon>
     </Compile>
     <Compile Include="Server\StandalonePage.json.cs">
       <DependentUpon>StandalonePage.json</DependentUpon>
@@ -106,8 +118,12 @@
       <DependentUpon>SearchPersonPage.json</DependentUpon>
     </Compile>
     <Compile Include="Server\UrlHelper.cs" />
+    <Compile Include="Server\WrapperPage.json.cs">
+      <DependentUpon>WrapperPage.json</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="wwwroot\People\css\people.css" />
     <Content Include="wwwroot\People\css\standalone.css" />
     <Content Include="wwwroot\People\html\address-relation.html" />
     <Content Include="wwwroot\People\html\address.html" />
@@ -121,6 +137,8 @@
     <Content Include="wwwroot\People\css\people-font.css" />
     <Content Include="wwwroot\People\font\people-font.svg" />
     <Content Include="wwwroot\People\html\confirm-dialog.html" />
+    <Content Include="wwwroot\People\html\email-address-relation.html" />
+    <Content Include="wwwroot\People\html\email-address.html" />
     <Content Include="wwwroot\People\html\email-addresses.html" />
     <Content Include="wwwroot\People\html\organization.html" />
     <Content Include="wwwroot\People\html\organizations.html" />
@@ -128,14 +146,17 @@
     <Content Include="wwwroot\People\html\menu.html" />
     <Content Include="wwwroot\People\html\person.html" />
     <Content Include="wwwroot\People\html\persons.html" />
+    <Content Include="wwwroot\People\html\phone-number-relation.html" />
+    <Content Include="wwwroot\People\html\phone-number.html" />
     <Content Include="wwwroot\People\html\phone-numbers.html" />
     <Content Include="wwwroot\People\html\search-organization.html" />
     <Content Include="wwwroot\People\html\search-person.html" />
     <Content Include="wwwroot\People\html\search.html" />
     <Content Include="wwwroot\People\html\standalone.html" />
+    <Content Include="wwwroot\People\html\wrapper.html" />
     <Content Include="wwwroot\People\message.html" />
     <Content Include="wwwroot\People\img\people.png" />
-    <Content Include="wwwroot\People\css\people.css" />
+    <Content Include="wwwroot\People\css\people-old.css" />
   </ItemGroup>
   <ItemGroup>
     <TypedJSON Include="Server\AddressRelationPage.json">
@@ -145,6 +166,21 @@
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <TypedJSON Include="Server\StandalonePage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="Server\WrapperPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="Server\EmailAddressRelationPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="Server\EmailAddressPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="Server\PhoneNumberPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="Server\PhoneNumberRelationPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <None Include="wwwroot\People\font\people-font.eot" />

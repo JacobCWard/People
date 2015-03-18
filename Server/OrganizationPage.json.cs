@@ -86,10 +86,12 @@ namespace People {
             this.Addresses.Clear();
 
             foreach (AddressRelation row in contactInfoProvider.SelectAddressRelations(this.Data)) {
-                var page = X.GET<AddressRelationPage>("/people/partials/address-relations/" + row.Key);
-                page.OnDelete = () => {
+                AddressRelationPage page = X.GET<AddressRelationPage>("/people/partials/address-relations/" + row.Key);
+
+                page.Deleted += (s, e) => {
                     this.RefreshAddresses();
                 };
+
                 this.Addresses.Add(page);
             }
         }

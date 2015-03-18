@@ -8,36 +8,16 @@
     "AddAddress$": 0,
     "AddEmailAddress$": 0,
     "AddPhoneNumber$": 0,
-    "EmailAddressRelationTypes": [
-        {
-            "Name": ""
-        }
-    ],
-    "PhoneNumberRelationTypes": [
-        {
-            "Name": ""
-        }
-    ],
     "Addresses": [
         {
         }
     ],
     "EmailAddresses": [
         {
-            "TypeIndex$": 0,
-            "EmailAddress": { 
-                "Text$": ""
-            },
-            "Delete$": 0
         }
     ],
     "PhoneNumbers": [
         {
-            "TypeIndex$": 0,
-            "PhoneNumber": { 
-                "Text$": ""
-            },
-            "Delete$": 0
         }
     ],
     "Confirm": {

@@ -1,11 +1,11 @@
 using Starcounter;
+using Simplified.Ring3;
 
 namespace People {
     [AddressPage_json]
-    partial class AddressPage : Page, IBound<Simplified.Ring3.Address> {
-        public void RefreshAddress(string addressId) {
-            var address = Db.SQL<Simplified.Ring3.Address>("SELECT a FROM Simplified.Ring3.Address a WHERE ObjectId = ?", addressId).First;
-            this.Data = address;
+    partial class AddressPage : Page, IBound<Address> {
+        public void RefreshAddress(string ID) {
+            this.Data = DbHelper.FromID(DbHelper.Base64DecodeObjectID(ID)) as Address;
         }
     }
 }

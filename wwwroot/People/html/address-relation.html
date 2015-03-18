@@ -1,15 +1,13 @@
 ﻿<template>
-  <div>
-      <select selectedindex="{{TypeIndex$}}">
-          <template repeat="{{AddressRelationTypes}}">
-              <option>{{Name}}</option>
-          </template>
-      </select>
-  </div>
-
-  <template is="imported-template" bind="{{Address}}" content="{{Address.Html}}"></template>
-
-  <div>
-      <button type="button" class="btn btn-small" onclick="getModel(this).Delete$++">Delete</button>
-  </div>
+    <div>
+        <select selectedindex="{{TypeIndex$}}">
+            <template repeat="{{AddressRelationTypes}}">
+                <option>{{Name}}</option>
+            </template>
+        </select>
+    </div>
+    <template is="imported-template" bind="{{Address}}" content="{{Address.Html}}"></template>
+    <div>
+        <button type="button" class="btn btn-small" onclick="getModel(this).Delete$++">Delete</button>
+    </div>
 </template>
