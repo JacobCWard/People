@@ -287,11 +287,11 @@ namespace People {
 
             if (DbScope) {
                 Db.Scope(() => {
-                    master = StandalonePage.GET("/people/standalone/master");
+                    master = X.GET<StandalonePage>("/people/standalone/master");
                     master.CurrentPage = X.GET<Json>(CurrentPageUrl);
                 });
             } else {
-                master = StandalonePage.GET("/people/standalone/master");
+                master = X.GET<StandalonePage>("/people/standalone/master");
                 master.CurrentPage = X.GET<Json>(CurrentPageUrl);
             }
 
