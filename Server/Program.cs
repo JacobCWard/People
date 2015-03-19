@@ -98,6 +98,42 @@ namespace People {
                 return master;
             });
 
+            Handle.GET("/people/unload", () => {
+                data.Unload();
+
+                return 200;
+            });
+
+            Handle.GET("/people/apply-default-layout", () => {
+                Page p = new Page() {
+                    Html = "/People/html/layout/apply-default-layout.html"
+                };
+
+                data.ApplyDefaultLayout();
+
+                return p;
+            });
+
+            Handle.GET("/people/clear-layout", () => {
+                Page p = new Page() {
+                    Html = "/People/html/layout/clear-layout.html"
+                };
+
+                data.ClearLayout();
+
+                return p;
+            });
+
+            Handle.GET("/people/layout", () => {
+                Page p = new Page() {
+                    Html = "/People/html/layout/layout.html"
+                };
+
+                data.ClearLayout();
+
+                return p;
+            });
+
             OntologyMap.Register();
         }
 

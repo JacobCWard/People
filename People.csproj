@@ -124,6 +124,7 @@
     <Compile Include="Server\UrlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Content\default-layout.sql" />
     <Content Include="wwwroot\People\css\people.css" />
     <Content Include="wwwroot\People\css\standalone.css" />
     <Content Include="wwwroot\People\html\address-relation.html" />
@@ -137,6 +138,8 @@
     <Content Include="wwwroot\People\css\people-font-ie7.css" />
     <Content Include="wwwroot\People\css\people-font.css" />
     <Content Include="wwwroot\People\font\people-font.svg" />
+    <Content Include="wwwroot\People\html\layout\apply-default-layout.html" />
+    <Content Include="wwwroot\People\html\layout\clear-layout.html" />
     <Content Include="wwwroot\People\html\confirm-dialog.html" />
     <Content Include="wwwroot\People\html\email-address-relation.html" />
     <Content Include="wwwroot\People\html\email-address.html" />
@@ -155,6 +158,7 @@
     <Content Include="wwwroot\People\html\search-person.html" />
     <Content Include="wwwroot\People\html\search.html" />
     <Content Include="wwwroot\People\html\standalone.html" />
+    <Content Include="wwwroot\People\html\layout\layout.html" />
     <Content Include="wwwroot\People\html\wrapper.html" />
     <Content Include="wwwroot\People\message.html" />
     <Content Include="wwwroot\People\img\people.png" />

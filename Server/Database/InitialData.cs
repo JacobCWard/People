@@ -1,4 +1,6 @@
-﻿using Starcounter;
+﻿using System;
+using System.IO;
+using Starcounter;
 using Simplified.Ring1;
 using Simplified.Ring2;
 using Simplified.Ring3;
@@ -48,6 +50,28 @@ namespace People {
                     type.Name = t;
                 });
             }
+        }
+
+        public void Unload() {
+            Db.Unload(@"F:\people.sql", 0, false);
+        }
+
+        public void ClearLayout() {
+            Db.Transact(() => {
+                Db.SlowSQL("DELETE FROM JuicyTiles.JuicyTilesSetup WHERE Key LIKE '/People/%'");
+            });
+        }
+
+        public void ApplyDefaultLayout() {
+            TextReader treader = new StreamReader(typeof(InitialData).Assembly.GetManifestResourceStream("People.Content.default-layout.sql"));
+            string sql = treader.ReadToEnd();
+
+            treader.Dispose();
+            this.ClearLayout();
+
+            Db.Transact(() => {
+                Db.SlowSQL(sql);
+            });
         }
     }
 }
