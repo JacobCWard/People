@@ -1,16 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "People", "People.csproj", "{E1D6642D-B9A3-4548-A714-26AE6D96F41E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{766252FD-B568-433B-AE5F-BECAE4F058D7}"
 	ProjectSection(SolutionItems) = preProject
 		Rebracer.xml = Rebracer.xml
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simplified", "..\Simplified\Simplified.csproj", "{26DF60EA-3A8C-455C-8A0C-2FD39703FC89}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Launcher", "..\Launcher\Launcher.csproj", "{30D11832-7DCA-4B52-A52E-D3F4EB573E1E}"
 EndProject
@@ -28,10 +24,6 @@ Global
 		{E1D6642D-B9A3-4548-A714-26AE6D96F41E}.Debug|x64.Build.0 = Debug|x64
 		{E1D6642D-B9A3-4548-A714-26AE6D96F41E}.Release|x64.ActiveCfg = Release|x64
 		{E1D6642D-B9A3-4548-A714-26AE6D96F41E}.Release|x64.Build.0 = Release|x64
-		{26DF60EA-3A8C-455C-8A0C-2FD39703FC89}.Debug|x64.ActiveCfg = Debug|x64
-		{26DF60EA-3A8C-455C-8A0C-2FD39703FC89}.Debug|x64.Build.0 = Debug|x64
-		{26DF60EA-3A8C-455C-8A0C-2FD39703FC89}.Release|x64.ActiveCfg = Release|x64
-		{26DF60EA-3A8C-455C-8A0C-2FD39703FC89}.Release|x64.Build.0 = Release|x64
 		{30D11832-7DCA-4B52-A52E-D3F4EB573E1E}.Debug|x64.ActiveCfg = Debug|x64
 		{30D11832-7DCA-4B52-A52E-D3F4EB573E1E}.Debug|x64.Build.0 = Debug|x64
 		{30D11832-7DCA-4B52-A52E-D3F4EB573E1E}.Release|x64.ActiveCfg = Release|x64
