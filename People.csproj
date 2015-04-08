@@ -135,12 +135,6 @@
     <Content Include="wwwroot\People\html\addresses.html" />
     <Content Include="wwwroot\People\html\app-icon.html" />
     <Content Include="wwwroot\People\css\animation.css" />
-    <Content Include="wwwroot\People\css\people-font-codes.css" />
-    <Content Include="wwwroot\People\css\people-font-embedded.css" />
-    <Content Include="wwwroot\People\css\people-font-ie7-codes.css" />
-    <Content Include="wwwroot\People\css\people-font-ie7.css" />
-    <Content Include="wwwroot\People\css\people-font.css" />
-    <Content Include="wwwroot\People\font\people-font.svg" />
     <Content Include="wwwroot\People\html\layout\apply-default-layout.html" />
     <Content Include="wwwroot\People\html\layout\clear-layout.html" />
     <Content Include="wwwroot\People\html\confirm-dialog.html" />
@@ -192,9 +186,6 @@
     <TypedJSON Include="Server\OrganizationPersonPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <None Include="wwwroot\People\font\people-font.eot" />
-    <None Include="wwwroot\People\font\people-font.ttf" />
-    <None Include="wwwroot\People\font\people-font.woff" />
     <TypedJSON Include="Server\SearchPersonPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
