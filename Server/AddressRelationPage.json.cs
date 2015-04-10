@@ -25,7 +25,7 @@ namespace People {
                 i++;
             }
 
-            this.Address = X.GET("/people/partials/addresses/" + addrel.Address.Key);
+            this.Address = Self.GET("/people/partials/addresses/" + addrel.Address.Key);
         }
 
         void Handle(Input.TypeIndex Action) {

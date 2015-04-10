@@ -38,11 +38,11 @@ namespace People {
 
             // Workspace home page (landing page from launchpad) dashboard alias
             Handle.GET("/people", () => {
-                return X.GET("/people/persons");
+                return Self.GET("/people/persons");
             });
 
             Handle.GET("/people/organizations", () => {
-                var master = (StandalonePage)X.GET("/people/standalone");
+                var master = (StandalonePage)Self.GET("/people/standalone");
                 if (!(master.CurrentPage is OrganizationsPage)) {
                     master.CurrentPage = GetLauncherPage("/people/partials/organizations");
                 }
@@ -50,19 +50,19 @@ namespace People {
             });
 
             Handle.GET("/people/organizations/add", () => {
-                var master = (StandalonePage)X.GET("/people/standalone");
+                var master = (StandalonePage)Self.GET("/people/standalone");
                 master.CurrentPage = GetLauncherPage("/people/partials/organizations-add", true);
                 return master;
             });
 
             Handle.GET("/people/organizations/{?}", (string id) => {
-                var master = (StandalonePage)X.GET("/people/standalone");
+                var master = (StandalonePage)Self.GET("/people/standalone");
                 master.CurrentPage = GetLauncherPage("/people/partials/organizations/" + id, true);
                 return master;
             });
 
             Handle.GET("/people/persons", () => {
-                var master = (StandalonePage)X.GET("/people/standalone");
+                var master = (StandalonePage)Self.GET("/people/standalone");
                 if (!(master.CurrentPage is PersonsPage)) {
                     master.CurrentPage = GetLauncherPage("/people/partials/persons");
                 }
@@ -70,21 +70,21 @@ namespace People {
             });
 
             Handle.GET("/people/persons/add", () => {
-                var master = (StandalonePage)X.GET("/people/standalone");
+                var master = (StandalonePage)Self.GET("/people/standalone");
                 master.CurrentPage = GetLauncherPage("/people/partials/persons-add", true);
                 return master;
             });
 
             Handle.GET<string>("/people/persons/{?}", (string id) => {
-                var master = (StandalonePage)X.GET("/people/standalone");
+                var master = (StandalonePage)Self.GET("/people/standalone");
                 master.CurrentPage = GetLauncherPage("/people/partials/persons/" + id, true);
                 return master;
             });
 
             Handle.GET("/people/search?query={?}", (String query) => {
-                var master = (StandalonePage)X.GET("/people/standalone");
-                
-                Response resp = X.GET("/People/partials/search/" + HttpUtility.UrlEncode(query));
+                var master = (StandalonePage)Self.GET("/people/standalone");
+
+                Response resp = Self.GET("/People/partials/search/" + HttpUtility.UrlEncode(query));
 
                 SearchPage page = (SearchPage)resp.Resource;
 
@@ -328,11 +328,11 @@ namespace People {
                 int fetch = 5;
 
                 foreach (Organization item in provider.SelectOrganizations(query, fetch)) {
-                    page.Organizations.Add(X.GET<Json>("/people/partials/search-organization/" + item.Key));
+                    page.Organizations.Add(Self.GET<Json>("/people/partials/search-organization/" + item.Key));
                 }
 
                 foreach (Person item in provider.SelectPersons(query, fetch)) {
-                    page.Persons.Add(X.GET<Json>("/people/partials/search-person/" + item.Key));
+                    page.Persons.Add(Self.GET<Json>("/people/partials/search-person/" + item.Key));
                 }
 
                 return page;
@@ -362,10 +362,10 @@ namespace People {
         static Json GetLauncherPage(string Url, bool DbScope = false) {
             if (DbScope) {
                 return Db.Scope(() => {
-                    return X.GET<Json>(Url);
+                    return Self.GET<Json>(Url);
                 });
             } else {
-                return X.GET<Json>(Url);
+                return Self.GET<Json>(Url);
             }
         }
     }

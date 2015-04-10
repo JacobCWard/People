@@ -27,7 +27,7 @@ namespace People {
                 i++;
             }
 
-            this.EmailAddress = X.GET("/people/partials/email-addresses/" + relation.EmailAddress.Key);
+            this.EmailAddress = Self.GET("/people/partials/email-addresses/" + relation.EmailAddress.Key);
         }
 
         void Handle(Input.TypeIndex Action) {

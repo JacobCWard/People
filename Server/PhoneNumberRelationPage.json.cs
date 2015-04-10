@@ -27,7 +27,7 @@ namespace People {
                 i++;
             }
 
-            this.PhoneNumber = X.GET("/people/partials/phone-number/" + relation.PhoneNumber.Key);
+            this.PhoneNumber = Self.GET("/people/partials/phone-number/" + relation.PhoneNumber.Key);
         }
 
         void Handle(Input.TypeIndex Action) {

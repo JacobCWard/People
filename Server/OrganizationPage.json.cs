@@ -76,7 +76,7 @@ namespace People {
             this.Addresses.Clear();
 
             foreach (AddressRelation row in contactInfoProvider.SelectAddressRelations(this.Data)) {
-                AddressRelationPage page = X.GET<AddressRelationPage>("/people/partials/address-relations/" + row.Key);
+                AddressRelationPage page = Self.GET<AddressRelationPage>("/people/partials/address-relations/" + row.Key);
 
                 page.Deleted += (s, e) => {
                     this.RefreshAddresses();
@@ -90,7 +90,7 @@ namespace People {
             this.EmailAddresses.Clear();
 
             foreach (EmailAddressRelation row in contactInfoProvider.SelectEmailAddressRelations(this.Data)) {
-                EmailAddressRelationPage page = X.GET<EmailAddressRelationPage>("/people/partials/email-address-relations/" + row.Key);
+                EmailAddressRelationPage page = Self.GET<EmailAddressRelationPage>("/people/partials/email-address-relations/" + row.Key);
 
                 page.Deleted += (s, a) => {
                     this.RefreshEmailAddresses();
@@ -104,7 +104,7 @@ namespace People {
             this.PhoneNumbers.Clear();
 
             foreach (PhoneNumberRelation row in contactInfoProvider.SelectPhoneNumberRelations(this.Data)) {
-                PhoneNumberRelationPage page = X.GET<PhoneNumberRelationPage>("/people/partials/phone-number-relations/" + row.Key);
+                PhoneNumberRelationPage page = Self.GET<PhoneNumberRelationPage>("/people/partials/phone-number-relations/" + row.Key);
 
                 page.Deleted += (s, a) => {
                     this.RefreshEmailAddresses();
@@ -118,7 +118,7 @@ namespace People {
             this.Persons.Clear();
 
             foreach (OrganizationPerson row in organizationsProvider.SelectOrganizationPersons(this.Data)) {
-                OrganizationPersonPage page = X.GET<OrganizationPersonPage>("/people/partials/organization-persons/" + row.Key);
+                OrganizationPersonPage page = Self.GET<OrganizationPersonPage>("/people/partials/organization-persons/" + row.Key);
 
                 page.Deleted += (s, e) => {
                     this.RefreshPersons();
