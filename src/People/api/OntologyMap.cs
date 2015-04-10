@@ -6,8 +6,8 @@ using PolyjuiceNamespace;
 using Starcounter;
 
 namespace People {
-    class OntologyMap {
-        public static void Register() {
+    internal class OntologyMap : IHandlers {
+        public void Register() {
             Polyjuice.Map("/people/menu", "/polyjuice/menu");
             Polyjuice.Map("/people/app-name", "/polyjuice/app-name");
             Polyjuice.Map("/people/app-icon", "/polyjuice/app-icon");

@@ -6,8 +6,8 @@ using Simplified.Ring2;
 using Simplified.Ring3;
 
 namespace People {
-    public class InitialData {
-        public void Insert() {
+    public class InitialData : IHandlers {
+        public void Register() {
             string[] defaultAddressTypes = new string[] { "Home", "Work" };
             string[] defaultEmailTypes = new string[] { "Primary", "Secondary", "Work", "Spam" };
             string[] defaultPhoneTypes = new string[] { "Mobile", "Home", "Work" };
@@ -59,11 +59,12 @@ namespace People {
         public void ClearLayout() {
             Db.Transact(() => {
                 Db.SlowSQL("DELETE FROM JuicyTiles.JuicyTilesSetup WHERE Key LIKE '/People/%'");
+                //Db.SlowSQL("DELETE FROM JuicyTiles.JuicyTilesSetup");
             });
         }
 
         public void ApplyDefaultLayout() {
-            TextReader treader = new StreamReader(typeof(InitialData).Assembly.GetManifestResourceStream("People.Content.default-layout.sql"));
+            TextReader treader = new StreamReader(typeof(InitialData).Assembly.GetManifestResourceStream("People.content.default-layout.sql"));
             string sql = treader.ReadToEnd();
 
             treader.Dispose();

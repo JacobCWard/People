@@ -68,146 +68,146 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="api\IHandlers.cs" />
+    <Compile Include="api\MainHandlers.cs" />
+    <Compile Include="api\PartialHandlers.cs" />
+    <Compile Include="api\PolyjuiceHandlers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\AddressPage.json.cs">
+    <Compile Include="viewmodels\AddressPage.json.cs">
       <DependentUpon>AddressPage.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\AddressRelationPage.json.cs">
+    <Compile Include="viewmodels\AddressRelationPage.json.cs">
       <DependentUpon>AddressRelationPage.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\Database\ContactInfoProvider.cs" />
-    <Compile Include="Server\Database\InitialData.cs" />
-    <Compile Include="Server\Database\OrganizationsProvider.cs" />
-    <Compile Include="Server\Database\PersonsProvider.cs" />
-    <Compile Include="Server\Database\SearchProvider.cs" />
-    <Compile Include="Server\EmailAddressPage.json.cs">
+    <Compile Include="helpers\ContactInfoProvider.cs" />
+    <Compile Include="helpers\InitialData.cs" />
+    <Compile Include="helpers\OrganizationsProvider.cs" />
+    <Compile Include="helpers\PersonsProvider.cs" />
+    <Compile Include="helpers\SearchProvider.cs" />
+    <Compile Include="viewmodels\EmailAddressPage.json.cs">
       <DependentUpon>EmailAddressPage.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\EmailAddressRelationPage.json.cs">
+    <Compile Include="viewmodels\EmailAddressRelationPage.json.cs">
       <DependentUpon>EmailAddressRelationPage.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\Interfaces\IConfirmPage.cs" />
-    <Compile Include="Server\OntologyMap.cs" />
-    <Compile Include="Server\OrganizationPage.json.cs">
+    <Compile Include="viewmodels\IConfirmPage.cs" />
+    <Compile Include="api\OntologyMap.cs" />
+    <Compile Include="viewmodels\OrganizationPage.json.cs">
       <DependentUpon>OrganizationPage.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\OrganizationPersonPage.json.cs">
+    <Compile Include="viewmodels\OrganizationPersonPage.json.cs">
       <DependentUpon>OrganizationPersonPage.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\OrganizationsPage.json.cs">
+    <Compile Include="viewmodels\OrganizationsPage.json.cs">
       <DependentUpon>OrganizationsPage.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\PhoneNumberPage.json.cs">
+    <Compile Include="viewmodels\PhoneNumberPage.json.cs">
       <DependentUpon>PhoneNumberPage.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\PhoneNumberRelationPage.json.cs">
+    <Compile Include="viewmodels\PhoneNumberRelationPage.json.cs">
       <DependentUpon>PhoneNumberRelationPage.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\StandalonePage.json.cs">
+    <Compile Include="viewmodels\StandalonePage.json.cs">
       <DependentUpon>StandalonePage.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\PersonPage.json.cs">
+    <Compile Include="viewmodels\PersonPage.json.cs">
       <DependentUpon>PersonPage.json</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Server\PersonsPage.json.cs">
+    <Compile Include="viewmodels\PersonsPage.json.cs">
       <DependentUpon>PersonsPage.json</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Server\Program.cs" />
-    <Compile Include="Server\SearchOrganizationPage.json.cs">
+    <Compile Include="Program.cs" />
+    <Compile Include="viewmodels\SearchOrganizationPage.json.cs">
       <DependentUpon>SearchOrganizationPage.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\SearchPage.json.cs">
+    <Compile Include="viewmodels\SearchPage.json.cs">
       <DependentUpon>SearchPage.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\SearchPersonPage.json.cs">
+    <Compile Include="viewmodels\SearchPersonPage.json.cs">
       <DependentUpon>SearchPersonPage.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\UrlHelper.cs" />
+    <Compile Include="helpers\UrlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Content\default-layout.sql" />
+    <EmbeddedResource Include="content\default-layout.sql" />
     <Content Include="wwwroot\People\css\people.css" />
     <Content Include="wwwroot\People\css\standalone.css" />
-    <Content Include="wwwroot\People\html\address-relation.html" />
-    <Content Include="wwwroot\People\html\address.html" />
-    <Content Include="wwwroot\People\html\addresses.html" />
-    <Content Include="wwwroot\People\html\app-icon.html" />
+    <Content Include="wwwroot\People\viewmodels\AddressRelationPage.html" />
+    <Content Include="wwwroot\People\viewmodels\AddressPage.html" />
+    <Content Include="wwwroot\People\viewmodels\AppIcon.html" />
     <Content Include="wwwroot\People\css\animation.css" />
-    <Content Include="wwwroot\People\html\layout\apply-default-layout.html" />
-    <Content Include="wwwroot\People\html\layout\clear-layout.html" />
-    <Content Include="wwwroot\People\html\confirm-dialog.html" />
-    <Content Include="wwwroot\People\html\email-address-relation.html" />
-    <Content Include="wwwroot\People\html\email-address.html" />
-    <Content Include="wwwroot\People\html\email-addresses.html" />
-    <Content Include="wwwroot\People\html\organization-person.html" />
-    <Content Include="wwwroot\People\html\organization.html" />
-    <Content Include="wwwroot\People\html\organizations.html" />
-    <Content Include="wwwroot\People\html\dashboard.html" />
-    <Content Include="wwwroot\People\html\menu.html" />
-    <Content Include="wwwroot\People\html\person.html" />
-    <Content Include="wwwroot\People\html\persons.html" />
-    <Content Include="wwwroot\People\html\phone-number-relation.html" />
-    <Content Include="wwwroot\People\html\phone-number.html" />
-    <Content Include="wwwroot\People\html\phone-numbers.html" />
-    <Content Include="wwwroot\People\html\search-organization.html" />
-    <Content Include="wwwroot\People\html\search-person.html" />
-    <Content Include="wwwroot\People\html\search.html" />
-    <Content Include="wwwroot\People\html\standalone.html" />
-    <Content Include="wwwroot\People\html\layout\layout.html" />
-    <Content Include="wwwroot\People\html\wrapper.html" />
-    <Content Include="wwwroot\People\message.html" />
-    <Content Include="wwwroot\People\img\people.png" />
+    <Content Include="wwwroot\People\viewmodels\LauncherWrapperPage.html" />
+    <Content Include="wwwroot\People\viewmodels\layout\ApplyDefaultLayoutPage.html" />
+    <Content Include="wwwroot\People\viewmodels\layout\ClearLayoutPage.html" />
+    <Content Include="wwwroot\People\viewmodels\ConfirmDialogPage.html" />
+    <Content Include="wwwroot\People\viewmodels\EmailAddressRelationPage.html" />
+    <Content Include="wwwroot\People\viewmodels\EmailAddressPage.html" />
+    <Content Include="wwwroot\People\viewmodels\OrganizationPersonPage.html" />
+    <Content Include="wwwroot\People\viewmodels\OrganizationPage.html" />
+    <Content Include="wwwroot\People\viewmodels\OrganizationsPage.html" />
+    <Content Include="wwwroot\People\viewmodels\Dashboard.html" />
+    <Content Include="wwwroot\People\viewmodels\Menu.html" />
+    <Content Include="wwwroot\People\viewmodels\PersonPage.html" />
+    <Content Include="wwwroot\People\viewmodels\PersonsPage.html" />
+    <Content Include="wwwroot\People\viewmodels\PhoneNumberRelationPage.html" />
+    <Content Include="wwwroot\People\viewmodels\PhoneNumberPage.html" />
+    <Content Include="wwwroot\People\viewmodels\SearchOrganizationPage.html" />
+    <Content Include="wwwroot\People\viewmodels\SearchPersonPage.html" />
+    <Content Include="wwwroot\People\viewmodels\SearchPage.html" />
+    <Content Include="wwwroot\People\viewmodels\StandalonePage.html" />
+    <Content Include="wwwroot\People\viewmodels\layout\LayoutPage.html" />
+    <Content Include="wwwroot\People\images\people.png" />
     <Content Include="wwwroot\People\css\people-old.css" />
   </ItemGroup>
   <ItemGroup>
-    <TypedJSON Include="Server\AddressRelationPage.json">
+    <TypedJSON Include="viewmodels\AddressRelationPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\AddressPage.json">
+    <TypedJSON Include="viewmodels\AddressPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\StandalonePage.json">
+    <TypedJSON Include="viewmodels\StandalonePage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\EmailAddressRelationPage.json">
+    <TypedJSON Include="viewmodels\EmailAddressRelationPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\EmailAddressPage.json">
+    <TypedJSON Include="viewmodels\EmailAddressPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\PhoneNumberPage.json">
+    <TypedJSON Include="viewmodels\PhoneNumberPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\PhoneNumberRelationPage.json">
+    <TypedJSON Include="viewmodels\PhoneNumberRelationPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\OrganizationPersonPage.json">
+    <TypedJSON Include="viewmodels\OrganizationPersonPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\SearchPersonPage.json">
+    <TypedJSON Include="viewmodels\SearchPersonPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\SearchOrganizationPage.json">
+    <TypedJSON Include="viewmodels\SearchOrganizationPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\SearchPage.json">
+    <TypedJSON Include="viewmodels\SearchPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\OrganizationPage.json">
+    <TypedJSON Include="viewmodels\OrganizationPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\AppName.json">
+    <TypedJSON Include="viewmodels\AppName.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\OrganizationsPage.json">
+    <TypedJSON Include="viewmodels\OrganizationsPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\PersonPage.json">
+    <TypedJSON Include="viewmodels\PersonPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\PersonsPage.json">
+    <TypedJSON Include="viewmodels\PersonsPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
   </ItemGroup>

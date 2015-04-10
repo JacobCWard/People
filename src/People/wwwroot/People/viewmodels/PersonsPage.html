@@ -2,29 +2,25 @@
 <link rel="stylesheet" href="/People/css/people.css" />
 <template>
     <fieldset class="people">
-        <legend>Organizations: {{Organizations.length}}</legend>
-        <table class="table" id="tblOrganizations">
+        <legend>Persons: {{Persons.length}}</legend>
+        <table class="table" id="tblPersons">
             <thead>
                 <tr>
                     <th>Key</th>
                     <th>Name</th>
-                    <th>Person</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <template repeat="{{Organizations}}">
+                <template repeat="{{Persons}}">
                     <tr>
                         <td>
                             <span>{{Key}}</span>
                         </td>
                         <td>
                             <span>{{Name}}</span>
-                        </td>
-                        <td>
-                            <span>{{PersonName}}</span>
                         </td>
                         <td>
                             <a href="mailto:{{EmailAddressName}}" target="_blank">{{EmailAddressName}}</a>
@@ -42,8 +38,8 @@
         </table>
     </fieldset>
     <div class="people buttons">
-        <a href="{{AddUrl}}" class="btn btn-primary">Add organization</a>
+        <a href="{{AddUrl}}" class="btn btn-primary">Add person</a>
     </div>
-    <template is="imported-template" content="/People/html/confirm-dialog.html"></template>
+    <template is="imported-template" content="/People/viewmodels/ConfirmDialogPage.html"></template>
     <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />
 </template>
