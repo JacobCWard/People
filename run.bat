@@ -1,1 +1,1 @@
-star --resourcedir="%~dp0wwwroot" "%~dp0\bin\debug\People.exe"
+star --resourcedir="%~dp0src\People\wwwroot" "%~dp0\src\People\bin\debug\People.exe"
