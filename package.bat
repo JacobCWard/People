@@ -10,11 +10,11 @@ IF EXIST %~dp0temp\NUL (
 
 REM Prepare Executables
 md %~dp0temp\app
-xcopy %~dp0bin\Debug\*.* %~dp0temp\app
+xcopy %~dp0src\People\bin\Debug\*.* %~dp0temp\app
 
 REM Prepare Content
 md %~dp0temp\content
-xcopy %~dp0wwwroot %~dp0temp\content /s /e
+xcopy %~dp0src\People\wwwroot %~dp0temp\content /s /e
 
 REM Copy icon and config
 xcopy %~dp0package\*.png %~dp0temp
@@ -31,7 +31,7 @@ IF NOT EXIST %~dp0dist (
 REM Zipp-it
 CD %~dp0temp
 
-zip -r ..\dist\%currentfolder% *.*  || (GOTO ERROR)
+zip -r ..\package\%currentfolder% *.*  || (GOTO ERROR)
 
 REM TODO Jump back to previous dir
 GOTO :CLEANUP
