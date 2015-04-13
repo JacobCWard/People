@@ -17,8 +17,8 @@ md %~dp0temp\content
 xcopy %~dp0src\People\wwwroot %~dp0temp\content /s /e
 
 REM Copy icon and config
-xcopy %~dp0package\*.png %~dp0temp
-xcopy %~dp0package\*.config %~dp0temp
+xcopy %~dp0src\People\package\*.png %~dp0temp
+xcopy %~dp0src\People\package\*.config %~dp0temp
 
 REM Get folder name for the zip name
 for %%a in (%~dp0.) do set currentfolder=%%~na
@@ -31,7 +31,7 @@ IF NOT EXIST %~dp0dist (
 REM Zipp-it
 CD %~dp0temp
 
-zip -r ..\package\%currentfolder% *.*  || (GOTO ERROR)
+zip -r ..\packages\%currentfolder% *.*  || (GOTO ERROR)
 
 REM TODO Jump back to previous dir
 GOTO :CLEANUP
