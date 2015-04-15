@@ -64,7 +64,7 @@ namespace People {
         }
 
         public void ApplyDefaultLayout() {
-            TextReader treader = new StreamReader(typeof(InitialData).Assembly.GetManifestResourceStream("People.content.default-layout.sql"));
+            TextReader treader = new StreamReader(typeof(InitialData).Assembly.GetManifestResourceStream("People.Content.default-layout.sql"));
             string sql = treader.ReadToEnd();
 
             treader.Dispose();
