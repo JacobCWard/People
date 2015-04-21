@@ -55,24 +55,5 @@ namespace People {
         public void Unload() {
             Db.Unload(@"F:\people.sql", 0, false);
         }
-
-        public void ClearLayout() {
-            Db.Transact(() => {
-                Db.SlowSQL("DELETE FROM JuicyTiles.JuicyTilesSetup WHERE Key LIKE '/People/%'");
-                //Db.SlowSQL("DELETE FROM JuicyTiles.JuicyTilesSetup");
-            });
-        }
-
-        public void ApplyDefaultLayout() {
-            TextReader treader = new StreamReader(typeof(InitialData).Assembly.GetManifestResourceStream("People.Content.default-layout.sql"));
-            string sql = treader.ReadToEnd();
-
-            treader.Dispose();
-            this.ClearLayout();
-
-            Db.Transact(() => {
-                Db.SlowSQL(sql);
-            });
-        }
     }
 }

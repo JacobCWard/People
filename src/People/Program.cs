@@ -23,6 +23,10 @@ namespace People {
             foreach (IHandlers handler in handlers) {
                 handler.Register();
             }
+
+            DefaultStyles styles = new DefaultStyles();
+
+            styles.ApplyIfEmpty();
         }
     }
 }

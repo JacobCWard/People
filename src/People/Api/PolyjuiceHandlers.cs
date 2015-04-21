@@ -21,7 +21,7 @@ namespace People {
 
             Handle.GET("/people/menu", () => {
                 Page p = new Page() {
-                    Html = "/People/viewmodels/Menu.html"
+                    Html = "/People/viewmodels/AppMenuPage.html"
                 };
 
                 return p;

@@ -93,35 +93,32 @@ namespace People {
             });
 
             Handle.GET("/people/apply-default-layout", () => {
-                InitialData data = new InitialData();
+                DefaultStyles styles = new DefaultStyles();
                 Page p = new Page() {
                     Html = "/People/viewmodels/layout/ApplyDefaultLayoutPage.html"
                 };
 
-                data.ApplyDefaultLayout();
+                styles.Apply();
 
                 return p;
             });
 
             Handle.GET("/people/clear-layout", () => {
-                InitialData data = new InitialData();
+                DefaultStyles styles = new DefaultStyles();
                 Page p = new Page() {
                     Html = "/People/viewmodels/layout/ClearLayoutPage.html"
                 };
 
-                data.ClearLayout();
+                styles.Clear();
 
                 return p;
             });
 
             Handle.GET("/people/layout", () => {
-                InitialData data = new InitialData();
                 Page p = new Page() {
                     Html = "/People/viewmodels/layout/LayoutPage.html"
                 };
-
-                data.ClearLayout();
-
+                
                 return p;
             });
         }
