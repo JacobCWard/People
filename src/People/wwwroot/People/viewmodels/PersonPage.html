@@ -19,10 +19,11 @@
     <div hidden?="{{!Addresses.length}}" class="addresses-label">
         <label class="control-label">Addresses:</label>
     </div>
-    <div hidden?="{{!Addresses.length}}" class="addresses">
+    <div class="addresses">
         <template repeat="{{Addresses}}">
             <launcher-root-partial name="Addresses"></launcher-root-partial>
         </template>
+        <div hidden?="{{Addresses.length}}">This person does not have addresses yet. Press <b>Add address</b> to add some.</div>
     </div>
     <div>
         <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddAddress$++">Add address</button>
@@ -30,10 +31,11 @@
     <div hidden?="{{!EmailAddresses.length}}">
         <label class="control-label">Emails:</label>
     </div>
-    <div hidden?="{{!EmailAddresses.length}}">
+    <div>
         <template repeat="{{EmailAddresses}}">
             <launcher-root-partial name="EmailAddresses"></launcher-root-partial>
         </template>
+        <div hidden?="{{EmailAddresses.length}}">This person does not have email addresses yet. Press <b>Add email address</b> to add some.</div>
     </div>
     <div>
         <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddEmailAddress$++">Add email address</button>
@@ -41,10 +43,11 @@
     <div hidden?="{{!PhoneNumbers.length}}">
         <label class="control-label">Phones:</label>
     </div>
-    <div hidden?="{{!PhoneNumbers.length}}">
+    <div>
         <template repeat="{{PhoneNumbers}}">
             <launcher-root-partial name="PhoneNumbers"></launcher-root-partial>
         </template>
+        <div hidden?="{{PhoneNumbers.length}}">This person does not have phone numbers yet. Press <b>Add phone number</b> to add some.</div>
     </div>
     <div>
         <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddPhoneNumber$++">Add phone number</button>
