@@ -16,10 +16,11 @@
     <div class="form-horizontal" hidden?="{{!Addresses.length}}">
         <label class="control-label">Addresses:</label>
     </div>
-    <div hidden?="{{!Addresses.length}}">
+    <div>
         <template repeat="{{Addresses}}">
             <launcher-root-partial name="Addresses"></launcher-root-partial>
         </template>
+        <div hidden?="{{Addresses.length}}">This organization has no addresses yet. Perss <b>Add address</b> to add some.</div>
     </div>
     <div>
         <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddAddress$++">Add address</button>
@@ -27,10 +28,11 @@
     <div class="form-horizontal" hidden?="{{!EmailAddresses.length}}">
         <label class="control-label">Emails:</label>
     </div>
-    <div hidden?="{{!EmailAddresses.length}}">
+    <div>
         <template repeat="{{EmailAddresses}}">
             <launcher-root-partial name="EmailAddresses"></launcher-root-partial>
         </template>
+        <div hidden?="{{EmailAddresses.length}}">This organization has no email addresses yet. Perss <b>Add email address</b> to add some.</div>
     </div>
     <div>
         <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddEmailAddress$++">Add email address</button>
@@ -38,10 +40,11 @@
     <div class="form-horizontal" hidden?="{{!PhoneNumbers.length}}">
         <label class="control-label">Phones:</label>
     </div>
-    <div hidden?="{{!PhoneNumbers.length}}">
+    <div>
         <template repeat="{{PhoneNumbers}}">
             <launcher-root-partial name="PhoneNumbers"></launcher-root-partial>
         </template>
+        <div hidden?="{{PhoneNumbers.length}}">This organization has no phone numbers yet. Perss <b>Add phone number</b> to add some.</div>
     </div>
     <div>
         <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddPhoneNumber$++">Add phone number</button>
@@ -49,10 +52,11 @@
     <div class="form-horizontal" hidden?="{{!Persons.length}}">
         <label class="control-label">Persons:</label>
     </div>
-    <div hidden?="{{!Persons.length}}">
+    <div>
         <template repeat="{{Persons}}">
             <launcher-root-partial name="Persons"></launcher-root-partial>
         </template>
+        <div hidden?="{{Persons.length}}">This organization has no contact persons yet. Perss <b>Find person</b> to add some.</div>
     </div>
     <div>
         <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).Find.Visible$ = true">Find person</button>
