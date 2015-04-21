@@ -25,7 +25,7 @@ namespace People {
 
             // Workspace home page (landing page from launchpad) dashboard alias
             Handle.GET("/people", () => {
-                return Self.GET("/people/persons");
+                return Self.GET("/people/organizations");
             });
 
             Handle.GET("/people/organizations", () => {
