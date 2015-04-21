@@ -195,7 +195,7 @@ namespace People {
                 OrganizationPerson op = new OrganizationPerson();
                 op.Person = this.Data;
                 op.Organization = this.ParentPage.Data;
-                this.ParentPage.Persons.Add(new OrganizationPersonPage() { Data = op });
+                this.ParentPage.RefreshPersons();
             }
 
             public OrganizationPage ParentPage {
