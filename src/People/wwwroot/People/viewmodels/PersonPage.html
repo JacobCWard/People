@@ -16,10 +16,10 @@
     <div>
         <input type="text" value="{{LastName$}}" placeholder="Last name" class="form-control" />
     </div>
-    <div>
+    <div hidden?="{{!Addresses.length}}" class="addresses-label">
         <label class="control-label">Addresses:</label>
     </div>
-    <div>
+    <div hidden?="{{!Addresses.length}}" class="addresses">
         <template repeat="{{Addresses}}">
             <launcher-root-partial name="Addresses"></launcher-root-partial>
         </template>
@@ -27,10 +27,10 @@
     <div>
         <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddAddress$++">Add address</button>
     </div>
-    <div>
+    <div hidden?="{{!EmailAddresses.length}}">
         <label class="control-label">Emails:</label>
     </div>
-    <div>
+    <div hidden?="{{!EmailAddresses.length}}">
         <template repeat="{{EmailAddresses}}">
             <launcher-root-partial name="EmailAddresses"></launcher-root-partial>
         </template>
@@ -38,10 +38,10 @@
     <div>
         <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddEmailAddress$++">Add email address</button>
     </div>
-    <div>
+    <div hidden?="{{!PhoneNumbers.length}}">
         <label class="control-label">Phones:</label>
     </div>
-    <div>
+    <div hidden?="{{!PhoneNumbers.length}}">
         <template repeat="{{PhoneNumbers}}">
             <launcher-root-partial name="PhoneNumbers"></launcher-root-partial>
         </template>

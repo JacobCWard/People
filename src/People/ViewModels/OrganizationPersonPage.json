@@ -1,5 +1,5 @@
 {
-    "Html": "/People/html/OrganizationPersonPage.html",
+    "Html": "/People/viewmodels/OrganizationPersonPage.html",
     "Person": {
         "Key": "",
         "Name": ""

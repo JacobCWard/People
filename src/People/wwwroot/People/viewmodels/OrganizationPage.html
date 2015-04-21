@@ -13,10 +13,10 @@
     <div>
         <input type='text' value='{{Name$}}' placeholder="Organization name" class="form-control" />
     </div>
-    <div class="form-horizontal">
+    <div class="form-horizontal" hidden?="{{!Addresses.length}}">
         <label class="control-label">Addresses:</label>
     </div>
-    <div>
+    <div hidden?="{{!Addresses.length}}">
         <template repeat="{{Addresses}}">
             <launcher-root-partial name="Addresses"></launcher-root-partial>
         </template>
@@ -24,10 +24,10 @@
     <div>
         <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddAddress$++">Add address</button>
     </div>
-    <div class="form-horizontal">
+    <div class="form-horizontal" hidden?="{{!EmailAddresses.length}}">
         <label class="control-label">Emails:</label>
     </div>
-    <div>
+    <div hidden?="{{!EmailAddresses.length}}">
         <template repeat="{{EmailAddresses}}">
             <launcher-root-partial name="EmailAddresses"></launcher-root-partial>
         </template>
@@ -35,10 +35,10 @@
     <div>
         <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddEmailAddress$++">Add email address</button>
     </div>
-    <div class="form-horizontal">
+    <div class="form-horizontal" hidden?="{{!PhoneNumbers.length}}">
         <label class="control-label">Phones:</label>
     </div>
-    <div>
+    <div hidden?="{{!PhoneNumbers.length}}">
         <template repeat="{{PhoneNumbers}}">
             <launcher-root-partial name="PhoneNumbers"></launcher-root-partial>
         </template>
@@ -46,13 +46,10 @@
     <div>
         <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddPhoneNumber$++">Add phone number</button>
     </div>
-    <div class="form-horizontal">
+    <div class="form-horizontal" hidden?="{{!Persons.length}}">
         <label class="control-label">Persons:</label>
     </div>
-    <div>
-        <h4>Persons</h4>
-    </div>
-    <div>
+    <div hidden?="{{!Persons.length}}">
         <template repeat="{{Persons}}">
             <launcher-root-partial name="Persons"></launcher-root-partial>
         </template>
@@ -69,7 +66,7 @@
     <div>
         <button type="button" class="btn btn-default" onclick="getModel(this).Cancel$++">Cancel</button>
     </div>
-    <template is="imported-template" content="/People/html/ConfirmDialogPage.html"></template>
+    <template is="imported-template" content="/People/viewmodels/ConfirmDialogPage.html"></template>
     <div class="people" id="divFindDialog">
         <template if="{{Find.Visible$}}">
             <paper-action-dialog heading="Find person" backdrop="true" layered="true" role="dialog" opened="{{Find.Visible$}}">
