@@ -98,6 +98,9 @@
     <Compile Include="ViewModels\OrganizationPersonPage.json.cs">
       <DependentUpon>OrganizationPersonPage.json</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\OrganizationSmallPage.json.cs">
+      <DependentUpon>OrganizationSmallPage.json</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\OrganizationsPage.json.cs">
       <DependentUpon>OrganizationsPage.json</DependentUpon>
     </Compile>
@@ -146,6 +149,7 @@
     <Content Include="wwwroot\People\viewmodels\EmailAddressPage.html" />
     <Content Include="wwwroot\People\viewmodels\OrganizationPersonPage.html" />
     <Content Include="wwwroot\People\viewmodels\OrganizationPage.html" />
+    <Content Include="wwwroot\People\viewmodels\OrganizationSmallPage.html" />
     <Content Include="wwwroot\People\viewmodels\OrganizationsPage.html" />
     <Content Include="wwwroot\People\viewmodels\Dashboard.html" />
     <Content Include="wwwroot\People\viewmodels\Menu.html" />
@@ -212,6 +216,9 @@
     </TypedJSON>
   </ItemGroup>
   <ItemGroup>
+    <TypedJSON Include="ViewModels\OrganizationSmallPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
     <None Include="weaver.ignore" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

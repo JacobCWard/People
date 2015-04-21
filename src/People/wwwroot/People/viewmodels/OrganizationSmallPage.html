@@ -1,0 +1,40 @@
+﻿<template>
+    <div>
+        <input type="text" value="{{Name$}}" update-on="input" placeholder="Organization name" class="form-control" />
+    </div>
+    <template bind="{{DefaultAddress}}">
+        <div class="col-lg-4">
+            <input type="text" value="{{Street$}}" class="form-control" placeholder="Street" />
+        </div>
+        <div class="col-lg-2">
+            <input type="text" value="{{House$}}" class="form-control" placeholder="House" />
+        </div>
+        <div class="col-lg-2">
+            <input type="text" value="{{PostalCode$}}" class="form-control" placeholder="PostalCode" />
+        </div>
+        <div class="col-lg-2">
+            <input type="text" value="{{City$}}" class="form-control" placeholder="City" />
+        </div>
+        <div class="col-lg-2">
+            <input type="text" value="{{Country$}}" class="form-control" placeholder="Country" />
+        </div>
+    </template>
+    <div class="col-lg-6">
+        <template bind="{{DefaultPhoneNumber}}">
+            <input type="text" value="{{Name$}}" class="form-control" placeholder="Phone number" />
+        </template>
+    </div>
+    <div class="col-lg-6">
+        <template bind="{{DefaultEmailAddress}}">
+            <input type="text" value="{{Name$}}" class="form-control" placeholder="Email address" />
+        </template>
+    </div>
+    <template bind="{{DefaultPerson}}">
+        <div class="col-lg-6">
+            <input type="text" value="{{FirstName$}}" class="form-control" placeholder="First name" />
+        </div>
+        <div class="col-lg-6">
+            <input type="text" value="{{LastName$}}" class="form-control" placeholder="Last name" />
+        </div>
+    </template>
+</template>

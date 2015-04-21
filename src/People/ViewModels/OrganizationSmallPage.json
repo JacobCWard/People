@@ -1,0 +1,21 @@
+{
+    "Html": "/People/viewmodels/OrganizationSmallPage.html",
+    "Name$": "",
+    "DefaultAddress": {
+        "Country$": "",
+        "City$": "",
+        "Street$": "",
+        "House$": "",
+        "PostalCode$": ""
+    },
+    "DefaultEmailAddress": {
+        "Name$": ""
+    },
+    "DefaultPhoneNumber": {
+        "Name$": ""
+    },
+    "DefaultPerson": {
+        "FirstName$": "",
+        "LastName$": ""
+    }
+}

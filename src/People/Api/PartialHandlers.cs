@@ -39,15 +39,27 @@ namespace People {
             });
 
             Handle.GET("/people/partials/organizations/{?}", (string id) => {
-                return Db.Scope<OrganizationPage>(() => {
-                    OrganizationPage page = new OrganizationPage() {
-                        Html = "/People/viewmodels/OrganizationPage.html"
-                    };
+                int level = Handle.CallLevel;
 
-                    page.RefreshOrganization(id);
+                if (level == 1) {
+                    return Db.Scope<OrganizationPage>(() => {
+                        OrganizationPage page = new OrganizationPage() {
+                            Html = "/People/viewmodels/OrganizationPage.html"
+                        };
 
-                    return page;
-                });
+                        page.RefreshOrganization(id);
+
+                        return page;
+                    });
+                } else {
+                    return Db.Scope<OrganizationSmallPage>(() => {
+                        OrganizationSmallPage page = new OrganizationSmallPage();
+
+                        page.RefreshOrganization(id);
+
+                        return page;
+                    });
+                }
             });
 
             Handle.GET("/people/partials/persons-add", () => {
