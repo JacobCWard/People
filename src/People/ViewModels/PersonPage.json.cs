@@ -103,7 +103,7 @@ namespace People {
                 PhoneNumberRelationPage page = Self.GET<PhoneNumberRelationPage>("/people/partials/phone-number-relations/" + row.Key);
 
                 page.Deleted += (s, a) => {
-                    this.RefreshEmailAddresses();
+                    this.RefreshPhoneNumbers();
                 };
 
                 this.PhoneNumbers.Add(page);
