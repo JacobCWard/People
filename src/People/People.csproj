@@ -148,6 +148,7 @@
     <Content Include="wwwroot\People\viewmodels\ConfirmDialogPage.html" />
     <Content Include="wwwroot\People\viewmodels\EmailAddressRelationPage.html" />
     <Content Include="wwwroot\People\viewmodels\EmailAddressPage.html" />
+    <Content Include="wwwroot\People\viewmodels\OrganizationEmptyPage.html" />
     <Content Include="wwwroot\People\viewmodels\OrganizationPersonPage.html" />
     <Content Include="wwwroot\People\viewmodels\OrganizationPage.html" />
     <Content Include="wwwroot\People\viewmodels\OrganizationSmallPage.html" />

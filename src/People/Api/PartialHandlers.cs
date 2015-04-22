@@ -55,7 +55,9 @@ namespace People {
                     return Db.Scope<OrganizationSmallPage>(() => {
                         OrganizationSmallPage page = new OrganizationSmallPage();
 
-                        page.RefreshOrganization(id);
+                        //Temporary fix.
+                        page.Html = "/People/viewmodels/OrganizationEmptyPage.html";
+                        //page.RefreshOrganization(id);
 
                         return page;
                     });
