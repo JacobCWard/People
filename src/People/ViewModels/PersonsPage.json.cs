@@ -12,7 +12,7 @@ namespace People {
 
         public void RefreshPersons() {
             this.Persons = PersonsProvider.SelectPersons();
-            this.AddUrl = UrlHelper.GetUrl("/persons/add");
+            this.AddUrl = "/persons/add";
         }
 
         [PersonsPage_json.Persons]
@@ -28,7 +28,7 @@ namespace People {
             }
 
             void Handle(Input.Edit Action) {
-                this.ParentPage.RedirectUrl = UrlHelper.GetUrl("/persons/" + this.Data.GetObjectID());
+                this.ParentPage.RedirectUrl = "/people/persons/" + this.Data.GetObjectID();
             }
 
             public PersonsPage ParentPage {

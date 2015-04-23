@@ -132,7 +132,6 @@
     <Compile Include="ViewModels\SearchPersonPage.json.cs">
       <DependentUpon>SearchPersonPage.json</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\UrlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Content\default-layout.sql" />

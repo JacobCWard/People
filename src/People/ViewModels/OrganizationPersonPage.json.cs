@@ -14,7 +14,7 @@ namespace People {
                 this.Data = DbHelper.FromID(DbHelper.Base64DecodeObjectID(ID)) as OrganizationPerson;
             }
 
-            this.EditUrl = UrlHelper.GetUrl("/persons/" + this.Data.Person.Key);
+            this.EditUrl = "/people/persons/" + this.Data.Person.Key;
         }
 
         void Handle(Input.Delete Action) {

@@ -54,7 +54,7 @@ namespace People {
         }
 
         public void GoBack() {
-            this.RedirectUrl = UrlHelper.GetUrl("/persons");
+            this.RedirectUrl = "/people/persons";
         }
 
         public void RefreshPerson(string ID = null) {

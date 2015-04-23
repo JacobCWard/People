@@ -12,7 +12,7 @@ namespace People {
 
         public void RefreshOrganizations() {
             this.Organizations = OrganizationsProvider.SelectOrganizations();
-            this.AddUrl = UrlHelper.GetUrl("/organizations/add");
+            this.AddUrl = "/people/organizations/add";
         }
 
         [OrganizationsPage_json.Organizations]
@@ -28,7 +28,7 @@ namespace People {
             }
 
             void Handle(Input.Edit Action) {
-                this.ParentPage.RedirectUrl = UrlHelper.GetUrl("/organizations/" + this.Data.GetObjectID());
+                this.ParentPage.RedirectUrl = "/people/organizations/" + this.Data.GetObjectID();
             }
 
             public OrganizationsPage ParentPage {

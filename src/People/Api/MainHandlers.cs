@@ -15,7 +15,6 @@ namespace People {
 
                 if (session == null) {
                     session = new Session(SessionOptions.PatchVersioning);
-                    UrlHelper.BaseUrl = "/people";
                     standalone.Html = "/People/viewmodels/StandalonePage.html";
                 }
 

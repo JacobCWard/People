@@ -55,11 +55,11 @@ namespace People {
         }
 
         public void GoBack() {
-            this.RedirectUrl = UrlHelper.GetUrl("/organizations");
+            this.RedirectUrl = "/people/organizations";
         }
 
         public void RefreshOrganization(string ID = null) {
-            this.AddPersonUrl = UrlHelper.GetUrl("/persons/add");
+            this.AddPersonUrl = "/people/persons/add";
 
             if (string.IsNullOrEmpty(ID)) {
                 this.Data = new Organization();
