@@ -21,7 +21,7 @@
     </div>
     <div class="addresses">
         <template repeat="{{Addresses}}">
-            <launcher-root-partial name="Addresses"></launcher-root-partial>
+            <launcher-root-partial></launcher-root-partial>
         </template>
         <div hidden?="{{Addresses.length}}">This person does not have addresses yet. Press <b>Add address</b> to add some.</div>
     </div>
@@ -33,7 +33,7 @@
     </div>
     <div>
         <template repeat="{{EmailAddresses}}">
-            <launcher-root-partial name="EmailAddresses"></launcher-root-partial>
+            <launcher-root-partial></launcher-root-partial>
         </template>
         <div hidden?="{{EmailAddresses.length}}">This person does not have email addresses yet. Press <b>Add email address</b> to add some.</div>
     </div>
@@ -45,7 +45,7 @@
     </div>
     <div>
         <template repeat="{{PhoneNumbers}}">
-            <launcher-root-partial name="PhoneNumbers"></launcher-root-partial>
+            <launcher-root-partial></launcher-root-partial>
         </template>
         <div hidden?="{{PhoneNumbers.length}}">This person does not have phone numbers yet. Press <b>Add phone number</b> to add some.</div>
     </div>
