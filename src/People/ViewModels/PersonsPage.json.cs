@@ -12,7 +12,7 @@ namespace People {
 
         public void RefreshPersons() {
             this.Persons = PersonsProvider.SelectPersons();
-            this.AddUrl = "/persons/add";
+            this.AddUrl = "/people/persons/add";
         }
 
         [PersonsPage_json.Persons]
