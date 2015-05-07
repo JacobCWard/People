@@ -164,7 +164,6 @@
     <Content Include="wwwroot\People\viewmodels\StandalonePage.html" />
     <Content Include="wwwroot\People\viewmodels\layout\LayoutPage.html" />
     <Content Include="wwwroot\People\images\people.png" />
-    <Content Include="wwwroot\People\css\people-old.css" />
   </ItemGroup>
   <ItemGroup>
     <TypedJSON Include="ViewModels\AddressRelationPage.json">
