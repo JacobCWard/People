@@ -135,19 +135,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Content\default-layout.sql" />
-    <Content Include="wwwroot\People\css\people.css" />
     <Content Include="wwwroot\People\css\standalone.css" />
     <Content Include="wwwroot\People\viewmodels\AddressRelationPage.html" />
     <Content Include="wwwroot\People\viewmodels\AddressPage.html" />
     <Content Include="wwwroot\People\viewmodels\AppIcon.html" />
-    <Content Include="wwwroot\People\css\animation.css" />
     <Content Include="wwwroot\People\viewmodels\LauncherWrapperPage.html" />
     <Content Include="wwwroot\People\viewmodels\layout\ApplyDefaultLayoutPage.html" />
     <Content Include="wwwroot\People\viewmodels\layout\ClearLayoutPage.html" />
     <Content Include="wwwroot\People\viewmodels\ConfirmDialogPage.html" />
     <Content Include="wwwroot\People\viewmodels\EmailAddressRelationPage.html" />
     <Content Include="wwwroot\People\viewmodels\EmailAddressPage.html" />
-    <Content Include="wwwroot\People\viewmodels\OrganizationEmptyPage.html" />
     <Content Include="wwwroot\People\viewmodels\OrganizationPersonPage.html" />
     <Content Include="wwwroot\People\viewmodels\OrganizationPage.html" />
     <Content Include="wwwroot\People\viewmodels\OrganizationSmallPage.html" />

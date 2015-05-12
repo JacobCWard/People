@@ -56,8 +56,8 @@ namespace People {
                         OrganizationSmallPage page = new OrganizationSmallPage();
 
                         //Temporary fix.
-                        page.Html = "/People/viewmodels/OrganizationEmptyPage.html";
-                        //page.RefreshOrganization(id);
+                        page.Html = "/People/viewmodels/OrganizationSmallPage.html";
+                        page.RefreshOrganization(id);
 
                         return page;
                     });
