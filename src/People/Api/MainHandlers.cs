@@ -56,9 +56,14 @@ namespace People {
             });
 
             Handle.GET("/people/persons/add", () => {
-                var master = (StandalonePage)Self.GET("/people/standalone");
-                master.CurrentPage = GetLauncherPage("/people/partials/persons-add", true);
-                return master;
+                return Db.Scope<Json>(() => {
+                    var master = (StandalonePage)Self.GET("/people/standalone");
+                    var person = new Simplified.Ring2.Person();
+
+                    master.CurrentPage = GetLauncherPage("/people/partials/persons/" + person.Key, true);
+
+                    return master;
+                });
             });
 
             Handle.GET<string>("/people/persons/{?}", (string id) => {
