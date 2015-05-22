@@ -1,6 +1,6 @@
 {
     "name": "People",
-    "version": "0.0.1",
+    "version": "2.0.0-pre10",
     "homepage": "https://github.com/Starcounter/People",
     "description": "People CRM - an example of Polyjuice app.",
     "main": "wwwroot/master.html",
