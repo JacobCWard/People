@@ -23,7 +23,7 @@ namespace People {
                 this.DefaultPerson.Data = op.Person;
             }
 
-            if (this.DefaultAddress == null) {
+            if (this.DefaultAddress.Data == null) {
                 AddressRelation ar = new AddressRelation() {
                     Somebody = this.Data,
                     Address = new Address()
@@ -32,7 +32,7 @@ namespace People {
                 this.DefaultAddress.Data = ar.Address;
             }
 
-            if (this.DefaultPhoneNumber == null) {
+            if (this.DefaultPhoneNumber.Data == null) {
                 PhoneNumberRelation pmr = new PhoneNumberRelation() {
                     Somebody = this.Data,
                     PhoneNumber = new PhoneNumber()
@@ -41,7 +41,7 @@ namespace People {
                 this.DefaultPhoneNumber.Data = pmr.PhoneNumber;
             }
 
-            if (this.DefaultEmailAddress == null) {
+            if (this.DefaultEmailAddress.Data == null) {
                 EmailAddressRelation ear = new EmailAddressRelation() {
                     Somebody = this.Data,
                     EmailAddress = new EmailAddress()
