@@ -1,9 +1,8 @@
-/**
- * Ontology map lives in a separate file to emphasize that mapping  
- * should be done in an external PeopleMap.exe app or even on the fly
- */
+using System;
 using PolyjuiceNamespace;
 using Starcounter;
+using Simplified.Ring1;
+using Simplified.Ring2;
 
 namespace People {
     internal class OntologyMap : IHandlers {
@@ -17,6 +16,30 @@ namespace People {
             Polyjuice.OntologyMap("/people/partials/persons/@w", "/so/person/@w", null, null);
             Polyjuice.OntologyMap("/people/partials/organizations/@w", "/so/organization/@w", null, null);
             Polyjuice.OntologyMap("/people/partials/addresses/@w", "/so/address/@w", null, null);
+
+            Polyjuice.OntologyMap("/people/partials/person-preview/@w", "/so/abstractcrossreference/@w", (string objectId) => {
+                return objectId;
+            }, (string objectId) => {
+                Relation rel = DbHelper.FromID(DbHelper.Base64DecodeObjectID(objectId)) as Relation;
+
+                if (rel.WhatIs != null && rel.WhatIs.GetType() == typeof(Person)) {
+                    return rel.WhatIs.Key;
+                }
+
+                return null;
+            });
+
+            Polyjuice.OntologyMap("/people/partials/organization-preview/@w", "/so/abstractcrossreference/@w", (string objectId) => {
+                return objectId;
+            }, (string objectId) => {
+                Relation rel = DbHelper.FromID(DbHelper.Base64DecodeObjectID(objectId)) as Relation;
+
+                if (rel.WhatIs != null && rel.WhatIs.GetType() == typeof(Organization)) {
+                    return rel.WhatIs.Key;
+                }
+
+                return null;
+            });
         }
     }
 }

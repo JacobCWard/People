@@ -99,11 +99,17 @@
     <Compile Include="ViewModels\OrganizationPersonPage.json.cs">
       <DependentUpon>OrganizationPersonPage.json</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\OrganizationPreviewPage.json.cs">
+      <DependentUpon>OrganizationPreviewPage.json</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\OrganizationSmallPage.json.cs">
       <DependentUpon>OrganizationSmallPage.json</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\OrganizationsPage.json.cs">
       <DependentUpon>OrganizationsPage.json</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\PersonPreviewPage.json.cs">
+      <DependentUpon>PersonPreviewPage.json</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\PhoneNumberPage.json.cs">
       <DependentUpon>PhoneNumberPage.json</DependentUpon>
@@ -147,11 +153,13 @@
     <Content Include="wwwroot\People\viewmodels\EmailAddressPage.html" />
     <Content Include="wwwroot\People\viewmodels\OrganizationPersonPage.html" />
     <Content Include="wwwroot\People\viewmodels\OrganizationPage.html" />
+    <Content Include="wwwroot\People\viewmodels\OrganizationPreviewPage.html" />
     <Content Include="wwwroot\People\viewmodels\OrganizationSmallPage.html" />
     <Content Include="wwwroot\People\viewmodels\OrganizationsPage.html" />
     <Content Include="wwwroot\People\viewmodels\Dashboard.html" />
     <Content Include="wwwroot\People\viewmodels\AppMenuPage.html" />
     <Content Include="wwwroot\People\viewmodels\PersonPage.html" />
+    <Content Include="wwwroot\People\viewmodels\PersonPreviewPage.html" />
     <Content Include="wwwroot\People\viewmodels\PersonsPage.html" />
     <Content Include="wwwroot\People\viewmodels\PhoneNumberRelationPage.html" />
     <Content Include="wwwroot\People\viewmodels\PhoneNumberPage.html" />
@@ -214,6 +222,12 @@
   </ItemGroup>
   <ItemGroup>
     <TypedJSON Include="ViewModels\OrganizationSmallPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="ViewModels\PersonPreviewPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="ViewModels\OrganizationPreviewPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <None Include="weaver.ignore" />

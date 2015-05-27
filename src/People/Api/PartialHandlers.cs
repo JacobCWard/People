@@ -208,6 +208,22 @@ namespace People {
 
                 return page;
             });
+
+            Handle.GET("/people/partials/person-preview/{?}", (string id) => {
+                PersonPreviewPage page = new PersonPreviewPage();
+
+                page.Data = DbHelper.FromID(DbHelper.Base64DecodeObjectID(id)) as Person;
+
+                return page;
+            });
+
+            Handle.GET("/people/partials/organization-preview/{?}", (string id) => {
+                OrganizationPreviewPage page = new OrganizationPreviewPage();
+
+                page.Data = DbHelper.FromID(DbHelper.Base64DecodeObjectID(id)) as Organization;
+
+                return page;
+            });
         }
     }
 }
