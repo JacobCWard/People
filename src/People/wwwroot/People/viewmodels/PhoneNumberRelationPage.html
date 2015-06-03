@@ -6,9 +6,7 @@
             </template>
         </select>
     </div>
-    <template bind="{{PhoneNumber}}">
-        <polyjuice-include></polyjuice-include>
-    </template>
+    <polyjuice-include partial="{{PhoneNumber}}"></polyjuice-include>
     <div>
         <button type="button" class="btn btn-default btn-xs" onclick="getModel(this).Delete$++">Delete</button>
     </div>

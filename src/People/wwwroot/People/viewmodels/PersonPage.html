@@ -21,7 +21,7 @@
     </div>
     <div class="addresses">
         <template repeat="{{Addresses}}">
-            <polyjuice-include></polyjuice-include>
+            <polyjuice-include partial="{{}}"></polyjuice-include>
         </template>
         <div hidden?="{{Addresses.length}}">This person does not have addresses yet. Press <b>Add address</b> to add some.</div>
     </div>
@@ -33,7 +33,7 @@
     </div>
     <div>
         <template repeat="{{EmailAddresses}}">
-            <polyjuice-include></polyjuice-include>
+            <polyjuice-include partial="{{}}"></polyjuice-include>
         </template>
         <div hidden?="{{EmailAddresses.length}}">This person does not have email addresses yet. Press <b>Add email address</b> to add some.</div>
     </div>
@@ -45,7 +45,7 @@
     </div>
     <div>
         <template repeat="{{PhoneNumbers}}">
-            <polyjuice-include></polyjuice-include>
+            <polyjuice-include partial="{{}}"></polyjuice-include>
         </template>
         <div hidden?="{{PhoneNumbers.length}}">This person does not have phone numbers yet. Press <b>Add phone number</b> to add some.</div>
     </div>
