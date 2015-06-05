@@ -14,7 +14,7 @@ namespace People {
             Polyjuice.Map("/people/search?query=@w", "/polyjuice/search?query=@w");
 
             Polyjuice.OntologyMap("/people/partials/persons/@w", "/so/person/@w", null, null);
-            Polyjuice.OntologyMap("/people/partials/organizations/@w", "/so/organization/@w", null, null);
+            Polyjuice.OntologyMap("/people/partials/organizations/@w", "/db/simplified.ring2.organization/@w", null, null);
             Polyjuice.OntologyMap("/people/partials/addresses/@w", "/so/address/@w", null, null);
 
             Polyjuice.OntologyMap("/people/partials/person-preview/@w", "/so/abstractcrossreference/@w", (string objectId) => {
