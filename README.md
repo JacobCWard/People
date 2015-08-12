@@ -1,8 +1,7 @@
 People app
 ==================
 
-Simple example of Polyjuice app. 
-Add functionality to create companies, and people. Uses dashoard, search results, app specific workspace, SO, and simple mappings.
+Sample address book. Manage contact information and define relations between **people** and **organizations**.
 
 ## How to run
 
