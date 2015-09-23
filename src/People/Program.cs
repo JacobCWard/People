@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using Starcounter;
-using PolyjuiceNamespace;
 using Simplified.Ring2;
 using Simplified.Ring3;
 
@@ -14,7 +13,7 @@ namespace People {
         static void Main() {
             IHandlers[] handlers = new IHandlers[] { 
                 new InitialData(), 
-                new PolyjuiceHandlers(), 
+                new MappingHandlers(), 
                 new PartialHandlers(), 
                 new MainHandlers(),
                 new OntologyMap()
@@ -25,8 +24,13 @@ namespace People {
             }
 
             DefaultStyles styles = new DefaultStyles();
+            
+            Handle.GET("/People/ApplyLayouts", () => {
+                styles.ApplyIfEmpty();
+                return 200;
+            });
 
-            styles.ApplyIfEmpty();
+            UriMapping.Map("/People/ApplyLayouts", UriMapping.MappingUriPrefix + "/user");
         }
     }
 }

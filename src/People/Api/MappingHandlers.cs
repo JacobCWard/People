@@ -1,10 +1,9 @@
 ﻿using Starcounter;
-using PolyjuiceNamespace;
 using Simplified.Ring2;
 using Simplified.Ring3;
 
 namespace People {
-    internal class PolyjuiceHandlers : IHandlers {
+    internal class MappingHandlers : IHandlers {
         public void Register() {
             // App name required for Launchpad
             Handle.GET("/people/app-name", () => {

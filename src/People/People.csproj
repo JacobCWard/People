@@ -71,7 +71,7 @@
     <Compile Include="Api\IHandlers.cs" />
     <Compile Include="Api\MainHandlers.cs" />
     <Compile Include="Api\PartialHandlers.cs" />
-    <Compile Include="Api\PolyjuiceHandlers.cs" />
+    <Compile Include="Api\MappingHandlers.cs" />
     <Compile Include="Helpers\DefaultStyles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AddressPage.json.cs">
