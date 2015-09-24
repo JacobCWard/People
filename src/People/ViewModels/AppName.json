@@ -1,4 +1,5 @@
 {
     "name": "People",
-    "description": "Extramely simple People CRM"
+    "description": "Extramely simple People CRM",
+    "html": "/People/viewmodels/AppIcon.html"
 }
