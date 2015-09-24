@@ -1,63 +1,79 @@
 ﻿<link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
 
 <template>
-    <div>
-        <h2>Person details</h2>
-    </div>
-    <div class="form-horizontal">
-        <label class="control-label">First name:</label>
-    </div>
-    <div>
-        <input type="text" value='{{FirstName$}}' placeholder="First name" class="form-control" />
-    </div>
-    <div class="form-horizontal">
-        <label class="control-label">Last name:</label>
-    </div>
-    <div>
-        <input type="text" value="{{LastName$}}" placeholder="Last name" class="form-control" />
-    </div>
-    <div hidden?="{{!Addresses.length}}" class="addresses-label">
-        <label class="control-label">Addresses:</label>
-    </div>
-    <div class="addresses">
-        <template repeat="{{Addresses}}">
-            <starcounter-include partial="{{}}"></starcounter-include>
+    <template is="dom-bind">
+        <div>
+            <h2>Person details</h2>
+        </div>
+        <div class="form-horizontal">
+            <label class="control-label">First name:</label>
+        </div>
+        <div>
+            <input type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
+        </div>
+        <div class="form-horizontal">
+            <label class="control-label">Last name:</label>
+        </div>
+        <div>
+            <input type="text" value="{{model.LastName$::change}}" placeholder="Last name" class="form-control" />
+        </div>
+        <div class="addresses-label">
+            <template is="dom-if" if="{{model.Addresses.length}}">
+                <label class="control-label">Addresses:</label>
+            </template>
+            <template is="dom-if" if="{{!model.Addresses.length}}">
+                <label class="control-label">This person does not have addresses yet. Press <b>Add address</b> to add some.</label>
+            </template>
+        </div>
+        <div class="addresses">
+            <template is="dom-repeat" items="{{model.Addresses}}">
+                <starcounter-include partial="{{item}}"></starcounter-include>
+            </template>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default btn-sm" onclick="++this.value;" value="{{model.AddAddress$::click}}">Add address</button>
+        </div>
+        <div>
+            <template is="dom-if" if="{{model.EmailAddresses.length}}">
+                <label class="control-label">Emails:</label>
+            </template>
+            <template is="dom-if" if="{{!model.EmailAddresses.length}}">
+                <label class="control-label">This person does not have email addresses yet. Press <b>Add email address</b> to add some.</label>
+            </template>
+        </div>
+        <div>
+            <template is="dom-repeat" items="{{model.EmailAddresses}}">
+                <starcounter-include partial="{{item}}"></starcounter-include>
+            </template>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default btn-sm" onclick="++this.value;" value="{{model.AddEmailAddress$::click}}">Add email address</button>
+        </div>
+        <div>
+            <template is="dom-if" if="{{model.PhoneNumbers.length}}">
+                <label class="control-label">Phones:</label>
+            </template>
+            <template is="dom-if" if="{{!model.PhoneNumbers.length}}">
+                <label class="control-label">This person does not have phone numbers yet. Press <b>Add phone number</b> to add some.</label>
+            </template>
+        </div>
+        <div>
+            <template is="dom-repeat" items="{{model.PhoneNumbers}}">
+                <starcounter-include partial="{{item}}"></starcounter-include>
+            </template>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default btn-sm" onclick="++this.value;" value="{{model.AddPhoneNumber$::click}}">Add phone number</button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" onclick="++this.value;" value="{{model.Save$::click}}">Save</button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default" onclick="++this.value;" value="{{model.Cancel$::click}}">Cancel</button>
+        </div>
+        <template is="imported-template" content="/People/viewmodels/ConfirmDialogPage.html">
         </template>
-        <div hidden?="{{Addresses.length}}">This person does not have addresses yet. Press <b>Add address</b> to add some.</div>
-    </div>
-    <div>
-        <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddAddress$++">Add address</button>
-    </div>
-    <div hidden?="{{!EmailAddresses.length}}">
-        <label class="control-label">Emails:</label>
-    </div>
-    <div>
-        <template repeat="{{EmailAddresses}}">
-            <starcounter-include partial="{{}}"></starcounter-include>
-        </template>
-        <div hidden?="{{EmailAddresses.length}}">This person does not have email addresses yet. Press <b>Add email address</b> to add some.</div>
-    </div>
-    <div>
-        <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddEmailAddress$++">Add email address</button>
-    </div>
-    <div hidden?="{{!PhoneNumbers.length}}">
-        <label class="control-label">Phones:</label>
-    </div>
-    <div>
-        <template repeat="{{PhoneNumbers}}">
-            <starcounter-include partial="{{}}"></starcounter-include>
-        </template>
-        <div hidden?="{{PhoneNumbers.length}}">This person does not have phone numbers yet. Press <b>Add phone number</b> to add some.</div>
-    </div>
-    <div>
-        <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddPhoneNumber$++">Add phone number</button>
-    </div>
-    <div>
-        <button type="button" class="btn btn-primary" onclick="getModel(this).Save$++">Save</button>
-    </div>
-    <div>
-        <button type="button" class="btn btn-default" onclick="getModel(this).Cancel$++">Cancel</button>
-    </div>
-    <template is="imported-template" content="/People/viewmodels/ConfirmDialogPage.html"></template>
-    <link is="puppet-redirect" history url="{{RedirectUrl$}}" />
+        <link is="puppet-redirect" history url$="{{model.RedirectUrl$}}" />
+        <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
+    </template>
 </template>

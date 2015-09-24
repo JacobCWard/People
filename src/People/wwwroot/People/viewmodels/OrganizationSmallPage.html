@@ -1,40 +1,35 @@
 ﻿<template>
-    <div>
-        <input type="text" value="{{Name$}}" update-on="input" placeholder="Organization name" class="form-control" />
-    </div>
-    <template bind="{{DefaultAddress}}">
+    <template is="dom-bind">
         <div>
-            <input type="text" value="{{Street$}}" class="form-control" placeholder="Street" />
+            <input type="text" value="{{model.Name$::change}}" update-on="input" placeholder="Organization name" class="form-control" />
         </div>
         <div>
-            <input type="text" value="{{House$}}" class="form-control" placeholder="House" />
+            <input type="text" value="{{model.DefaultAddress.Street$::change}}" class="form-control" placeholder="Street" />
         </div>
         <div>
-            <input type="text" value="{{PostalCode$}}" class="form-control" placeholder="PostalCode" />
+            <input type="text" value="{{model.DefaultAddress.House$::change}}" class="form-control" placeholder="House" />
         </div>
         <div>
-            <input type="text" value="{{City$}}" class="form-control" placeholder="City" />
+            <input type="text" value="{{model.DefaultAddress.PostalCode$::change}}" class="form-control" placeholder="PostalCode" />
         </div>
         <div>
-            <input type="text" value="{{Country$}}" class="form-control" placeholder="Country" />
-        </div>
-    </template>
-    <div>
-        <template bind="{{DefaultPhoneNumber}}">
-            <input type="text" value="{{Name$}}" class="form-control" placeholder="Phone number" />
-        </template>
-    </div>
-    <div>
-        <template bind="{{DefaultEmailAddress}}">
-            <input type="text" value="{{Name$}}" class="form-control" placeholder="Email address" />
-        </template>
-    </div>
-    <template bind="{{DefaultPerson}}">
-        <div>
-            <input type="text" value="{{FirstName$}}" class="form-control" placeholder="First name" />
+            <input type="text" value="{{model.DefaultAddress.City$::change}}" class="form-control" placeholder="City" />
         </div>
         <div>
-            <input type="text" value="{{LastName$}}" class="form-control" placeholder="Last name" />
+            <input type="text" value="{{model.DefaultAddress.Country$::change}}" class="form-control" placeholder="Country" />
         </div>
+        <div>
+            <input type="text" value="{{model.DefaultPhoneNumber.Name$::change}}" class="form-control" placeholder="Phone number" />
+        </div>
+        <div>
+            <input type="text" value="{{model.DefaultEmailAddress.Name$::change}}" class="form-control" placeholder="Email address" />
+        </div>
+        <div>
+            <input type="text" value="{{model.DefaultPerson.FirstName$::change}}" class="form-control" placeholder="First name" />
+        </div>
+        <div>
+            <input type="text" value="{{model.DefaultPerson.LastName$::change}}" class="form-control" placeholder="Last name" />
+        </div>
+        <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
     </template>
 </template>

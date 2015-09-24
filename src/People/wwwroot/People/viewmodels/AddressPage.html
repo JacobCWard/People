@@ -1,17 +1,20 @@
 ﻿<template>
-    <div>
-        <input type="text" value="{{Street$}}" placeholder="Street" class="form-control" />
-    </div>
-    <div>
-        <input type="text" value="{{House$}}" placeholder="House" class="form-control" />
-    </div>
-    <div>
-        <input type="text" value="{{PostalCode$}}" placeholder="Postal code" class="form-control" />
-    </div>
-    <div>
-        <input type="text" value="{{City$}}" placeholder="City" class="form-control" />
-    </div>
-    <div>
-        <input type="text" value="{{Country$}}" placeholder="Country" class="form-control" />
-    </div>
+    <template is="dom-bind">
+        <div>
+            <input type="text" value="{{model.Street$::change}}" placeholder="Street" class="form-control" />
+        </div>
+        <div>
+            <input type="text" value="{{model.House$::change}}" placeholder="House" class="form-control" />
+        </div>
+        <div>
+            <input type="text" value="{{model.PostalCode$::change}}" placeholder="Postal code" class="form-control" />
+        </div>
+        <div>
+            <input type="text" value="{{model.City$::change}}" placeholder="City" class="form-control" />
+        </div>
+        <div>
+            <input type="text" value="{{model.Country$::change}}" placeholder="Country" class="form-control" />
+        </div>
+        <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
+    </template>
 </template>

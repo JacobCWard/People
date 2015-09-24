@@ -1,20 +1,23 @@
 ﻿<link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
 
 <template>
-    <template if="{{Organizations.length > 0}}">
-        <fieldset class="people">
-            <legend>Organizations</legend>
-            <template repeat="{{Organizations}}">
-                <starcounter-include partial="{{}}"></starcounter-include>
-            </template>
-        </fieldset>
-    </template>
-    <template if="{{Persons.length > 0}}">
-        <fieldset class="people">
-            <legend>Persons</legend>
-            <template repeat="{{Persons}}">
-                <starcounter-include partial="{{}}"></starcounter-include>
-            </template>
-        </fieldset>
+    <template is="dom-bind">
+        <template is="dom-if" if="{{model.Organizations.length}}">
+            <fieldset class="people">
+                <legend>Organizations</legend>
+                <template is="dom-repeat" items="{{model.Organizations}}">
+                    <starcounter-include partial="{{item}}"></starcounter-include>
+                </template>
+            </fieldset>
+        </template>
+        <template is="dom-if" if="{{Persons.length}}">
+            <fieldset class="people">
+                <legend>Persons</legend>
+                <template is="dom-if" items="{{model.Persons}}">
+                    <starcounter-include partial="{{item}}"></starcounter-include>
+                </template>
+            </fieldset>
+        </template>
+        <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
     </template>
 </template>
