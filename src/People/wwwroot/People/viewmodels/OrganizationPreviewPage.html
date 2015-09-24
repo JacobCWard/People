@@ -1,7 +1,10 @@
 ﻿<template>
-    <div>
-        <a href="/people/organizations/{{Key}}">
-            <span>{{Name}}</span>
-        </a>
-    </div>
+    <template is="dom-bind">
+        <div>
+            <a href="{{model.Url}}">
+                <span>{{model.Name}}</span>
+            </a>
+        </div>
+        <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
+    </template>
 </template>

@@ -1,28 +1,38 @@
 ﻿<template>
-    <div class="people">
-        <div class="search-person">
-            Name: <a href="/people/persons/{{Key}}" title="Edit person">{{Name}}</a>
-        </div>
-    </div>
-    <template if="{{AddressName != null && AddressName != ''}}">
+    <template is="dom-bind">
         <div class="people">
             <div class="search-person">
-                Address: <span>{{AddressName}}</span>
+                Name: <a href="{{model.Url}}" title="Edit person">{{model.Name}}</a>
             </div>
         </div>
-    </template>
-    <template if="{{EmailAddressName != null && EmailAddressName != ''}}">
-        <div class="people">
-            <div class="search-person">
-                Email address: <a href="mailto:{{EmailAddressName}}" target="_blank">{{EmailAddressName}}</a>
+        <template is="dom-if" if="{{model.AddressName}}">
+            <div class="people">
+                <div class="search-person">
+                    Address: <span>{{model.AddressName}}</span>
+                </div>
             </div>
-        </div>
-    </template>
-    <template if="{{PhoneNumberName != null && PhoneNumberName != ''}}">
-        <div class="people">
-            <div class="search-person">
-                Phone number: <a href="tel:{{PhoneNumberName}}" target="_blank">{{PhoneNumberName}}</a>
+        </template>
+        <template is="dom-if" if="{{model.EmailAddressName}}">
+            <div class="people">
+                <div class="search-person">
+                    Email address: <a href="{{concat('mailto:', model.EmailAddressName)}}" target="_blank">{{model.EmailAddressName}}</a>
+                </div>
             </div>
-        </div>
+        </template>
+        <template is="dom-if" if="{{model.PhoneNumberName}}">
+            <div class="people">
+                <div class="search-person">
+                    Phone number: <a href="{{concat('tel:', model.PhoneNumberName)}}" target="_blank">{{model.PhoneNumberName}}</a>
+                </div>
+            </div>
+        </template>
+        <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
     </template>
+    <script>
+        (function init(template) {
+            template.concat = function () {
+                return Array.prototype.join.call(arguments, "");
+            };
+        })(document.currentScript.previousElementSibling);
+    </script>
 </template>

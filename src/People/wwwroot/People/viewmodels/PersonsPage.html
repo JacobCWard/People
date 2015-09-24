@@ -1,40 +1,50 @@
 ﻿<link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
 <template>
-    <fieldset class="people">
-        <legend>Persons: {{Persons.length}}</legend>
-        <table class="table" id="tblPersons">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <template repeat="{{Persons}}">
+    <template is="dom-bind">
+        <fieldset class="people">
+            <legend>Persons: <span>{{model.Persons.length}}</span></legend>
+            <table class="table" id="tblPersons">
+                <thead>
                     <tr>
-                        <td>
-                            <span>{{Name}}</span>
-                        </td>
-                        <td>
-                            <a href="mailto:{{EmailAddressName}}" target="_blank">{{EmailAddressName}}</a>
-                        </td>
-                        <td>
-                            <a href="tel:{{PhoneNumberName}}" target="_blank">{{PhoneNumberName}}</a>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-default" onclick="getModel(this).Delete$++">Delete</button>
-                            <button type="button" class="btn btn-sm btn-default" onclick="getModel(this).Edit$++">Edit</button>
-                        </td>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th></th>
                     </tr>
-                </template>
-            </tbody>
-        </table>
-    </fieldset>
-    <div class="people buttons">
-        <a href="{{AddUrl}}" class="btn btn-primary">Add person</a>
-    </div>
-    <template is="imported-template" content="/People/viewmodels/ConfirmDialogPage.html"></template>
-    <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />
+                </thead>
+                <tbody>
+                    <template is="dom-repeat" items="{{model.Persons}}">
+                        <tr>
+                            <td>
+                                <span>{{item.Name}}</span>
+                            </td>
+                            <td>
+                                <a href="{{concat('mailto:', item.EmailAddressName)}}" target="_blank">{{item.EmailAddressName}}</a>
+                            </td>
+                            <td>
+                                <a href="{{concat('tel:', item.PhoneNumberName)}}" target="_blank">{{item.PhoneNumberName}}</a>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-default" onclick="++this.value;" value="{{item.Delete$::click}}">Delete</button>
+                                <button type="button" class="btn btn-sm btn-default" onclick="++this.value;" value="{{item.Edit$::click}}">Edit</button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </fieldset>
+        <div class="people buttons">
+            <a href="{{model.AddUrl}}" class="btn btn-primary">Add person</a>
+        </div>
+        <template is="imported-template" content="/People/viewmodels/ConfirmDialogPage.html" model="{{model}}"></template>
+        <link is="puppet-redirect" history url$="{{model.RedirectUrl$}}" />
+        <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
+    </template>
+    <script>
+        (function init(template) {
+            template.concat = function () {
+                return Array.prototype.join.call(arguments, "");
+            };
+        })(document.currentScript.previousElementSibling);
+    </script>
 </template>

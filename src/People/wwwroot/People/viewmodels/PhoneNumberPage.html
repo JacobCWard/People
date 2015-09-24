@@ -1,5 +1,8 @@
 ﻿<template>
-    <div>
-        <input type="text" value="{{Name$}}" placeholder="+380980880708" class="form-control" />
-    </div>
+    <template is="dom-bind">
+        <div>
+            <input type="text" value="{{model.Name$::change}}" placeholder="+380980880708" class="form-control" />
+        </div>
+        <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
+    </template>
 </template>

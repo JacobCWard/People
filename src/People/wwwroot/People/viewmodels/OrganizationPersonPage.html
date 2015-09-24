@@ -1,8 +1,11 @@
 ﻿<template>
-    <div>
-        <a href="{{EditUrl}}" class="form-control">{{Person.Name}}</a>
-    </div>
-    <div>
-        <button type="button" class="btn btn-default btn-xs" onclick="getModel(this).Delete$++">Delete</button>
-    </div>
+    <template is="dom-bind">
+        <div>
+            <a href="{{model.EditUrl}}" class="form-control">{{model.Person.Name}}</a>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default btn-xs" onclick="++this.value;" value="{{model.Delete$::click}}">Delete</button>
+        </div>
+        <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
+    </template>
 </template>

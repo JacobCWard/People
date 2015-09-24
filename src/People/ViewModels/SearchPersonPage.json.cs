@@ -15,6 +15,7 @@ namespace People {
             this.AddressName = ar != null ? ar.Address.Name : null;
             this.EmailAddressName = ear != null ? ear.EmailAddress.Name : null;
             this.PhoneNumberName = pnr != null ? pnr.PhoneNumber.Name : null;
+            this.Url = string.Format("/people/persons/{0}", this.Key);
         }
     }
 }

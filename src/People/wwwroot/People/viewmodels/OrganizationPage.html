@@ -1,113 +1,130 @@
 ﻿<link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
-<link rel="import" href="/sys/paper-button/paper-button.html" />
-<link rel="import" href="/sys/paper-dialog/paper-action-dialog.html" />
 
 <template>
-    <div>
-        <h2>Organization details</h2>
-    </div>
-    <div class="form-horizontal">
-        <label class="control-label">Name:</label>
-    </div>
-    <div>
-        <input type='text' value='{{Name$}}' placeholder="Organization name" class="form-control" />
-    </div>
-    <div class="form-horizontal" hidden?="{{!Addresses.length}}">
-        <label class="control-label">Addresses:</label>
-    </div>
-    <div>
-        <template repeat="{{Addresses}}">
-            <starcounter-include partial="{{}}"></starcounter-include>
-        </template>
-        <div hidden?="{{Addresses.length}}">This organization has no addresses yet. Perss <b>Add address</b> to add some.</div>
-    </div>
-    <div>
-        <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddAddress$++">Add address</button>
-    </div>
-    <div class="form-horizontal" hidden?="{{!EmailAddresses.length}}">
-        <label class="control-label">Emails:</label>
-    </div>
-    <div>
-        <template repeat="{{EmailAddresses}}">
-            <starcounter-include partial="{{}}"></starcounter-include>
-        </template>
-        <div hidden?="{{EmailAddresses.length}}">This organization has no email addresses yet. Perss <b>Add email address</b> to add some.</div>
-    </div>
-    <div>
-        <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddEmailAddress$++">Add email address</button>
-    </div>
-    <div class="form-horizontal" hidden?="{{!PhoneNumbers.length}}">
-        <label class="control-label">Phones:</label>
-    </div>
-    <div>
-        <template repeat="{{PhoneNumbers}}">
-            <starcounter-include partial="{{}}"></starcounter-include>
-        </template>
-        <div hidden?="{{PhoneNumbers.length}}">This organization has no phone numbers yet. Perss <b>Add phone number</b> to add some.</div>
-    </div>
-    <div>
-        <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).AddPhoneNumber$++">Add phone number</button>
-    </div>
-    <div class="form-horizontal" hidden?="{{!Persons.length}}">
-        <label class="control-label">Persons:</label>
-    </div>
-    <div>
-        <template repeat="{{Persons}}">
-            <starcounter-include partial="{{}}"></starcounter-include>
-        </template>
-        <div hidden?="{{Persons.length}}">This organization has no contact persons yet. Perss <b>Find person</b> to add some.</div>
-    </div>
-    <div>
-        <button type="button" class="btn btn-default btn-sm" onclick="getModel(this).Find.Visible$ = true">Find person</button>
-    </div>
-    <div>
-        <a href="{{AddPersonUrl}}" class="btn btn-default btn-sm">Add person</a>
-    </div>
-    <div>
-        <button type="button" class="btn btn-primary" onclick="getModel(this).Save$++">Save</button>
-    </div>
-    <div>
-        <button type="button" class="btn btn-default" onclick="getModel(this).Cancel$++">Cancel</button>
-    </div>
-    <template is="imported-template" content="/People/viewmodels/ConfirmDialogPage.html"></template>
-    <div class="people" id="divFindDialog">
-        <template if="{{Find.Visible$}}">
-            <paper-action-dialog heading="Find person" backdrop="true" layered="true" role="dialog" opened="{{Find.Visible$}}">
-                <div class="people control-group">
-                    <label class="control-label">Search:</label>
-                    <div class="controls">
-                        <input type="text" value="{{Find.Query$}}" />
+    <template is="dom-bind">
+        <div>
+            <h2>Organization details</h2>
+        </div>
+        <div class="form-horizontal">
+            <label class="control-label">Name:</label>
+        </div>
+        <div>
+            <input type="text" value="{{model.Name$::change}}" placeholder="Organization name" class="form-control" />
+        </div>
+        <div class="form-horizontal">
+            <template is="dom-if" if="{{model.Addresses.length}}">
+                <label class="control-label">Addresses:</label>
+            </template>
+            <template is="dom-if" if="{{!model.Addresses.length}}">
+                <label class="control-label">This organization has no addresses yet. Perss <b>Add address</b> to add some.</label>
+            </template>
+        </div>
+        <div>
+            <template is="dom-repeat" items="{{model.Addresses}}">
+                <starcounter-include partial="{{item}}"></starcounter-include>
+            </template>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default btn-sm" onclick="++this.value;" value="{{model.AddAddress$::click}}">Add address</button>
+        </div>
+        <div class="form-horizontal">
+            <template is="dom-if" if="{{model.EmailAddresses.length}}">
+                <label class="control-label">Emails:</label>
+            </template>
+            <template is="dom-if" if="{{!model.EmailAddresses.length}}">
+                <label class="control-label">This organization has no email addresses yet. Perss <b>Add email address</b> to add some.</label>
+            </template>
+        </div>
+        <div>
+            <template is="dom-repeat" items="{{model.EmailAddresses}}">
+                <starcounter-include partial="{{item}}"></starcounter-include>
+            </template>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default btn-sm" onclick="++this.value;" value="{{model.AddEmailAddress$::click}}">Add email address</button>
+        </div>
+        <div class="form-horizontal">
+            <template is="dom-if" if="{{model.PhoneNumbers.length}}">
+                <label class="control-label">Phones:</label>
+            </template>
+            <template is="dom-if" if="{{!model.PhoneNumbers.length}}">
+                <label class="control-label">This organization has no phone numbers yet. Perss <b>Add phone number</b> to add some.</label>
+            </template>
+        </div>
+        <div>
+            <template is="dom-repeat" items="{{model.PhoneNumbers}}">
+                <starcounter-include partial="{{item}}"></starcounter-include>
+            </template>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default btn-sm" onclick="++this.value;" value="{{model.AddPhoneNumber$::click}}">Add phone number</button>
+        </div>
+        <div class="form-horizontal">
+            <template is="dom-if" if="{{model.Persons.length}}">
+                <label class="control-label">Persons:</label>
+            </template>
+            <template is="dom-if" if="{{!model.Persons.length}}">
+                <label class="control-label">This organization has no contact persons yet. Perss <b>Find person</b> to add some.</label>
+            </template>
+        </div>
+        <div>
+            <template is="dom-repeat" items="{{model.Persons}}">
+                <starcounter-include partial="{{item}}"></starcounter-include>
+            </template>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default btn-sm" onclick="this.value = true;" value="{{model.Find.Visible$::click}}">Find person</button>
+        </div>
+        <div>
+            <a href="{{model.AddPersonUrl}}" class="btn btn-default btn-sm">Add person</a>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" onclick="++this.value;" value="{{model.Save$::click}}">Save</button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default" onclick="++this.value;" value="{{model.Cancel$::click}}">Cancel</button>
+        </div>
+        <template is="imported-template" content="/People/viewmodels/ConfirmDialogPage.html"></template>
+        <div class="people" id="divFindDialog">
+            <template is="dom-if" if="{{model.Find.Visible$}}">
+                <paper-action-dialog heading="Find person" backdrop="true" layered="true" role="dialog" opened="{{model.Find.Visible$}}">
+                    <div class="people control-group">
+                        <label class="control-label">Search:</label>
+                        <div class="controls">
+                            <input type="text" value="{{model.Find.Query$::input}}" />
+                        </div>
                     </div>
-                </div>
-                <div class="people control-group">
-                    <div class="controls">
-                        <template if="{{Find.Persons.length > 0}}">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <template repeat="{{person, i in Find.Persons}}">
+                    <div class="people control-group">
+                        <div class="controls">
+                            <template is="dom-if" if="{{Find.Persons.length}}">
+                                <table class="table">
+                                    <thead>
                                         <tr>
-                                            <td>{{i + 1}}</td>
-                                            <td>{{person.Name}}</td>
-                                            <td>
-                                                <button affirmative type="button" class="btn btn-small" onclick="getModel(this).person.Add$++">Add</button>
-                                            </td>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th></th>
                                         </tr>
-                                    </template>
-                                </tbody>
-                            </table>
-                        </template>
+                                    </thead>
+                                    <tbody>
+                                        <template is="dom-repeat" items="{{model.Find.Persons}}" as="person" index-as="i">
+                                            <tr>
+                                                <td>{{item.i}}</td>
+                                                <td>{{item.person.Name}}</td>
+                                                <td>
+                                                    <button affirmative type="button" class="btn btn-small" onclick="++this.value;" value="{{item.person.Add$::click}}">Add</button>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <paper-button affirmative role="button" tabindex="0" onclick="getModel(document.getElementById('divFindDialog')).Find.Visible$ = false">Close</paper-button>
-            </paper-action-dialog>
-        </template>
-    </div>
-    <link is="puppet-redirect" history url="{{ RedirectUrl$ }}" />
+                    <button class="btn btn-default" onclick="this.value = false;" value="{{model.Find.Visible$::click}}">Close</button>
+                </paper-action-dialog>
+            </template>
+        </div>
+        <link is="puppet-redirect" history url$="{{model.RedirectUrl$}}" />
+        <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
+    </template>
 </template>

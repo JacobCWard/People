@@ -1,13 +1,16 @@
 ﻿<template>
-    <div>
-        <select selectedindex="{{TypeIndex$}}" class="form-control">
-            <template repeat="{{PhoneNumberRelationTypes}}">
-                <option>{{Name}}</option>
-            </template>
-        </select>
-    </div>
-    <starcounter-include partial="{{PhoneNumber}}"></starcounter-include>
-    <div>
-        <button type="button" class="btn btn-default btn-xs" onclick="getModel(this).Delete$++">Delete</button>
-    </div>
+    <template is="dom-bind">
+        <div>
+            <select selectedindex="{{model.TypeIndex$::change}}" class="form-control">
+                <template is="dom-repeat" items="{{model.PhoneNumberRelationTypes}}">
+                    <option>{{item.Name}}</option>
+                </template>
+            </select>
+        </div>
+        <starcounter-include partial="{{model.PhoneNumber}}"></starcounter-include>
+        <div>
+            <button type="button" class="btn btn-default btn-xs" onclick="++this.value;" value="{{model.Delete$::click}}">Delete</button>
+        </div>
+        <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
+    </template>
 </template>
