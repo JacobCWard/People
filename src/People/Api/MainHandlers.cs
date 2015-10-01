@@ -73,19 +73,7 @@ namespace People {
             });
 
             Handle.GET("/people/search?query={?}", (string query) => {
-                var master = (StandalonePage)Self.GET("/people/standalone");
-
-                Response resp = Self.GET("/People/partials/search/" + HttpUtility.UrlEncode(query));
-
-                SearchPage page = (SearchPage)resp.Resource;
-
-                if (page.Organizations.Count == 0 && page.Persons.Count == 0) {
-                    master.CurrentPage = new Page();
-                } else {
-                    master.CurrentPage = resp;
-                }
-
-                return master;
+                return Self.GET("/People/partials/search/" + HttpUtility.UrlEncode(query));
             });
 
             Handle.GET("/people/unload", () => {
