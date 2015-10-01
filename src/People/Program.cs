@@ -24,13 +24,8 @@ namespace People {
             }
 
             DefaultStyles styles = new DefaultStyles();
-            
-            Handle.GET("/People/ApplyLayouts", () => {
-                styles.ApplyIfEmpty();
-                return 200;
-            });
 
-            UriMapping.Map("/People/ApplyLayouts", UriMapping.MappingUriPrefix + "/user");
+            styles.ApplyIfEmpty();
         }
     }
 }
