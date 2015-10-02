@@ -12,11 +12,11 @@ namespace People {
             UriMapping.Map("/people/dashboard", UriMapping.MappingUriPrefix + "/dashboard");
             UriMapping.Map("/people/search?query=@w", UriMapping.MappingUriPrefix + "/search?query=@w");
 
-            UriMapping.OntologyMap("/people/partials/persons/@w", "/so/person/@w", null, null);
-            UriMapping.OntologyMap("/people/partials/organizations/@w", "/db/simplified.ring2.organization/@w", null, null);
-            UriMapping.OntologyMap("/people/partials/addresses/@w", "/so/address/@w", null, null);
+            UriMapping.OntologyMap("/people/partials/persons/@w", "concepts.ring1.person", null, null);
+            UriMapping.OntologyMap("/people/partials/organizations/@w", "simplified.ring2.organization", null, null);
+            UriMapping.OntologyMap("/people/partials/addresses/@w", "concepts.ring1.address", null, null);
 
-            UriMapping.OntologyMap("/people/partials/person-preview/@w", "/so/abstractcrossreference/@w", (string objectId) => {
+            UriMapping.OntologyMap("/people/partials/person-preview/@w", "concepts.ring2.abstractcrossreference", (string objectId) => {
                 return objectId;
             }, (string objectId) => {
                 Relation rel = DbHelper.FromID(DbHelper.Base64DecodeObjectID(objectId)) as Relation;
@@ -28,7 +28,7 @@ namespace People {
                 return null;
             });
 
-            UriMapping.OntologyMap("/people/partials/organization-preview/@w", "/so/abstractcrossreference/@w", (string objectId) => {
+            UriMapping.OntologyMap("/people/partials/organization-preview/@w", "concepts.ring2.abstractcrossreference", (string objectId) => {
                 return objectId;
             }, (string objectId) => {
                 Relation rel = DbHelper.FromID(DbHelper.Base64DecodeObjectID(objectId)) as Relation;
