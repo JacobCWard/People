@@ -12,9 +12,9 @@ namespace People {
             UriMapping.Map("/people/dashboard", UriMapping.MappingUriPrefix + "/dashboard");
             UriMapping.Map("/people/search?query=@w", UriMapping.MappingUriPrefix + "/search?query=@w");
 
-            UriMapping.OntologyMap("/people/partials/persons/@w", "concepts.ring1.person", null, null);
+            UriMapping.OntologyMap("/people/partials/persons/@w", "simplified.ring2.person", null, null);
             UriMapping.OntologyMap("/people/partials/organizations/@w", "simplified.ring2.organization", null, null);
-            UriMapping.OntologyMap("/people/partials/addresses/@w", "concepts.ring1.address", null, null);
+            UriMapping.OntologyMap("/people/partials/addresses/@w", "simplified.ring3.address", null, null);
 
             UriMapping.OntologyMap("/people/partials/person-preview/@w", "concepts.ring2.abstractcrossreference", (string objectId) => {
                 return objectId;
