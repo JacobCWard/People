@@ -10,7 +10,6 @@ namespace People {
         public void Register() {
             UriMapping.Map("/people/menu", UriMapping.MappingUriPrefix + "/menu");
             UriMapping.Map("/people/app-name", UriMapping.MappingUriPrefix + "/app-name");
-            UriMapping.Map("/people/app-icon", UriMapping.MappingUriPrefix + "/app-icon");
             UriMapping.Map("/people/dashboard", UriMapping.MappingUriPrefix + "/dashboard");
             UriMapping.Map("/people/search?query=@w", UriMapping.MappingUriPrefix + "/search?query=@w");
 

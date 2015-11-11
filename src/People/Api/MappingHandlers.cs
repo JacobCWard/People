@@ -10,14 +10,6 @@ namespace People {
                 return new AppName();
             });
 
-            Handle.GET("/people/app-icon", () => {
-                Page p = new Page() {
-                    Html = "/People/viewmodels/AppIcon.html"
-                };
-
-                return p;
-            });
-
             Handle.GET("/people/menu", () => {
                 Page p = new Page() {
                     Html = "/People/viewmodels/AppMenuPage.html"
