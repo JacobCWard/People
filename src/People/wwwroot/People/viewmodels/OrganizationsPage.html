@@ -45,7 +45,7 @@
         <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
     </template>
     <script>
-        (function init(template) {
+        (function (template) {
             template.concat = function () {
                 return Array.prototype.join.call(arguments, "");
             };

@@ -19,7 +19,7 @@
         <dom-bind-notifier observed-object="{{model}}" path="model" deep></dom-bind-notifier>
     </template>
     <script>
-        (function init(template) {
+        (function (template) {
             template.onConfirmOkClick = function () {
                 template.set("model.Confirm.Ok$", template.model.Confirm.Ok$ / 1 + 1);
             };
