@@ -1,4 +1,4 @@
-﻿<link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
+﻿<link rel="import" href="/sys/puppet-redirect/puppet-redirect.html" />
 <template>
     <template is="dom-bind">
         <fieldset class="people">
@@ -41,7 +41,7 @@
             <a href="{{model.AddUrl}}" class="btn btn-primary">Add organization</a>
         </div>
         <template is="imported-template" content="/People/viewmodels/ConfirmDialogPage.html" model="{{model}}"></template>
-        <link is="puppet-redirect" history url$="{{model.RedirectUrl$}}" />
+        <link is="puppet-redirect" history url="{{model.RedirectUrl$}}" />
         <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
     </template>
     <script>

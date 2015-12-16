@@ -1,5 +1,5 @@
 ﻿<link rel="import" href="/sys/paper-dialog/paper-dialog.html" />
-<link rel="import" href="/sys/puppet-redirect/src/puppet-redirect.html" />
+<link rel="import" href="/sys/puppet-redirect/puppet-redirect.html" />
 
 <template>
     <template is="dom-bind">
@@ -127,7 +127,7 @@
                 </paper-dialog>
             </template>
         </div>
-        <link is="puppet-redirect" history url$="{{model.RedirectUrl$}}" />
+        <link is="puppet-redirect" history url="{{model.RedirectUrl$}}" />
         <dom-bind-notifier path="model" observed-object="{{model}}" deep></dom-bind-notifier>
     </template>
 </template>
